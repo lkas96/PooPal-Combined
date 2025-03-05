@@ -15,11 +15,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/loo/")
+@RequestMapping("/toilet/browse")
 public class LooMapDirectory {
 
     // wire from applciation proerpties
@@ -30,7 +32,7 @@ public class LooMapDirectory {
     private String looMapURL;
 
     // Data scrape for all districts
-    @GetMapping("/scrape")
+    @GetMapping("/all")
     public Map<String, List<Map<String, Object>>> scrape() {
         Map<String, List<Map<String, Object>>> directories = new HashMap<>();
         try {
@@ -72,7 +74,7 @@ public class LooMapDirectory {
     }
 
     // get the list of 5 regions
-    @GetMapping("/scrape/districts")
+    @GetMapping("/districts")
     public List<String> getDistricts() {
         List<String> districts = new ArrayList<>();
         try {
@@ -91,7 +93,7 @@ public class LooMapDirectory {
     }
 
     // Data scrape for a selected district
-    @GetMapping("/scrape/{district}")
+    @GetMapping("/{district}")
     public List<Map<String, Object>> scrapByDistrict(@PathVariable String district) {
         List<Map<String, Object>> districtList = new ArrayList<>();
         try {
