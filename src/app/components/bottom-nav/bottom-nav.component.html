@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand bg-light fixed-bottom d-md-none">
+    <div class="container-fluid d-flex justify-content-around">
+      <a routerLink="/tracker" class="nav-item">
+        <img src="assets/navbar-icons/log.svg" alt="Tracker Icon">
+        <span>Tracker</span>
+      </a>
+      <a routerLink="/trends" class="nav-item">
+        <img src="assets/navbar-icons/trend.svg" alt="Trends Icon">
+        <span>Trends</span>
+      </a>
+      <a routerLink="/toilets" class="nav-item">
+        <img src="assets/navbar-icons/toilet.svg" alt="Toilets Icon">
+        <span>Toilets</span>
+      </a>
+      <a routerLink="/chat" class="nav-item">
+        <img src="assets/navbar-icons/chat.svg" alt="Chat Icon">
+        <span>Chat</span>
+      </a>
+      <a>
+        <img *ngIf="user$ | async as user" [src]="user.photoURL" alt="User Avatar" class="profile-avatar">
+      </a>
+    </div>
+  </nav>  
