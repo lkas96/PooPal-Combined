@@ -1,0 +1,147 @@
+<div>
+  <h1>Create a Poo Entry</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submitPoo()">
+
+    <!-- IS PUBLIC POO -->
+    <div>
+      <label for="isPublic">Where did you poo?</label><br />
+      <input type="radio" formControlName="isPublic" [value]="true" />
+      <label for="publicYes">Yes</label>
+
+      <input type="radio" formControlName="isPublic" [value]="false" />
+      <label for="publicNo">No</label>
+    </div>
+    <br />
+
+    <!-- POO TYPE -->
+    <div>
+      <label for="pooType">Poo Type</label>
+      <select id="pooType" formControlName="pooType" class="form-control">
+        <option *ngFor="let type of pooTypes" [value]="type">{{ type }}</option>
+      </select>
+    </div>
+    <br />
+
+    <!-- POO COLOR -->
+    <div>
+      <label for="poopColor">Select Poop Color:</label>
+      <select id="poopColor" formControlName="pooColor">
+        <option *ngFor="let color of poopColors" [value]="color.value">
+          {{ color.label }}
+        </option>
+      </select>
+    </div>
+    <br />
+
+    <!-- POO PAIN LEVELS -->
+    <div>
+      <h3>Pain Level</h3>
+      <table class="pain-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Before</th>
+            <th>During</th>
+            <th>After</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let level of [1, 2, 3, 4, 5]">
+            <td>{{ level }}</td>
+            <td>
+              <input
+                type="radio"
+                formControlName="painBefore"
+                [value]="level"
+              />
+            </td>
+            <td>
+              <input
+                type="radio"
+                formControlName="painDuring"
+                [value]="level"
+              />
+            </td>
+            <td>
+              <input type="radio" formControlName="painAfter" [value]="level" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- POO URGENCY -->
+    <div class="radio-group">
+      <label>Urgent:</label>
+      <input
+        type="radio"
+        formControlName="urgent"
+        [value]="true"
+        id="urgentYes"
+      />
+      <label for="urgentYes">Yes</label>
+
+      <input
+        type="radio"
+        formControlName="urgent"
+        [value]="false"
+        id="urgentNo"
+      />
+      <label for="urgentNo">No</label>
+    </div>
+    <br />
+
+    <!-- POO LAXATIVE -->
+    <div class="radio-group">
+      <label>Laxative Used:</label>
+      <input
+        type="radio"
+        formControlName="laxative"
+        [value]="true"
+        id="laxativeYes"
+      />
+      <label for="laxativeYes">Yes</label>
+
+      <input
+        type="radio"
+        formControlName="laxative"
+        [value]="false"
+        id="laxativeNo"
+      />
+      <label for="laxativeNo">No</label>
+    </div>
+    <br />
+
+    <!-- POO BLEEDING -->
+    <div class="radio-group">
+      <label>Bleeding:</label>
+      <input
+        type="radio"
+        formControlName="bleeding"
+        [value]="true"
+        id="bleedingYes"
+      />
+      <label for="bleedingYes">Yes</label>
+
+      <input
+        type="radio"
+        formControlName="bleeding"
+        [value]="false"
+        id="bleedingNo"
+      />
+      <label for="bleedingNo">No</label>
+    </div>
+    <br />
+
+    <!-- POO COMMENTS -->
+    <div>
+      <label for="notes">Notes & Comments</label>
+      <textarea id="notes" formControlName="notes"></textarea>
+    </div>
+    <br />
+
+    <!-- SUBMIT BUTTON -->
+    <button type="submit">Submit Poo</button>
+  </form>
+</div>
