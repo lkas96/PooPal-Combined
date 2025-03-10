@@ -34,6 +34,6 @@ export class AppComponent implements OnInit {
 
   checkDevice() {
     const isTouchDevice = navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
-    this.isMobile = isTouchDevice && window.innerWidth < 768; // Show bottom navbar only on mobile
+    this.isMobile = isTouchDevice && window.innerWidth < 992; // Show bottom navbar only on mobile
   }
 }
