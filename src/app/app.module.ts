@@ -16,6 +16,13 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { HomeSummaryComponent } from './pages/home-summary/home-summary.component';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ChatComponent } from './pages/chat/chat.component';
+import { TrendComponent } from './pages/trend/trend.component';
+import { ToiletComponent } from './pages/toilet/toilet.component';
+import { PooformComponent } from './components/TRACKER/pooform/pooform.component';
+import { TrackerSummaryComponent } from './components/TRACKER/summary/summary.component';
+import { RecordsComponent } from './components/TRACKER/records/records.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,11 +32,18 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     LoginComponent,
     TrackerComponent,
     HomeSummaryComponent,
-    TopNavComponent
+    TopNavComponent,
+    ChatComponent,
+    TrendComponent,
+    ToiletComponent,
+    PooformComponent,
+    TrackerSummaryComponent,
+    RecordsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
+    ReactiveFormsModule,
     AngularMaterialModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
