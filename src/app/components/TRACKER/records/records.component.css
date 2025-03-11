@@ -1,0 +1,41 @@
+.records-container {
+  max-width: 1080px;
+  width: 90%;
+  margin: auto;
+  padding: 20px;
+}
+
+.records-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+mat-expansion-panel {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.panel-title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-weight: 500;
+}
+
+.timestamp,
+.public,
+.notes {
+  flex: 1;
+  text-align: left;
+}
+
+.record-details {
+  padding: 10px;
+}
+
+mat-action-row {
+  display: flex;
+  justify-content: flex-end;
+}

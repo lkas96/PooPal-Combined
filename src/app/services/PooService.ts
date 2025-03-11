@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { PooRecord } from '../models/pooRecord';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { PooRecordViewing } from '../models/pooRecordViewing';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,12 @@ export class PooService{
     );
   }
 
+  //springboot endpoint to get GET METHOD to /poo/records/all
+  getRecords(userId: string) : Observable<PooRecordViewing[]>{
+    const headers = new HttpHeaders({ 'userId': userId});
+    return this.httpClient.get<PooRecordViewing[]>(`${this.baseURL}/all`, { headers }
+    );
+  }
 
 
 }

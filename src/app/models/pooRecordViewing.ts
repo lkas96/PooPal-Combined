@@ -1,4 +1,5 @@
-export class PooRecord {
+export class PooRecordViewing {
+    id!: number;
     pooWhere!: string;
     pooType!: string;
     pooColor!: string;
@@ -9,4 +10,5 @@ export class PooRecord {
     laxative!: boolean;
     bleeding!: boolean;
     notes!: string;
+    timestamp!: number[] | Date;
 }

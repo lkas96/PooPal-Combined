@@ -1,1 +1,44 @@
-<p>records works!</p>
+<mat-card class="records-container">
+  <mat-card-title>Poo Records</mat-card-title>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search records" />
+  </mat-form-field>
+
+  <div class="records-list">
+    <mat-accordion multi="true">
+      <mat-expansion-panel *ngFor="let record of dataSource.filteredData">
+        <!-- Panel Header (Always Visible) -->
+        <mat-expansion-panel-header>
+          <mat-panel-title class="panel-title">
+            <span class="timestamp">{{ getFormattedDate(record.timestamp) }}</span>
+            <span class="public">
+              {{ record.pooWhere === 'home' ? 'Home' : 'Outside' }}
+            </span>
+            <span class="notes">{{ record.notes || 'No comments' }}</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- Panel content when expanded - reorg later -->
+        <div class="record-details">
+          <p><strong>Poo Type:</strong> {{ record.pooType }}</p>
+          <p><strong>Poo Color:</strong> {{ record.pooColor }}</p>
+          <p><strong>Pain Before:</strong> {{ record.painBefore }}</p>
+          <p><strong>Pain During:</strong> {{ record.painDuring }}</p>
+          <p><strong>Pain After:</strong> {{ record.painAfter }}</p>
+          <p><strong>Urgent:</strong> {{ record.urgent ? 'Yes' : 'No' }}</p>
+          <p><strong>Laxative Used:</strong> {{ record.laxative ? 'Yes' : 'No' }}</p>
+          <p><strong>Bleeding:</strong> {{ record.bleeding ? 'Yes' : 'No' }}</p>
+        </div>
+
+        <mat-action-row>
+          <button mat-button color="primary" (click)="editRecord(record)">Edit</button>
+          <button mat-button color="primary" (click)="deleteRecord(record.id)">Delete</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</mat-card>

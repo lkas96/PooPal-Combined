@@ -44,7 +44,7 @@ export class PooformComponent implements OnInit {
 
     //instantiate the form shit
     this.form = new FormGroup({
-      isPublic: new FormControl(null, Validators.required),
+      pooWhere: new FormControl(null, Validators.required),
       pooType: new FormControl(null, Validators.required),
       pooColor: new FormControl(null, Validators.required),
       painBefore: new FormControl(null, Validators.required),
