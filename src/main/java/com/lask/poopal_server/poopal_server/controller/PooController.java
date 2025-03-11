@@ -1,6 +1,8 @@
 package com.lask.poopal_server.poopal_server.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @CrossOrigin(origins = "http://localhost:4200") // Apply globally for now, can also put in the individual mappings thingy
 @RestController
@@ -24,13 +28,20 @@ public class PooController {
 
     //save a poo entry
     @PostMapping("/records/new")
-    public void savePooEntry(@RequestBody PooRecord poo, String userId) {
-        ps.savePooEntry(poo);
-    }
+    public ResponseEntity<Map<String, String>> savePooEntry(@RequestBody PooRecord poo, @RequestHeader("userId") String userId) {
+        System.out.println("ADDING NEW ENTRY");
+        ps.savePooEntry(userId, poo);
 
-    //get all poos of a user
-    @GetMapping("/records/all")
-    public List<PooRecord> getAllPoos(@RequestBody String userId) {
+        Map<String, String> resp = new HashMap<>();
+        resp.put("message", "Poo entry saved successfully");
+        return ResponseEntity.ok(resp);
+    }
+    
+
+
+    @PostMapping("/records/all")
+    public List<PooRecord> getAllPoos(@RequestBody Map<String, String> requestBody) {
+        String userId = requestBody.get("userId");
         return ps.getAllPooEntries(userId);
     }
 

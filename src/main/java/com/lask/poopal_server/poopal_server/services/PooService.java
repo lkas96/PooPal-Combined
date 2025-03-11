@@ -13,8 +13,8 @@ public class PooService {
     @Autowired private PooRepo pr;
 
     //create a poo entry
-    public void savePooEntry(PooRecord pooEntry) {
-        pr.savePooEntry(pooEntry);
+    public void savePooEntry(String userId, PooRecord pooEntry) {
+        pr.savePooEntry(userId, pooEntry);
     }
 
     //get all poo entries

@@ -16,10 +16,10 @@ public class PooRepo {
     @Autowired private JdbcTemplate template;
     
     //To save a poo entry/record
-    public void savePooEntry(PooRecord poo) {
-        final String SQL_INSERT = "INSERT INTO records (public, pooType, pooColor, painBefore, painDuring, painAfter, urgent, laxative, bleeding, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public void savePooEntry(String userId, PooRecord poo) {
+        final String SQL_INSERT = "INSERT INTO records (userId, public, pooType, pooColor, painBefore, painDuring, painAfter, urgent, laxative, bleeding, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        int isAdded = template.update(SQL_INSERT, poo.isPublic(), poo.getPooType(), poo.getPooColor(), poo.getPainBefore(), poo.getPainDuring(), poo.getPainAfter(), poo.isUrgent(), poo.isLaxative(), poo.isBleeding(), poo.getNotes());
+        int isAdded = template.update(SQL_INSERT, userId, poo.isPublic(), poo.getPooType(), poo.getPooColor(), poo.getPainBefore(), poo.getPainDuring(), poo.getPainAfter(), poo.isUrgent(), poo.isLaxative(), poo.isBleeding(), poo.getNotes());
 
         if (isAdded == 1) {
             System.out.println("Poo entry added successfully");
