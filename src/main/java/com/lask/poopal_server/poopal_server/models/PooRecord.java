@@ -5,22 +5,14 @@ import java.time.LocalDateTime;
 public class PooRecord {
     private int id;
     private String pooWhere;
-    public String getPooWhere() {
-        return pooWhere;
-    }
-
-    public void setPooWhere(String pooWhere) {
-        this.pooWhere = pooWhere;
-    }
-
     private String pooType;
     private String pooColor;
-    private int painBefore;
-    private int painDuring;
-    private int painAfter;
-    private boolean urgent;
-    private boolean laxative;
-    private boolean bleeding;
+    private String painBefore;
+    private String painDuring;
+    private String painAfter;
+    private String urgent;
+    private String laxative;
+    private String bleeding;
     private String notes;
     private LocalDateTime timestamp;
 
@@ -32,7 +24,13 @@ public class PooRecord {
         this.id = id;
     }
 
+    public String getPooWhere() {
+        return pooWhere;
+    }
 
+    public void setPooWhere(String pooWhere) {
+        this.pooWhere = pooWhere;
+    }
 
     public String getPooType() {
         return pooType;
@@ -50,51 +48,51 @@ public class PooRecord {
         this.pooColor = pooColor;
     }
 
-    public int getPainBefore() {
+    public String getPainBefore() {
         return painBefore;
     }
 
-    public void setPainBefore(int painBefore) {
+    public void setPainBefore(String painBefore) {
         this.painBefore = painBefore;
     }
 
-    public int getPainDuring() {
+    public String getPainDuring() {
         return painDuring;
     }
 
-    public void setPainDuring(int painDuring) {
+    public void setPainDuring(String painDuring) {
         this.painDuring = painDuring;
     }
 
-    public int getPainAfter() {
+    public String getPainAfter() {
         return painAfter;
     }
 
-    public void setPainAfter(int painAfter) {
+    public void setPainAfter(String painAfter) {
         this.painAfter = painAfter;
     }
 
-    public boolean isUrgent() {
+    public String getUrgent() {
         return urgent;
     }
 
-    public void setUrgent(boolean urgent) {
+    public void setUrgent(String urgent) {
         this.urgent = urgent;
     }
 
-    public boolean isLaxative() {
+    public String getLaxative() {
         return laxative;
     }
 
-    public void setLaxative(boolean laxative) {
+    public void setLaxative(String laxative) {
         this.laxative = laxative;
     }
 
-    public boolean isBleeding() {
+    public String getBleeding() {
         return bleeding;
     }
 
-    public void setBleeding(boolean bleeding) {
+    public void setBleeding(String bleeding) {
         this.bleeding = bleeding;
     }
 
@@ -114,8 +112,8 @@ public class PooRecord {
         this.timestamp = timestamp;
     }
 
-    public PooRecord(int id, String pooWhere, String pooType, String pooColor, int painBefore, int painDuring,
-            int painAfter, boolean urgent, boolean laxative, boolean bleeding, String notes, LocalDateTime timestamp) {
+    public PooRecord(int id, String pooWhere, String pooType, String pooColor, String painBefore, String painDuring,
+            String painAfter, String urgent, String laxative, String bleeding, String notes, LocalDateTime timestamp) {
         this.id = id;
         this.pooWhere = pooWhere;
         this.pooType = pooType;
@@ -130,8 +128,8 @@ public class PooRecord {
         this.timestamp = timestamp;
     }
 
-    public PooRecord(String pooWhere, String pooType, String pooColor, int painBefore, int painDuring, int painAfter,
-            boolean urgent, boolean laxative, boolean bleeding, String notes) {
+    public PooRecord(String pooWhere, String pooType, String pooColor, String painBefore, String painDuring, String painAfter,
+            String urgent, String laxative, String bleeding, String notes) {
         this.pooWhere = pooWhere;
         this.pooType = pooType;
         this.pooColor = pooColor;

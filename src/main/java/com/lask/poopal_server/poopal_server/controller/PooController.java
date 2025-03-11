@@ -79,9 +79,9 @@ public class PooController {
         recordChange.setPainBefore(poo.getPainBefore());
         recordChange.setPainDuring(poo.getPainDuring());
         recordChange.setPainAfter(poo.getPainAfter());
-        recordChange.setUrgent(poo.isUrgent());
-        recordChange.setLaxative(poo.isLaxative());
-        recordChange.setBleeding(poo.isBleeding());
+        recordChange.setUrgent(poo.getUrgent());
+        recordChange.setLaxative(poo.getLaxative());
+        recordChange.setBleeding(poo.getBleeding());
         recordChange.setNotes(poo.getNotes());
         recordChange.setTimestamp(poo.getTimestamp());
 
