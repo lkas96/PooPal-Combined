@@ -1,21 +1,25 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PooRecord } from '../models/pooRecord';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PooService {
+export class PooService{
 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private gauth: AuthService) { }
 
-  private baseURL = "http://localhost:8080/poo/records";
+  private baseURL = "http://localhost:9090/poo/records";
 
   //springboot endpoint to save POST METHOD to /poo/records/new
-  savePooRecord(pooRecord: PooRecord) : Observable<PooRecord>{
-    return this.httpClient.post<PooRecord>(this.baseURL+ '/new', pooRecord);
+  savePooRecord(userId: string, pooRecord: PooRecord) : Observable<PooRecord>{
+    const headers = new HttpHeaders({ 'userId': userId});
+    return this.httpClient.post<PooRecord>(`${this.baseURL}/new`, pooRecord, { headers } // ✅ Pass headers in the third parameter
+    );
   }
 
 

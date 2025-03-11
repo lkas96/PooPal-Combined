@@ -1,43 +1,66 @@
-<div>
-  <h1>Create a Poo Entry</h1>
+<div class="card poo-card">
+  <div class="card-header">
+    <h1 class="card-title">New Poo Entry</h1>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="submitPoo()">
 
-  <form [formGroup]="form" (ngSubmit)="submitPoo()">
+      <!-- IS PUBLIC POO -->
+      <div class="mb-3">
+        <label class="form-label"><h6>Did you poo in public?</h6></label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="isPublic" [value]="true">
+          <label class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="isPublic" [value]="false">
+          <label class="form-check-label">No</label>
+        </div>
+      </div>
+      <br>
 
-    <!-- IS PUBLIC POO -->
-    <div>
-      <label for="isPublic">Where did you poo?</label><br />
-      <input type="radio" formControlName="isPublic" [value]="true" />
-      <label for="publicYes">Yes</label>
+      <!-- POO TYPE -->
+      <!-- <div class="mb-3">
+        <label class="form-label"><h6>What was the poo type?</h6></label>
+        <img src="assets/images/p-bristol-stool-chart-fluffy.webp" alt="Bristol Chart" class="img-fluid"><br><br>
+        <select class="form-select" formControlName="pooType">
+          <option *ngFor="let type of pooTypes" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+      <br> -->
+      <div class="mb-3">
+        <label class="form-label"><h6>What was the poo type?</h6></label>
+          <img src="assets/images/p-bristol-stool-chart-fluffy.jpg" alt="Bristol Chart" class="img-fluid"><br><br>
+          <mat-form-field appearance="outline" class="full-width" style="width: 100%">
+            <mat-label>Select Type</mat-label>
+            <mat-select formControlName="pooType">
+              <mat-option *ngFor="let type of pooTypes" [value]="type">
+                {{ type }}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+      </div>
+      <br><br>
+      
 
-      <input type="radio" formControlName="isPublic" [value]="false" />
-      <label for="publicNo">No</label>
-    </div>
-    <br />
+      <!-- POO COLOR -->
+      <div class="mb-3">
+        <label class="form-label"><h6>What was the poo color?</h6></label>
+        <img src="assets/images/shades.jpg" alt="Color Chart" class="img-fluid"><br><br>
+        <mat-form-field appearance="outline" class="full-width" style="width: 100%">
+          <mat-label>Select Poo Color</mat-label>
+          <mat-select formControlName="pooColor">
+            <mat-option *ngFor="let color of poopColors" [value]="color.value">
+              {{ color.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>        
+      </div>
+      <br>
 
-    <!-- POO TYPE -->
-    <div>
-      <label for="pooType">Poo Type</label>
-      <select id="pooType" formControlName="pooType" class="form-control">
-        <option *ngFor="let type of pooTypes" [value]="type">{{ type }}</option>
-      </select>
-    </div>
-    <br />
-
-    <!-- POO COLOR -->
-    <div>
-      <label for="poopColor">Select Poop Color:</label>
-      <select id="poopColor" formControlName="pooColor">
-        <option *ngFor="let color of poopColors" [value]="color.value">
-          {{ color.label }}
-        </option>
-      </select>
-    </div>
-    <br />
-
-    <!-- POO PAIN LEVELS -->
-    <div>
-      <h3>Pain Level</h3>
-      <table class="pain-table">
+      <!-- POO PAIN LEVELS -->
+      <h6>Pain Level</h6>
+      <table class="table table-bordered text-center">
         <thead>
           <tr>
             <th></th>
@@ -49,99 +72,68 @@
         <tbody>
           <tr *ngFor="let level of [1, 2, 3, 4, 5]">
             <td>{{ level }}</td>
-            <td>
-              <input
-                type="radio"
-                formControlName="painBefore"
-                [value]="level"
-              />
-            </td>
-            <td>
-              <input
-                type="radio"
-                formControlName="painDuring"
-                [value]="level"
-              />
-            </td>
-            <td>
-              <input type="radio" formControlName="painAfter" [value]="level" />
-            </td>
+            <td><input class="form-check-input" type="radio" formControlName="painBefore" [value]="level"></td>
+            <td><input class="form-check-input" type="radio" formControlName="painDuring" [value]="level"></td>
+            <td><input class="form-check-input" type="radio" formControlName="painAfter" [value]="level"></td>
           </tr>
         </tbody>
       </table>
-    </div>
+      <br>
 
-    <!-- POO URGENCY -->
-    <div class="radio-group">
-      <label>Urgent:</label>
-      <input
-        type="radio"
-        formControlName="urgent"
-        [value]="true"
-        id="urgentYes"
-      />
-      <label for="urgentYes">Yes</label>
+      <!-- POO URGENCY -->
+      <div class="mb-3">
+        <label class="form-label"><h6>Was it urgent?</h6></label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="urgent" [value]="true">
+          <label class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="urgent" [value]="false">
+          <label class="form-check-label">No</label>
+        </div>
+      </div>
+      <br>
 
-      <input
-        type="radio"
-        formControlName="urgent"
-        [value]="false"
-        id="urgentNo"
-      />
-      <label for="urgentNo">No</label>
-    </div>
-    <br />
+      <!-- POO LAXATIVE -->
+      <div class="mb-3">
+        <label class="form-label"><h6>Was laxatives taken?</h6></label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="laxative" [value]="true">
+          <label class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="laxative" [value]="false">
+          <label class="form-check-label">No</label>
+        </div>
+      </div>
+      <br>
 
-    <!-- POO LAXATIVE -->
-    <div class="radio-group">
-      <label>Laxative Used:</label>
-      <input
-        type="radio"
-        formControlName="laxative"
-        [value]="true"
-        id="laxativeYes"
-      />
-      <label for="laxativeYes">Yes</label>
+      <!-- POO BLEEDING -->
+      <div class="mb-3">
+        <label class="form-label"><h6>Was there bleeding?</h6></label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="bleeding" [value]="true">
+          <label class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="bleeding" [value]="false">
+          <label class="form-check-label">No</label>
+        </div>
+      </div>
+      <br>
 
-      <input
-        type="radio"
-        formControlName="laxative"
-        [value]="false"
-        id="laxativeNo"
-      />
-      <label for="laxativeNo">No</label>
-    </div>
-    <br />
+      <!-- POO COMMENTS -->
+      <div class="mb-3">
+        <label class="form-label"><h6>Notes & Comments</h6></label>
+        <textarea class="form-control" formControlName="notes" rows="3"></textarea>
+      </div>
+      <br>
 
-    <!-- POO BLEEDING -->
-    <div class="radio-group">
-      <label>Bleeding:</label>
-      <input
-        type="radio"
-        formControlName="bleeding"
-        [value]="true"
-        id="bleedingYes"
-      />
-      <label for="bleedingYes">Yes</label>
+      <!-- SUBMIT BUTTON -->
+      <div class="text-end">
+        <button class="btn btn-primary" type="submit">Log Poo Entry!</button>
+      </div>
 
-      <input
-        type="radio"
-        formControlName="bleeding"
-        [value]="false"
-        id="bleedingNo"
-      />
-      <label for="bleedingNo">No</label>
-    </div>
-    <br />
-
-    <!-- POO COMMENTS -->
-    <div>
-      <label for="notes">Notes & Comments</label>
-      <textarea id="notes" formControlName="notes"></textarea>
-    </div>
-    <br />
-
-    <!-- SUBMIT BUTTON -->
-    <button type="submit">Submit Poo</button>
-  </form>
+    </form>
+  </div>
 </div>

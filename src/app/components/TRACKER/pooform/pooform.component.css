@@ -1,29 +1,5 @@
-.pain-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
+.poo-card {
+  max-width: 600px;
+  width: 70%;
+  margin: auto;
 }
-
-.pain-table th, .pain-table td {
-    padding: 8px;
-}
-
-.pain-table th {
-    background-color: #f4f4f4;
-}
-
-.pain-table input {
-    transform: scale(1.3);
-}
-
-.radio-group {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-  }
-  .radio-group label {
-    margin-right: 10px;
-  }
-  .radio-group input {
-    transform: scale(1.2);
-  }
