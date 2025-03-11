@@ -20,15 +20,16 @@ export class PooformComponent implements OnInit {
   pooTypes: number[] = [1, 2, 3, 4, 5, 6, 7];
 
   selectedColor: string = '';
+  
   poopColors = [
-    { label: 'Brown', value: 'brown' },
-    { label: 'Bright Brown', value: 'bright-brown' },
-    { label: 'Yellowish', value: 'yellowish' },
-    { label: 'White or Clay-colored', value: 'white-clay' },
-    { label: 'Green', value: 'green' },
-    { label: 'Bright Red', value: 'bright-red' },
-    { label: 'Reddish', value: 'reddish' },
-    { label: 'Black or Dark Brown', value: 'black-dark-brown' }
+    { label: 'Brown', value: 'Brown' },
+    { label: 'Bright Brown', value: 'Bright Brown' },
+    { label: 'Yellowish', value: 'Yellowish' },
+    { label: 'White or Clay-colored', value: 'White Clay Colored' },
+    { label: 'Green', value: 'Green' },
+    { label: 'Bright Red', value: 'Bright Red' },
+    { label: 'Reddish', value: 'Reddish' },
+    { label: 'Black or Dark Brown', value: 'Black or Dark Brown' }
   ];
 
   constructor(private ps: PooService, private router: Router, private gauth: AuthService) {}
