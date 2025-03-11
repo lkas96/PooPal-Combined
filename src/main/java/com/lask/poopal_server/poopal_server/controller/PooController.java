@@ -11,14 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lask.poopal_server.poopal_server.models.PooRecord;
 import com.lask.poopal_server.poopal_server.services.PooService;
 
+import jakarta.json.Json;
+import jakarta.json.JsonArrayBuilder;
+import jakarta.json.JsonStructure;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @CrossOrigin(origins = "http://localhost:4200") // Apply globally for now, can also put in the individual mappings thingy
 @RestController
@@ -38,41 +43,43 @@ public class PooController {
         return ResponseEntity.ok(resp);
     }
     
-
-
-
-
+    // WORKING - COMPLETED DO NOT TOUCH
+    //REVISED JSONP DATEIMER SHIT KEEPS MESSING UP ON FRONTEND CRI
+    //get all poo entries
     @GetMapping("/records/all")
-    public ResponseEntity<List<PooRecord>> getAllPoos(@RequestHeader("userId") String userId) {
+    public ResponseEntity<String> getAllPoos(@RequestHeader("userId") String userId) {
         List<PooRecord> records = ps.getAllPooEntries(userId);
-        return ResponseEntity.ok(records);
-    }
-
-
-
-
-
-
-    //get a poo by id
-    @GetMapping("/records/{id}")
-    public ResponseEntity<PooRecord> getPooById(@PathVariable int id, @RequestBody String userId) {
-        PooRecord poo = ps.getPooEntry(userId, id);
-        if (poo == null) {
-            return ResponseEntity.notFound().build();
+        
+        //serialise to jsonp format thingy rip use the method in the model class easier nearter
+        JsonArrayBuilder jab = Json.createArrayBuilder();
+        for (PooRecord record : records) {
+            jab.add(record.toJson());
         }
-        return ResponseEntity.ok(poo);
+        JsonStructure js = jab.build();
+        System.out.println(js);
+
+        return ResponseEntity.ok(js.toString());
     }
 
+    //get a poo by id for editing for view indepth
+    @GetMapping("/records/{id}")
+    public ResponseEntity<String> getPooById(@PathVariable int id, @RequestHeader String userId) {
+        
+        PooRecord poo = ps.getPooEntry(userId, id);
+        JsonStructure js = poo.toJson();
+        System.out.println(js.toString());
+        return ResponseEntity.ok(js.toString());
+    }
+
+    //ok working now
     //update a poo by id
-    @GetMapping("/records/update/{id}")
-    public ResponseEntity<PooRecord> updatePooById(@PathVariable int id, @RequestBody PooRecord poo, String userId) {
+    @PutMapping("/records/edit/{id}")
+    public ResponseEntity<PooRecord> updatePooById(@PathVariable int id, @RequestBody PooRecord poo, @RequestHeader("userId") String userId) {
+       
+        System.out.println(poo.toString());
+
         PooRecord recordChange = ps.getPooEntry(userId, id);
 
-        if (recordChange == null) {
-            //something wrong, no poo records retrivede
-            return ResponseEntity.notFound().build();
-        }
-        
         recordChange.setPooWhere(poo.getPooWhere());
         recordChange.setPooType(poo.getPooType());
         recordChange.setPooColor(poo.getPooColor());
@@ -88,6 +95,16 @@ public class PooController {
         ps.updatePooEntry(userId, poo);
 
         return ResponseEntity.ok(recordChange);
+    }
+    
+    //delete a poo by id
+    @DeleteMapping("/records/delete/{id}")
+    public ResponseEntity<Map<String, String>> deletePooById(@PathVariable int id, @RequestHeader("userId") String userId) {
+        ps.deletePooEntry(userId, id);
+
+        Map<String, String> resp = new HashMap<>();
+        resp.put("message", "Poo entry deleted successfully");
+        return ResponseEntity.ok(resp);
     }
     
 }

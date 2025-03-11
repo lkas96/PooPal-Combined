@@ -1,6 +1,10 @@
 package com.lask.poopal_server.poopal_server.models;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
 
 public class PooRecord {
     private int id;
@@ -128,7 +132,8 @@ public class PooRecord {
         this.timestamp = timestamp;
     }
 
-    public PooRecord(String pooWhere, String pooType, String pooColor, String painBefore, String painDuring, String painAfter,
+    public PooRecord(String pooWhere, String pooType, String pooColor, String painBefore, String painDuring,
+            String painAfter,
             String urgent, String laxative, String bleeding, String notes) {
         this.pooWhere = pooWhere;
         this.pooType = pooType;
@@ -143,6 +148,24 @@ public class PooRecord {
     }
 
     public PooRecord() {
+    }
+
+    // method to convert to jsonp jarkata easy
+    public JsonObject toJson() {
+        return Json.createObjectBuilder()
+                .add("id", id)
+                .add("pooWhere", pooWhere)
+                .add("pooType", pooType)
+                .add("pooColor", pooColor)
+                .add("painBefore", painBefore)
+                .add("painDuring", painDuring)
+                .add("painAfter", painAfter)
+                .add("urgent", urgent)
+                .add("laxative", laxative)
+                .add("bleeding", bleeding)
+                .add("notes", notes)
+                .add("timestamp", timestamp != null ? timestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) : "null")
+                .build();
     }
 
 }
