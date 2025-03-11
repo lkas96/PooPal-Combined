@@ -4,13 +4,13 @@
       <div class="col-12 d-block d-lg-none">
         <div class="button-group d-flex justify-content-between">
           <button mat-button color="primary" (click)="navigate('summary')">Summary</button>
-          <button mat-button color="accent" (click)="navigate('new-entry')">Log A Poo</button>
-          <button mat-button color="warn" (click)="navigate('history')">Poo History</button>
+          <button mat-button color="accent" (click)="navigate('new')">Log A Poo</button>
+          <button mat-button color="warn" (click)="navigate('records')">Poo History</button>
         </div>
       </div>
     </div>
   </div>
-    <div>
+    <div class="nested-container">
         <router-outlet></router-outlet>
     </div>
 <app-bottom-nav></app-bottom-nav>
