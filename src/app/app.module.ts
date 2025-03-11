@@ -24,6 +24,8 @@ import { TrackerSummaryComponent } from './components/TRACKER/summary/summary.co
 import { RecordsComponent } from './components/TRACKER/records/records.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { EditPooformComponent } from './components/TRACKER/editpooform/editpooform.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { HttpClientModule } from '@angular/common/http';
     PooformComponent,
     TrackerSummaryComponent,
     RecordsComponent, 
-    TrendComponent
+    TrendComponent,
+    EditPooformComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth())
+    provideAuth(() => getAuth()), 
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

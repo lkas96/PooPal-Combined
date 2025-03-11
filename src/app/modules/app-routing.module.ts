@@ -11,6 +11,7 @@ import { ToiletComponent } from '../pages/toilet/toilet.component';
 import { PooformComponent } from '../components/TRACKER/pooform/pooform.component';
 import { TrackerSummaryComponent } from '../components/TRACKER/summary/summary.component';
 import { RecordsComponent } from '../components/TRACKER/records/records.component';
+import { EditPooformComponent } from '../components/TRACKER/editpooform/editpooform.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,7 +23,8 @@ const routes: Routes = [
                 { path: '', redirectTo: 'summary', pathMatch: 'full' }, 
                 { path: 'summary', component: TrackerSummaryComponent}, 
                 { path: 'new',component: PooformComponent},
-                { path: 'records',component: RecordsComponent}
+                { path: 'records',component: RecordsComponent},
+                { path: 'records/edit/:id',component: EditPooformComponent}
               ],
   },
   {

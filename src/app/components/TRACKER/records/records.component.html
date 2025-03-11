@@ -12,11 +12,10 @@
         <!-- Panel Header (Always Visible) -->
         <mat-expansion-panel-header>
           <mat-panel-title class="panel-title">
-            <span class="timestamp">{{ getFormattedDate(record.timestamp) }}</span>
-            <span class="public">
-              {{ record.pooWhere === 'home' ? 'Home' : 'Outside' }}
-            </span>
-            <span class="notes">{{ record.notes || 'No comments' }}</span>
+            <span class="timestamp">{{ record.timestamp }}</span>
+            <span class="public">{{ record.pooWhere === 'home' ? 'Home' : 'Outside' }}</span>
+            <span class="urgent">{{ record.urgent === 'yes' ? 'Urgent' : 'Not Urgent' }}</span>
+            
           </mat-panel-title>
         </mat-expansion-panel-header>
 
@@ -27,13 +26,13 @@
           <p><strong>Pain Before:</strong> {{ record.painBefore }}</p>
           <p><strong>Pain During:</strong> {{ record.painDuring }}</p>
           <p><strong>Pain After:</strong> {{ record.painAfter }}</p>
-          <p><strong>Urgent:</strong> {{ record.urgent ? 'Yes' : 'No' }}</p>
           <p><strong>Laxative Used:</strong> {{ record.laxative ? 'Yes' : 'No' }}</p>
           <p><strong>Bleeding:</strong> {{ record.bleeding ? 'Yes' : 'No' }}</p>
+          <p><Strong>Notes:</Strong> {{ record.notes || 'No comments' }}</p>
         </div>
 
         <mat-action-row>
-          <button mat-button color="primary" (click)="editRecord(record)">Edit</button>
+          <button mat-button color="primary" (click)="editRecord(record.id)">Edit</button>
           <button mat-button color="primary" (click)="deleteRecord(record.id)">Delete</button>
         </mat-action-row>
       </mat-expansion-panel>

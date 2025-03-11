@@ -29,7 +29,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatMenuModule } from '@angular/material/menu';
 import { matExpansionAnimations, MatExpansionModule } from '@angular/material/expansion';
 
-
 @NgModule({
   imports: [
     CommonModule,

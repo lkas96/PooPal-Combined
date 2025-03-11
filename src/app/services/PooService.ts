@@ -9,7 +9,7 @@ import { PooRecordViewing } from '../models/pooRecordViewing';
 @Injectable({
   providedIn: 'root'
 })
-export class PooService{
+export class PooService {
 
 
   constructor(private httpClient: HttpClient, private gauth: AuthService) { }
@@ -30,25 +30,25 @@ export class PooService{
     );
   }
 
+  //get a single record
+  getRecord(userId: string, recordId: string) : Observable<PooRecordViewing>{
+    const headers = new HttpHeaders({ 'userId': userId});
+    return this.httpClient.get<PooRecordViewing>(`${this.baseURL}/${recordId}`, { headers }
+    );
+  }
+
+  //update a record ok functioning
+  updatePooRecord(userId: string, retrievedRecord: PooRecordViewing) : Observable<PooRecordViewing>{
+    const headers = new HttpHeaders({ 'userId': userId});
+    return this.httpClient.put<PooRecordViewing>(`${this.baseURL}/edit/${retrievedRecord.id}`,retrievedRecord, { headers }
+    );
+  }
+
+  //delete a record
+  deleteRecord(userId: string, recordId: string) : Observable<any>{
+    const headers = new HttpHeaders({ 'userId': userId});
+    return this.httpClient.delete<any>(`${this.baseURL}/delete/${recordId}`, { headers }
+    );
+  }
 
 }
-
-// getAll() : Observable<Employee []> {
-//   return this.httpClient.get<Employee[]>(this.baseURL);
-// }
-
-// getById(id: number) : Observable<Employee> {
-//   return this.httpClient.get<Employee>(this.baseURL+ '/' + id);
-// }
-
-// create(employee: Employee) : Observable<Employee>{
-//   return this.httpClient.post<Employee>(this.baseURL, employee);
-// }
-
-// update(id:number, employee: Employee) : Observable<Object>{
-//   return this.httpClient.put<Employee>(this.baseURL+ '/'+ id, employee);
-// }
-
-// deleteById(id:number) : Observable<Object>{
-//   return this.httpClient.delete<Employee>(this.baseURL +'/'+ id)
-// }

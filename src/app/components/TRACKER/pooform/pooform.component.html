@@ -34,8 +34,8 @@
           <mat-form-field appearance="outline" class="full-width" style="width: 100%">
             <mat-label>Select Type</mat-label>
             <mat-select formControlName="pooType">
-              <mat-option *ngFor="let type of pooTypes" [value]="type">
-                {{ type }}
+              <mat-option *ngFor="let type of pooTypes" [value]="type.value">
+                {{ type.value }}
               </mat-option>
             </mat-select>
         </mat-form-field>
@@ -70,13 +70,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let level of [1, 2, 3, 4, 5]">
-            <td>{{ level }}</td>
-            <td><input class="form-check-input" type="radio" formControlName="painBefore" [value]="level"></td>
-            <td><input class="form-check-input" type="radio" formControlName="painDuring" [value]="level"></td>
-            <td><input class="form-check-input" type="radio" formControlName="painAfter" [value]="level"></td>
+          <tr *ngFor="let painLevel of painLevels">
+            <td>{{ painLevel.label }}</td>
+            <td><input class="form-check-input" type="radio" formControlName="painBefore" [value]="painLevel.value"></td>
+            <td><input class="form-check-input" type="radio" formControlName="painDuring" [value]="painLevel.value"></td>
+            <td><input class="form-check-input" type="radio" formControlName="painAfter" [value]="painLevel.value"></td>
           </tr>
-        </tbody>
+        </tbody>        
       </table>
       <br>
 
@@ -84,11 +84,11 @@
       <div class="mb-3">
         <label class="form-label"><h6>Was it urgent?</h6></label><br>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" formControlName="urgent" [value]="true">
+          <input class="form-check-input" type="radio" formControlName="urgent" value="yes">
           <label class="form-check-label">Yes</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" formControlName="urgent" [value]="false">
+          <input class="form-check-input" type="radio" formControlName="urgent" value="no">
           <label class="form-check-label">No</label>
         </div>
       </div>
@@ -98,11 +98,11 @@
       <div class="mb-3">
         <label class="form-label"><h6>Was laxatives taken?</h6></label><br>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" formControlName="laxative" [value]="true">
+          <input class="form-check-input" type="radio" formControlName="laxative" value="yes">
           <label class="form-check-label">Yes</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" formControlName="laxative" [value]="false">
+          <input class="form-check-input" type="radio" formControlName="laxative" value="no">
           <label class="form-check-label">No</label>
         </div>
       </div>
@@ -112,11 +112,11 @@
       <div class="mb-3">
         <label class="form-label"><h6>Was there bleeding?</h6></label><br>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" formControlName="bleeding" [value]="true">
+          <input class="form-check-input" type="radio" formControlName="bleeding" value="yes">
           <label class="form-check-label">Yes</label>
         </div>
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" formControlName="bleeding" [value]="false">
+          <input class="form-check-input" type="radio" formControlName="bleeding" value="no">
           <label class="form-check-label">No</label>
         </div>
       </div>

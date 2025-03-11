@@ -17,19 +17,35 @@ export class PooformComponent implements OnInit {
 
   userId!: string;
 
-  pooTypes: number[] = [1, 2, 3, 4, 5, 6, 7];
-
   selectedColor: string = '';
-  
+
+  pooTypes = [
+    {label: 'Type 1', value: 'Type 1'},
+    {label: 'Type 2', value: 'Type 2'},
+    {label: 'Type 3', value: 'Type 3'},
+    {label: 'Type 4', value: 'Type 4'},
+    {label: 'Type 5', value: 'Type 5'},
+    {label: 'Type 6', value: 'Type 6'},
+    {label: 'Type 7', value: 'Type 7'}
+  ];
+
   poopColors = [
     { label: 'Brown', value: 'Brown' },
     { label: 'Bright Brown', value: 'Bright Brown' },
     { label: 'Yellowish', value: 'Yellowish' },
-    { label: 'White or Clay-colored', value: 'White Clay Colored' },
+    { label: 'White or Clay Colored', value: 'White Clay Colored' },
     { label: 'Green', value: 'Green' },
     { label: 'Bright Red', value: 'Bright Red' },
     { label: 'Reddish', value: 'Reddish' },
     { label: 'Black or Dark Brown', value: 'Black or Dark Brown' }
+  ];
+
+  painLevels = [
+    { value: 'Unbearable', label: 'Unbearable' },
+    { value: 'Severe', label : 'Severe' },
+    { value: 'Moderate', label: 'Moderate' },
+    { value: 'Mild', label: 'Mild' },
+    { value: 'None', label: 'None' }
   ];
 
   constructor(private ps: PooService, private router: Router, private gauth: AuthService) {}
