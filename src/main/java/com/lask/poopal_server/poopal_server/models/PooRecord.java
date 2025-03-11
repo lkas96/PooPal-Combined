@@ -4,7 +4,15 @@ import java.time.LocalDateTime;
 
 public class PooRecord {
     private int id;
-    private boolean isPublic;
+    private String pooWhere;
+    public String getPooWhere() {
+        return pooWhere;
+    }
+
+    public void setPooWhere(String pooWhere) {
+        this.pooWhere = pooWhere;
+    }
+
     private String pooType;
     private String pooColor;
     private int painBefore;
@@ -24,13 +32,7 @@ public class PooRecord {
         this.id = id;
     }
 
-    public boolean isPublic() {
-        return isPublic;
-    }
 
-    public void setPublic(boolean isPublic) {
-        this.isPublic = isPublic;
-    }
 
     public String getPooType() {
         return pooType;
@@ -112,10 +114,10 @@ public class PooRecord {
         this.timestamp = timestamp;
     }
 
-    public PooRecord(int id, boolean isPublic, String pooType, String pooColor, int painBefore, int painDuring,
+    public PooRecord(int id, String pooWhere, String pooType, String pooColor, int painBefore, int painDuring,
             int painAfter, boolean urgent, boolean laxative, boolean bleeding, String notes, LocalDateTime timestamp) {
         this.id = id;
-        this.isPublic = isPublic;
+        this.pooWhere = pooWhere;
         this.pooType = pooType;
         this.pooColor = pooColor;
         this.painBefore = painBefore;
@@ -128,9 +130,9 @@ public class PooRecord {
         this.timestamp = timestamp;
     }
 
-    public PooRecord(boolean isPublic, String pooType, String pooColor, int painBefore, int painDuring, int painAfter,
+    public PooRecord(String pooWhere, String pooType, String pooColor, int painBefore, int painDuring, int painAfter,
             boolean urgent, boolean laxative, boolean bleeding, String notes) {
-        this.isPublic = isPublic;
+        this.pooWhere = pooWhere;
         this.pooType = pooType;
         this.pooColor = pooColor;
         this.painBefore = painBefore;

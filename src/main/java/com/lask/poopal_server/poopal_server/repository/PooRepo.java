@@ -1,6 +1,6 @@
 package com.lask.poopal_server.poopal_server.repository;
 
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +17,9 @@ public class PooRepo {
     
     //To save a poo entry/record
     public void savePooEntry(String userId, PooRecord poo) {
-        final String SQL_INSERT = "INSERT INTO records (userId, public, pooType, pooColor, painBefore, painDuring, painAfter, urgent, laxative, bleeding, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        final String SQL_INSERT = "INSERT INTO records (userId, pooWhere, pooType, pooColor, painBefore, painDuring, painAfter, urgent, laxative, bleeding, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        int isAdded = template.update(SQL_INSERT, userId, poo.isPublic(), poo.getPooType(), poo.getPooColor(), poo.getPainBefore(), poo.getPainDuring(), poo.getPainAfter(), poo.isUrgent(), poo.isLaxative(), poo.isBleeding(), poo.getNotes());
+        int isAdded = template.update(SQL_INSERT, userId, poo.getPooWhere(), poo.getPooType(), poo.getPooColor(), poo.getPainBefore(), poo.getPainDuring(), poo.getPainAfter(), poo.isUrgent(), poo.isLaxative(), poo.isBleeding(), poo.getNotes());
 
         if (isAdded == 1) {
             System.out.println("Poo entry added successfully");
@@ -30,16 +30,12 @@ public class PooRepo {
 
     //To get all poo entries
     public List<PooRecord> getAllPooEntries(String userId) {
-        final String SQL_SELECT_ALL = "SELECT * FROM records where userId = ?";
+        final String SQL_SELECT_ALL = "SELECT * FROM records where userId = ? ORDER BY timestamp DESC";
 
-        List<PooRecord> list = new ArrayList<>();
-
-        SqlRowSet rs = template.queryForRowSet(SQL_SELECT_ALL, userId);
-        PooRecord p = new PooRecord();
-
-        while(rs.next()){
+        return template.query(SQL_SELECT_ALL, new Object[]{userId},(rs, rowNum) -> {
+            PooRecord p = new PooRecord();
             p.setId(rs.getInt("id"));
-            p.setPublic(rs.getBoolean("public"));
+            p.setPooWhere(rs.getString("pooWhere"));
             p.setPooType(rs.getString("pooType"));
             p.setPooColor(rs.getString("pooColor"));
             p.setPainBefore(rs.getInt("painBefore"));
@@ -49,12 +45,13 @@ public class PooRepo {
             p.setLaxative(rs.getBoolean("laxative"));
             p.setBleeding(rs.getBoolean("bleeding"));
             p.setNotes(rs.getString("notes"));
-            list.add(p);
-        }
+            //convert to localdatetime
+            Timestamp timestamp = rs.getTimestamp("timestamp");
+            p.setTimestamp(timestamp != null ? timestamp.toLocalDateTime() : null);
 
-        System.out.printf("Retrieved records for user %s: %s%n", userId, p.toString());
+            return p;
+    });
 
-        return list;
     }
 
     //To get a single poo entry
@@ -66,7 +63,7 @@ public class PooRepo {
 
         while(rs.next()){
             p.setId(rs.getInt("id"));
-            p.setPublic(rs.getBoolean("public"));
+            p.setPooWhere(rs.getString("pooWhere"));
             p.setPooType(rs.getString("pooType"));
             p.setPooColor(rs.getString("pooColor"));
             p.setPainBefore(rs.getInt("painBefore"));
@@ -85,9 +82,9 @@ public class PooRepo {
 
     //To update a poo entry
     public void updatePooEntry(String userId, PooRecord newPoo) {
-        final String SQL_UPDATE = "UPDATE records SET public = ?, pooType = ?, pooColor = ?, painBefore = ?, painDuring = ?, painAfter = ?, urgent = ?, laxative = ?, bleeding = ?, notes = ?, timestamp = ? WHERE userId = ? and id = ?";
+        final String SQL_UPDATE = "UPDATE records SET pooWhere = ?, pooType = ?, pooColor = ?, painBefore = ?, painDuring = ?, painAfter = ?, urgent = ?, laxative = ?, bleeding = ?, notes = ?, timestamp = ? WHERE userId = ? and id = ?";
 
-        int isUpdated = template.update(SQL_UPDATE, newPoo.isPublic(), newPoo.getPooType(), newPoo.getPooColor(), newPoo.getPainBefore(), newPoo.getPainDuring(), newPoo.getPainAfter(), newPoo.isUrgent(), newPoo.isLaxative(), newPoo.isBleeding(), newPoo.getNotes(), newPoo.getTimestamp(), userId, newPoo.getId());
+        int isUpdated = template.update(SQL_UPDATE, newPoo.getPooWhere(), newPoo.getPooType(), newPoo.getPooColor(), newPoo.getPainBefore(), newPoo.getPainDuring(), newPoo.getPainAfter(), newPoo.isUrgent(), newPoo.isLaxative(), newPoo.isBleeding(), newPoo.getNotes(), newPoo.getTimestamp(), userId, newPoo.getId());
 
         if (isUpdated == 1) {
             System.out.println("Poo entry updated successfully");

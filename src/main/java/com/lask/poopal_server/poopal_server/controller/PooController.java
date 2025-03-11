@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PooController {
     @Autowired private PooService ps;
 
+    // WORKING - COMPLETED DO NOT TOUCH
     //save a poo entry
     @PostMapping("/records/new")
     public ResponseEntity<Map<String, String>> savePooEntry(@RequestBody PooRecord poo, @RequestHeader("userId") String userId) {
@@ -39,11 +40,18 @@ public class PooController {
     
 
 
-    @PostMapping("/records/all")
-    public List<PooRecord> getAllPoos(@RequestBody Map<String, String> requestBody) {
-        String userId = requestBody.get("userId");
-        return ps.getAllPooEntries(userId);
+
+
+    @GetMapping("/records/all")
+    public ResponseEntity<List<PooRecord>> getAllPoos(@RequestHeader("userId") String userId) {
+        List<PooRecord> records = ps.getAllPooEntries(userId);
+        return ResponseEntity.ok(records);
     }
+
+
+
+
+
 
     //get a poo by id
     @GetMapping("/records/{id}")
@@ -65,7 +73,7 @@ public class PooController {
             return ResponseEntity.notFound().build();
         }
         
-        recordChange.setPublic(poo.isPublic());
+        recordChange.setPooWhere(poo.getPooWhere());
         recordChange.setPooType(poo.getPooType());
         recordChange.setPooColor(poo.getPooColor());
         recordChange.setPainBefore(poo.getPainBefore());
