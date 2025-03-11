@@ -23,6 +23,7 @@ import { PooformComponent } from './components/TRACKER/pooform/pooform.component
 import { TrackerSummaryComponent } from './components/TRACKER/summary/summary.component';
 import { RecordsComponent } from './components/TRACKER/records/records.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule, 
     ReactiveFormsModule,
+    HttpClientModule,
     AngularMaterialModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
