@@ -39,7 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     ToiletComponent,
     PooformComponent,
     TrackerSummaryComponent,
-    RecordsComponent
+    RecordsComponent, 
+    TrendComponent
   ],
   imports: [
     BrowserModule,

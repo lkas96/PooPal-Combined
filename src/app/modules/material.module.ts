@@ -27,6 +27,7 @@ import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatMenuModule } from '@angular/material/menu';
+import { matExpansionAnimations, MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatTableModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatExpansionModule
   ],
   exports: [
     MatButtonModule,
@@ -87,7 +89,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatTableModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule, 
+    MatExpansionModule
   ]
 })
 export class AngularMaterialModule { }
