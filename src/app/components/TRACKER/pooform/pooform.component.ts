@@ -48,6 +48,12 @@ export class PooformComponent implements OnInit {
     { value: 'None', label: 'None' }
   ];
 
+  satisfactionLevels = [
+    {label: 'Good', value: 'Good'},
+    {label: 'Mid', value: 'Mid'},
+    {label: 'Bad', value: 'Bad'},
+  ];
+
   constructor(private ps: PooService, private router: Router, private gauth: AuthService) {}
 
   ngOnInit(): void {
@@ -70,7 +76,8 @@ export class PooformComponent implements OnInit {
       urgent: new FormControl(null, Validators.required),
       laxative: new FormControl(null, Validators.required),
       bleeding: new FormControl(null, Validators.required),
-      notes: new FormControl('')
+      notes: new FormControl(''),
+      satisfactionLevel: new FormControl(null, Validators.required)
     });
   }
 

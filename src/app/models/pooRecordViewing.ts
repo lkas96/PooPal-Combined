@@ -11,4 +11,5 @@ export class PooRecordViewing {
     bleeding!: string;
     notes!: string;
     timestamp!: string;
+    satisfactionLevel!: string;
 }

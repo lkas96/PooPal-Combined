@@ -46,6 +46,12 @@ export class EditPooformComponent implements OnInit {
     { value: 'None', label: 'None' },
   ];
 
+  satisfactionLevels = [
+    {label: 'Good', value: 'Good'},
+    {label: 'Mid', value: 'Mid'},
+    {label: 'Bad', value: 'Bad'},
+  ];
+
   constructor(
     private ps: PooService,
     private router: Router,
@@ -66,6 +72,7 @@ export class EditPooformComponent implements OnInit {
       laxative: new FormControl('', Validators.required),
       bleeding: new FormControl('', Validators.required),
       notes: new FormControl(''),
+      satisfactionLevel: new FormControl('', Validators.required),
     });
   }
 
@@ -133,6 +140,7 @@ export class EditPooformComponent implements OnInit {
       laxative: this.retrievedRecord.laxative || '',
       bleeding: this.retrievedRecord.bleeding || '',
       notes: this.retrievedRecord.notes || '',
+      satisfactionLevel: this.retrievedRecord.satisfactionLevel || '',
     });
   
     console.log("Form populated with:", this.form.value);

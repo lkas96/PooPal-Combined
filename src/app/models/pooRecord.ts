@@ -9,4 +9,5 @@ export class PooRecord {
     laxative!: string;
     bleeding!: string;
     notes!: string;
+    satisfactionLevel!: string;
 }
