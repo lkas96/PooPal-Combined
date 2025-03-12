@@ -2,12 +2,26 @@ package com.lask.poopal_server.poopal_server.models;
 
 import java.util.UUID;
 
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+
 public class Toilet {
     private String id;
     private String name;
     private String district;
     private String type;
     private int rating;
+
+    //to json format helper method easier
+    public JsonObject toJson() {
+        return Json.createObjectBuilder()
+            .add("id", id)
+            .add("name", name)
+            .add("district", district)
+            .add("type", type)
+            .add("rating", rating)
+            .build();
+    }
     
     public Toilet(String id, String name, String district, String type, int rating) {
         this.id = id;

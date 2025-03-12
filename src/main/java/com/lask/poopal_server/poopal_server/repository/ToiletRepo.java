@@ -14,10 +14,10 @@ import com.lask.poopal_server.poopal_server.models.Toilet;
 public class ToiletRepo {
     @Autowired private JdbcTemplate template;
 
-    public void saveToilet(List<Toilet> toilets, int batchSize) {
+    public void saveToilets(List<Toilet> toilets, int batchSize) {
 
         //prepare insert ddml statement
-        final String SQL_INSERT = "INSERT INTO toilets (id, type, name, district, rating) VALUES (?, ?, ?, ?, ?)";
+        final String SQL_INSERT = "INSERT INTO toilets (type, name, district, rating) VALUES (?, ?, ?, ?)";
     
         //insert function into mysql
         for (int i = 0; i < toilets.size(); i += batchSize){
@@ -28,7 +28,7 @@ public class ToiletRepo {
             List<Object[]> batchArgs = new ArrayList<>();
             
             for (Toilet t : batchGroup){
-                Object[] args = {t.getId(), t.getType(), t.getName(), t.getDistrict(), t.getRating()};
+                Object[] args = {t.getType(), t.getName(), t.getDistrict(), t.getRating()};
                 batchArgs.add(args);
             }
 
