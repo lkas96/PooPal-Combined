@@ -19,6 +19,15 @@ public class PooRecord {
     private String bleeding;
     private String notes;
     private LocalDateTime timestamp;
+    private String satisfactionLevel;
+
+    public String getSatisfactionLevel() {
+        return satisfactionLevel;
+    }
+
+    public void setSatisfactionLevel(String satisfactionLevel) {
+        this.satisfactionLevel = satisfactionLevel;
+    }
 
     public int getId() {
         return id;
@@ -117,7 +126,8 @@ public class PooRecord {
     }
 
     public PooRecord(int id, String pooWhere, String pooType, String pooColor, String painBefore, String painDuring,
-            String painAfter, String urgent, String laxative, String bleeding, String notes, LocalDateTime timestamp) {
+            String painAfter, String urgent, String laxative, String bleeding, String notes, LocalDateTime timestamp,
+            String satisfactionLevel) {
         this.id = id;
         this.pooWhere = pooWhere;
         this.pooType = pooType;
@@ -130,11 +140,11 @@ public class PooRecord {
         this.bleeding = bleeding;
         this.notes = notes;
         this.timestamp = timestamp;
+        this.satisfactionLevel = satisfactionLevel;
     }
 
     public PooRecord(String pooWhere, String pooType, String pooColor, String painBefore, String painDuring,
-            String painAfter,
-            String urgent, String laxative, String bleeding, String notes) {
+            String painAfter, String urgent, String laxative, String bleeding, String notes, String satisfactionLevel) {
         this.pooWhere = pooWhere;
         this.pooType = pooType;
         this.pooColor = pooColor;
@@ -145,6 +155,7 @@ public class PooRecord {
         this.laxative = laxative;
         this.bleeding = bleeding;
         this.notes = notes;
+        this.satisfactionLevel = satisfactionLevel;
     }
 
     public PooRecord() {
@@ -164,7 +175,10 @@ public class PooRecord {
                 .add("laxative", laxative)
                 .add("bleeding", bleeding)
                 .add("notes", notes)
-                .add("timestamp", timestamp != null ? timestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) : "null")
+                .add("timestamp",
+                        timestamp != null ? timestamp.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                                : "null")
+                .add("satisfactionLevel", satisfactionLevel)
                 .build();
     }
 

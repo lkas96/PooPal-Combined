@@ -91,7 +91,7 @@ public class PooController {
         recordChange.setBleeding(poo.getBleeding());
         recordChange.setNotes(poo.getNotes());
         recordChange.setTimestamp(poo.getTimestamp());
-
+        recordChange.setSatisfactionLevel(poo.getSatisfactionLevel());
         ps.updatePooEntry(userId, poo);
 
         return ResponseEntity.ok(recordChange);
@@ -106,5 +106,16 @@ public class PooController {
         resp.put("message", "Poo entry deleted successfully");
         return ResponseEntity.ok(resp);
     }
+
+    
+
+    //FOR SUMMARY PAGES
+    ///1. COUNT NUMBER OF POOS
+    /// 2. COUNT NUMBER OF POOS BY TYPE
+    /// 3. COUNT NUMBER OF POOS BY COLOR
+    /// 4. COUNT NUMBER OF URGENT POOS
+    /// 5. COUNT NUMBER OF SATISFYING POOS
+    /// 
+    
     
 }
