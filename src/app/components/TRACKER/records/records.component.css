@@ -20,22 +20,39 @@ mat-expansion-panel {
 .panel-title {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   font-weight: 500;
+  padding: 8px;
 }
 
-.timestamp,
-.public,
-.notes {
-  flex: 1;
+.panel-title span {
+  flex-basis: 50%;
+  text-align: center;
+}
+
+.timestamp {
   text-align: left;
+  flex: 2;
 }
 
-.record-details {
-  padding: 10px;
+.record-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.record-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  vertical-align: top;
 }
 
 mat-action-row {
   display: flex;
   justify-content: flex-end;
+  padding: 10px;
 }
+
+
+

@@ -22,11 +22,7 @@ export class RecordsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(
-    private ps: PooService,
-    private gauth: AuthService,
-    private router: Router
-  ) {}
+  constructor(private ps: PooService, private gauth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.gauth.getUserId().then((userId) => {

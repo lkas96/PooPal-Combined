@@ -14,22 +14,35 @@
           <mat-panel-title class="panel-title">
             <span class="timestamp">{{ record.timestamp }}</span>
             <span class="public">{{ record.pooWhere === 'home' ? 'Home' : 'Outside' }}</span>
-            <span class="urgent">{{ record.urgent === 'yes' ? 'Urgent' : 'Not Urgent' }}</span>
-            <span class="urgent">{{ record.satisfactionLevel }}</span>
+            <span class="satisfactionLevel">{{ record.satisfactionLevel }}</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
 
         <!-- Panel content when expanded - reorg later -->
-        <div class="record-details">
-          <p><strong>Poo Type:</strong> {{ record.pooType }}</p>
-          <p><strong>Poo Color:</strong> {{ record.pooColor }}</p>
-          <p><strong>Pain Before:</strong> {{ record.painBefore }}</p>
-          <p><strong>Pain During:</strong> {{ record.painDuring }}</p>
-          <p><strong>Pain After:</strong> {{ record.painAfter }}</p>
-          <p><strong>Laxative Used:</strong> {{ record.laxative ? 'Yes' : 'No' }}</p>
-          <p><strong>Bleeding:</strong> {{ record.bleeding ? 'Yes' : 'No' }}</p>
-          <p><Strong>Notes:</Strong> {{ record.notes || 'No comments' }}</p>
-        </div>
+         <div>
+          <table class="record-table">
+            <tr>
+              <td><strong>Poo Type:</strong> {{ record.pooType }}</td>
+              <td><strong>Pain Before:</strong> {{ record.painBefore }}</td>
+            </tr>
+            <tr>
+              <td><strong>Poo Color:</strong> {{ record.pooColor }}</td>
+              <td><strong>Pain During:</strong> {{ record.painDuring }}</td>
+            </tr>
+            <tr>
+              <td><strong>Laxative Used:</strong> {{ record.laxative ? 'Yes' : 'No' }}</td>
+              <td><strong>Pain After:</strong> {{ record.painAfter }}</td>
+            </tr>
+            <tr>
+              <td><strong>Urgent:</strong> {{ record.urgent === 'yes' ? 'Urgent' : 'Not Urgent' }}</td>
+              <td><strong>Bleeding:</strong> {{ record.bleeding ? 'Yes' : 'No' }}</td>
+              
+            </tr>
+            <tr>
+              <td colspan="2"><strong>Notes:</strong> {{ record.notes || 'No comments' }}</td>
+            </tr>
+          </table>  
+         </div>
 
         <mat-action-row>
           <button mat-button color="primary" (click)="editRecord(record.id)">Edit</button>
