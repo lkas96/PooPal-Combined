@@ -12,6 +12,8 @@ import { PooformComponent } from '../components/TRACKER/pooform/pooform.componen
 import { TrackerSummaryComponent } from '../components/TRACKER/summary/summary.component';
 import { RecordsComponent } from '../components/TRACKER/records/records.component';
 import { EditPooformComponent } from '../components/TRACKER/editpooform/editpooform.component';
+import { BrowseAllToiletsComponent } from '../components/TOILET/browse-all-toilets/browse-all-toilets.component';
+import { NearestToiletComponent } from '../components/TOILET/nearest-toilet/nearest-toilet.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,10 +36,13 @@ const routes: Routes = [
     children: [],
   },
   {
-    path: 'toilets',
-    component: ToiletComponent,
-    canActivate: [AuthGuard],
-    children: [],
+    path: 'toilets', component: ToiletComponent, canActivate: [AuthGuard],
+    children: [
+                { path: '', redirectTo: 'directory', pathMatch: 'full' },
+                { path: 'directory', component: BrowseAllToiletsComponent },
+                { path: 'nearest', component: NearestToiletComponent },
+                // { path: 'reviews', component: ToiletReviewsComponent },
+              ],
   },
   {
     path: 'chat',
