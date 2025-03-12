@@ -1,9 +1,18 @@
 <app-top-nav></app-top-nav>
-  
-  <div class="container">
-    <h1>Browsing All Toilets💩</h1>
-    <p>Find Toilets</p>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 d-block d-lg-none">
+      <div class="button-group d-flex justify-content-between">
+        <button mat-button color="primary" (click)="navigate('directory')">Toilet Directory</button>
+        <button mat-button color="accent" (click)="navigate('nearest')">Nearest Toilet</button>
+        <button mat-button color="warn" (click)="navigate('reviews')">Public Reviews</button>
+      </div>
+    </div>
   </div>
+</div>
+<div class="nested-container">
+  <router-outlet></router-outlet>
+</div>
 
 <app-bottom-nav></app-bottom-nav>
-  
