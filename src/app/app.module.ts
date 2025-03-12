@@ -26,6 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EditPooformComponent } from './components/TRACKER/editpooform/editpooform.component';
 import { DatePipe } from '@angular/common';
+import { BrowseAllToiletsComponent } from './components/TOILET/browse-all-toilets/browse-all-toilets.component';
+import { NearestToiletComponent } from './components/TOILET/nearest-toilet/nearest-toilet.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { DatePipe } from '@angular/common';
     RecordsComponent, 
     TrendComponent,
     EditPooformComponent,
+    BrowseAllToiletsComponent,
+    NearestToiletComponent
    
   ],
   imports: [
