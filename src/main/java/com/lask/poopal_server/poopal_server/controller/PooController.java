@@ -171,7 +171,20 @@ public class PooController {
         return ResponseEntity.ok(jo.toString());
     }
     
-    
+    @GetMapping("/summary/lastestPoo")
+    public ResponseEntity<String> getLastestPoo (@RequestHeader("userId") String userId) {
+
+        PooRecord lastestPoo = ps.getLastestPoo(userId);
+
+        if (lastestPoo == null) {
+            JsonObject jo = Json.createObjectBuilder().add("message", "No poo entries found, start logging your poo journey with us today!").build();
+            return ResponseEntity.ok(jo.toString());
+        }
+
+        JsonStructure js = lastestPoo.toJson();
+        System.out.println(js.toString());
+        return ResponseEntity.ok(js.toString());
+    }
     
     
     

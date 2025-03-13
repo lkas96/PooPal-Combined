@@ -216,6 +216,35 @@ public class PooRepo {
         return new int[]{0, 0, 0};
     }
 
+    @SuppressWarnings("deprecation")
+    public PooRecord getLastestPoo(String userId) {
+        final String SQL_LASTEST = "SELECT * FROM records WHERE userId = ? ORDER BY timestamp DESC LIMIT 1";
+
+        return template.query(SQL_LASTEST, new Object[]{userId}, rs -> {
+            if (rs.next()) {
+                PooRecord p = new PooRecord();
+                p.setId(rs.getInt("id"));
+                p.setPooWhere(rs.getString("pooWhere"));
+                p.setPooType(rs.getString("pooType"));
+                p.setPooColor(rs.getString("pooColor"));
+                p.setPainBefore(rs.getString("painBefore"));
+                p.setPainDuring(rs.getString("painDuring"));
+                p.setPainAfter(rs.getString("painAfter"));
+                p.setUrgent(rs.getString("urgent"));
+                p.setLaxative(rs.getString("laxative"));
+                p.setBleeding(rs.getString("bleeding"));
+                p.setNotes(rs.getString("notes"));
+                // Convert to LocalDateTime
+                Timestamp timestamp = rs.getTimestamp("timestamp");
+                p.setTimestamp(timestamp != null ? timestamp.toLocalDateTime() : null);
+                p.setSatisfactionLevel(rs.getString("satisfactionLevel"));
+    
+                return p;
+            }
+            return null; 
+        });
+    }
+
 
     
 

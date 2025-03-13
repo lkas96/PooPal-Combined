@@ -56,4 +56,8 @@ public class PooService {
     public int[] getSatisfyingPoos(String userId) {
         return pr.getSatisfyingPoos(userId);
     }
+
+    public PooRecord getLastestPoo(String userId) {
+        return pr.getLastestPoo(userId);
+    }
 }
