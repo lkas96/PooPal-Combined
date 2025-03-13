@@ -13,6 +13,7 @@ import com.lask.poopal_server.poopal_server.services.PooService;
 
 import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
+import jakarta.json.JsonObject;
 import jakarta.json.JsonStructure;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 
 @CrossOrigin(origins = "http://localhost:4200") // Apply globally for now, can also put in the individual mappings thingy
 @RestController
@@ -110,12 +112,67 @@ public class PooController {
     
 
     //FOR SUMMARY PAGES
-    ///1. COUNT NUMBER OF POOS
+    /// 1. COUNT NUMBER OF POOS
     /// 2. COUNT NUMBER OF POOS BY TYPE
     /// 3. COUNT NUMBER OF POOS BY COLOR
     /// 4. COUNT NUMBER OF URGENT POOS
     /// 5. COUNT NUMBER OF SATISFYING POOS
-    /// 
+    
+    @GetMapping("/summary/pooCount")
+    public ResponseEntity<String> getTotalPooCounts (@RequestHeader("userId") String userId) {
+
+        int totalPoos = ps.getTotalPooCount(userId);
+        JsonObject jo = Json.createObjectBuilder().add("totalPoos", totalPoos).build();
+        System.out.println("Total Poo Counts : " + jo.toString());
+        return ResponseEntity.ok(jo.toString());
+    }
+
+    @GetMapping("/summary/topPooType")
+    public ResponseEntity<String> getTopPooType (@RequestHeader("userId") String userId) {
+
+        String topPooType = ps.getTopPooType(userId);
+        JsonObject jo = Json.createObjectBuilder().add("topPooType", topPooType).build();
+        System.out.println("Top Poo Type : " + jo.toString());
+        return ResponseEntity.ok(jo.toString());
+    }
+
+    @GetMapping("/summary/topPooColor")
+    public ResponseEntity<String> getTopPooColor (@RequestHeader("userId") String userId) {
+
+        String topPooColor = ps.getTopPooColor(userId);
+        JsonObject jo = Json.createObjectBuilder().add("topPooType", topPooColor).build();
+        System.out.println("Top Poo Type : " + jo.toString());
+        return ResponseEntity.ok(jo.toString());
+    }
+
+    @GetMapping("/summary/urgentPooCount")
+    public ResponseEntity<String> getUrgentPoos (@RequestHeader("userId") String userId) {
+
+        int[] urgentPoos = ps.getUrgentPoos(userId);
+        JsonObject jo = Json.createObjectBuilder()
+                        .add("totalUrgentNo", urgentPoos[0])
+                        .add("totalUrgentYes", urgentPoos[1])
+                        .build();
+        System.out.println("Urgent Poos : " + jo.toString());
+        return ResponseEntity.ok(jo.toString());
+    }
+
+    @GetMapping("/summary/satisfyingPooCount")
+    public ResponseEntity<String> getSatisfyingPoos (@RequestHeader("userId") String userId) {
+
+        int[] satisfyingPoos = ps.getSatisfyingPoos(userId);
+        JsonObject jo = Json.createObjectBuilder()
+                        .add("totalGood", satisfyingPoos[0])
+                        .add("totalMid", satisfyingPoos[1])
+                        .add("totalBad", satisfyingPoos[2])
+                        .build();
+                        
+        System.out.println("Satisfying Poos : " + jo.toString());
+        return ResponseEntity.ok(jo.toString());
+    }
+    
+    
+    
     
     
 }

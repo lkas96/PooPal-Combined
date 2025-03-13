@@ -36,4 +36,24 @@ public class PooService {
     public void deletePooEntry(String userId, int pooId) {
         pr.deletePooEntry(userId, pooId);
     }
+
+    public int getTotalPooCount(String userId) {
+        return pr.getTotalPooCount(userId);
+    }
+
+    public String getTopPooType(String userId) {
+        return pr.getTopPooType(userId);
+    }
+
+    public String getTopPooColor(String userId) {
+        return pr.getTopPooColor(userId);
+    }
+
+    public int[] getUrgentPoos(String userId) {
+        return pr.getUrgentPoos(userId);
+    }
+
+    public int[] getSatisfyingPoos(String userId) {
+        return pr.getSatisfyingPoos(userId);
+    }
 }

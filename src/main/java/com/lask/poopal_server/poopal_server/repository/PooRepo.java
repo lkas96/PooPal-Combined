@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import com.lask.poopal_server.poopal_server.models.PooRecord;
@@ -112,5 +113,110 @@ public class PooRepo {
             System.out.println("Poo entry failed to delete");
         }
     }
+
+    @SuppressWarnings("deprecation")
+    public int getTotalPooCount(String userId) {
+        final String SQL_COUNT = "SELECT COUNT(*) FROM records WHERE userId = ?";
+
+        return template.queryForObject(SQL_COUNT, new Object[]{userId}, Integer.class);
+    }
+
+    public String getTopPooType(String userId) {
+        final String SQL_POOTYPE = "SELECT pooType, COUNT(pooType) as count FROM records WHERE userId = ? GROUP BY pooType ORDER BY count DESC LIMIT 1";
+
+        SqlRowSet rs = template.queryForRowSet(SQL_POOTYPE, userId);
+
+        if (rs.next()) {
+            return rs.getString("pooType");
+        }
+
+        return "No poo entries";
+    }
+
+    public String getTopPooColor(String userId) {
+        final String SQL_POOCOLOR = "SELECT pooColor, COUNT(pooColor) as count FROM records WHERE userId = ? GROUP BY pooColor ORDER BY count DESC LIMIT 1";
+
+        SqlRowSet rs = template.queryForRowSet(SQL_POOCOLOR, userId);
+
+        if (rs.next()) {
+            return rs.getString("pooColor");
+        }
+
+        return "No poo entries";
+    }
+
+    public int[] getUrgentPoos(String userId) {
+        final String SQL_URGENT = "SELECT COUNT(*) as total, urgent FROM records WHERE userId = ? GROUP BY urgent ORDER BY urgent DESC";
+
+        //since order by urgent desc, 
+        //first row will be no, second row will be yes
+
+        SqlRowSet rs = template.queryForRowSet(SQL_URGENT, userId);
+
+        int rowIndex = 0;
+
+        while (rs.next()) {
+
+            if (rowIndex == 0) {
+                int totalNo = rs.getInt("total");
+                rowIndex++;
+
+                if (rowIndex == 1) {
+                    int totalYes = rs.getInt("total");
+                    return new int[]{totalNo, totalYes};
+                }
+            }
+        }
+
+        return new int[]{0, 0};
+
+
+    }
+
+    public int[] getSatisfyingPoos(String userId) {
+        final String SQL_SATISFYING =   "SELECT s.satisfactionLevel, COALESCE(r.total, 0) as total " +
+                                        "FROM (SELECT 'good' AS satisfactionLevel UNION ALL SELECT 'mid' UNION ALL SELECT 'bad') AS s " + 
+                                        "LEFT JOIN (SELECT satisfactionLevel, COUNT(*) as total FROM records WHERE userId = ? GROUP BY satisfactionLevel) AS r " + 
+                                        "ON s.satisfactionLevel = r.satisfactionLevel " +
+                                        "ORDER BY CASE " +
+                                        "WHEN s.satisfactionLevel = 'good' THEN 1 " +
+                                        "WHEN s.satisfactionLevel = 'mid' THEN 2 " +
+                                        "WHEN s.satisfactionLevel = 'bad' THEN 3 END";
+
+                                        //force return all results, example if no good return 0 still
+                                        //easier for front end. just get the array. 
+
+        //since order by satisfactionLevel desc, 
+        //first row will be no, second row will be yes
+
+        SqlRowSet rs = template.queryForRowSet(SQL_SATISFYING, userId);
+
+        int rowIndex = 0;
+
+        while (rs.next()) {
+
+            if (rowIndex == 0) {
+                int totalGood = rs.getInt("total");
+                rowIndex++;
+
+                if (rowIndex == 1) {
+                    int totalMid = rs.getInt("total");
+                    return new int[]{totalGood, totalMid};
+                }
+                rowIndex++;
+
+                if (rowIndex == 2) {
+                    int totalBad = rs.getInt("total");
+                    return new int[]{totalBad, totalBad};
+                }
+
+            }
+        }
+
+        return new int[]{0, 0, 0};
+    }
+
+
+    
 
 }
