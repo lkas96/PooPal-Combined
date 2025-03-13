@@ -67,4 +67,26 @@ public class ToiletRepo {
         }
     }
 
+    public List<Toilet> getToilets() {
+        final String SQL_SELECT = "SELECT * FROM toilets";
+
+        SqlRowSet results = template.queryForRowSet(SQL_SELECT);
+
+        if (results.next()) {
+            List<Toilet> toilets = new ArrayList<>();
+            do {
+                Toilet t = new Toilet();
+                t.setId(results.getString("id"));
+                t.setType(results.getString("type"));
+                t.setName(results.getString("name"));
+                t.setDistrict(results.getString("district"));
+                t.setRating(results.getInt("rating"));
+                toilets.add(t);
+            } while (results.next());
+            return toilets;
+        } else {
+            return null;
+        }
+    }
+
 }
