@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+
+
 @CrossOrigin(origins = "http://localhost:4200") // Apply globally for now, can also put in the individual mappings thingy
 @RestController
 @RequestMapping("/poo")
@@ -186,6 +188,105 @@ public class PooController {
         return ResponseEntity.ok(js.toString());
     }
     
+    
+
+
+    //FOR NOW DO ONE BY ONE
+    //MAYBE NEXT TIME IF GOT TIME AND BRAIN CELLS
+    //COMBINE ALL THESE DETAILS INTO ONE BIG JSON CALL
+    //HAHA BEETCH SMART.
+    //ALSO MOVE OUT TO THE DIFFERENT CONTROLLERS/SERVICES INSTEAD
+
+    //FOR TRRENDS PAGES
+    // 1. POOWHERE COUNTS
+    // 2. POOTYPE COUNTS
+    // 3. POOCOLOR COUNTS
+    // 4. PAIN LEVEL COUNTS -> BEFORE, DURING, AFTER
+    // 5. URGENT POO COUNTS
+    // 6. LAXATIVE POO COUNTS
+    // 7. BLEEDING POO COUNTS
+    // 8. SATISFACTION LEVEL COUNTS
+
+    @GetMapping("/trends/pooWhere")
+    public ResponseEntity<Map<String, Integer>> getPooWhereCounts(@RequestHeader("userId") String userId) {
+
+        Map<String, Integer> pooWhereCounts = ps.getPooWhereCounts(userId);
+        System.out.println("Poo Where Counts : " + pooWhereCounts);
+        return ResponseEntity.ok(pooWhereCounts);
+    }
+
+    @GetMapping("/trends/pooType")
+    public ResponseEntity<Map<String, Integer>> getPooTypeCounts(@RequestHeader("userId") String userId) {
+
+        Map<String, Integer> pooTypeCounts = ps.getPooTypeCounts(userId);
+        System.out.println("Poo Type Counts : " + pooTypeCounts);
+        return ResponseEntity.ok(pooTypeCounts);
+    }
+
+    @GetMapping("/trends/pooColor")
+    public ResponseEntity<Map<String, Integer>> getPooColorCounts(@RequestHeader("userId") String userId) {
+
+        Map<String, Integer> pooColorCounts = ps.getPooColorCounts(userId);
+        System.out.println("Poo Color Counts : " + pooColorCounts);
+        return ResponseEntity.ok(pooColorCounts);
+    }
+    
+    @GetMapping("/trends/painLevelBefore")
+    public ResponseEntity<Map<String, Integer>> getPainLevelBeforeCounts(@RequestHeader("userId") String userId) {
+
+        Map<String, Integer> painLevelCounts = ps.getPainLevelBeforeCounts(userId);
+        System.out.println("Pain Level Counts : " + painLevelCounts);
+        return ResponseEntity.ok(painLevelCounts);
+    }
+
+    @GetMapping("/trends/painLevelDuring")
+    public ResponseEntity<Map<String, Integer>> getPainLevelDuringCounts(@RequestHeader("userId") String userId) {
+
+        Map<String, Integer> painLevelCounts = ps.getPainLevelDuringCounts(userId);
+        System.out.println("Pain Level Counts : " + painLevelCounts);
+        return ResponseEntity.ok(painLevelCounts);
+    }
+    
+    @GetMapping("/trends/painLevelAfter")
+    public ResponseEntity<Map<String, Integer>> getPainLevelAfterCounts(@RequestHeader("userId") String userId) {
+
+        Map<String, Integer> painLevelCounts = ps.getPainLevelAfterCounts(userId);
+        System.out.println("Pain Level Counts : " + painLevelCounts);
+        return ResponseEntity.ok(painLevelCounts);
+    }
+
+    @GetMapping("/trends/urgentPoo")
+    public ResponseEntity<Map<String, Integer>> getUrgentPooCounts(@RequestHeader("userId") String userId) {
+
+        Map<String, Integer> urgentPooCounts = ps.getUrgentPooCounts(userId);
+        System.out.println("Urgent Poo Counts : " + urgentPooCounts);
+        return ResponseEntity.ok(urgentPooCounts);
+    }
+    
+    @GetMapping("/trends/laxativePoo")
+    public ResponseEntity<Map<String, Integer>> getLaxativePooCounts(@RequestHeader("userId") String userId) {
+
+        Map<String, Integer> laxativePooCounts = ps.getLaxativePooCounts(userId);
+        System.out.println("Laxative Poo Counts : " + laxativePooCounts);
+        return ResponseEntity.ok(laxativePooCounts);
+    }
+
+    @GetMapping("/trends/bleedingPoo")
+    public ResponseEntity<Map<String, Integer>> getBleedingPooCounts(@RequestHeader("userId") String userId) {
+
+        Map<String, Integer> bleedingPooCounts = ps.getBleedingPooCounts(userId);
+        System.out.println("Bleeding Poo Counts : " + bleedingPooCounts);
+        return ResponseEntity.ok(bleedingPooCounts);
+    }
+
+    @GetMapping("/trends/satisfactionLevel")
+    public ResponseEntity<Map<String, Integer>> getSatisfactionLevelCounts(@RequestHeader("userId") String userId) {
+
+        Map<String, Integer> satisfactionLevelCounts = ps.getSatisfactionLevelCounts(userId);
+        System.out.println("Satisfaction Level Counts : " + satisfactionLevelCounts);
+        return ResponseEntity.ok(satisfactionLevelCounts);
+    }
+
     
     
 }

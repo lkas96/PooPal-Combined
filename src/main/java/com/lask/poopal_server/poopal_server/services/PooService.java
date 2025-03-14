@@ -1,6 +1,7 @@
 package com.lask.poopal_server.poopal_server.services;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,4 +61,45 @@ public class PooService {
     public PooRecord getLastestPoo(String userId) {
         return pr.getLastestPoo(userId);
     }
+
+    public Map<String, Integer> getPooWhereCounts(String userId) {
+        return pr.getPooWhereCounts(userId);
+    }
+
+    public Map<String, Integer> getPooTypeCounts(String userId) {
+        return pr.getPooTypeCounts(userId);
+    }
+
+    public Map<String, Integer> getPooColorCounts(String userId) {
+        return pr.getPooColorCounts(userId);
+    }
+
+    public Map<String, Integer> getPainLevelBeforeCounts(String userId) {
+        return pr.getPainLevelBeforeCounts(userId);
+    }
+
+    public Map<String, Integer> getPainLevelDuringCounts(String userId) {
+        return pr.getPainLevelDuringCounts(userId);
+    }
+
+    public Map<String, Integer> getPainLevelAfterCounts(String userId) {
+        return pr.getPainLevelAfterCounts(userId);
+    }
+
+    public Map<String, Integer> getUrgentPooCounts(String userId) {
+        return pr.getUrgentPooCounts(userId);
+    }
+
+    public Map<String, Integer> getLaxativePooCounts(String userId) {
+        return pr.getLaxativePooCounts(userId);
+    }
+
+    public Map<String, Integer> getBleedingPooCounts(String userId) {
+        return pr.getBleedingPooCounts(userId);
+    }
+
+    public Map<String, Integer> getSatisfactionLevelCounts(String userId) {
+        return pr.getSatisfactionLevelCounts(userId);
+    }
+
 }

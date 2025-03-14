@@ -2,6 +2,7 @@ package com.lask.poopal_server.poopal_server.repository;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -241,6 +242,302 @@ public class PooRepo {
             return null; 
         });
     }
+
+    @SuppressWarnings("deprecation")
+    public Map<String, Integer> getPooWhereCounts(String userId) {
+        final String SQL_POO_WHERE =    "SELECT s.pooWhere, COALESCE(r.total, 0) as total " + 
+                                        "FROM (SELECT 'home' AS pooWhere UNION ALL SELECT 'outside') AS s " + 
+                                        "LEFT JOIN (SELECT pooWhere, COUNT(*) as total FROM records WHERE userId = ? GROUP BY pooWhere) AS r " + 
+                                        "ON s.pooWhere = r.pooWhere " + 
+                                        "ORDER BY CASE " + 
+                                        "WHEN s.pooWhere = 'home' THEN 1 " + 
+                                        "WHEN s.pooWhere = 'outside' THEN 2 END";
+
+        return template.query(SQL_POO_WHERE, new Object[]{userId}, rs -> {
+            Map<String, Integer> whereCounts = new java.util.HashMap<>();
+
+            while (rs.next()) {
+                whereCounts.put(rs.getString("pooWhere"), rs.getInt("total")); //put key Vvalue pair shit //home-number
+            }
+
+            return whereCounts;
+        });
+    }
+
+    @SuppressWarnings("deprecation")
+    public Map<String, Integer> getPooTypeCounts(String userId) {
+        final String SQL_POO_TYPE = "SELECT s.pooType, COALESCE(r.total, 0) as total " + 
+                                    "FROM (SELECT 'Type 1' AS pooType " + 
+                                    "UNION ALL SELECT 'Type 2' " + 
+                                    "UNION ALL SELECT 'Type 3' " + 
+                                    "UNION ALL SELECT 'Type 4' " + 
+                                    "UNION ALL SELECT 'Type 5' " + 
+                                    "UNION ALL SELECT 'Type 6' " + 
+                                    "UNION ALL SELECT 'Type 7') AS s " + 
+                                    "LEFT JOIN (SELECT pooType, COUNT(*) as total " + 
+                                    "FROM records " + 
+                                    "WHERE userId = ? " + 
+                                    "GROUP BY pooType) AS r " + 
+                                    "ON s.pooType = r.pooType " + 
+                                    "ORDER BY CASE " + 
+                                    "WHEN s.pooType = 'Type 1' THEN 1 " + 
+                                    "WHEN s.pooType = 'Type 2' THEN 2 " + 
+                                    "WHEN s.pooType = 'Type 3' THEN 3 " + 
+                                    "WHEN s.pooType = 'Type 4' THEN 4 " + 
+                                    "WHEN s.pooType = 'Type 5' THEN 5 " + 
+                                    "WHEN s.pooType = 'Type 6' THEN 6 " + 
+                                    "WHEN s.pooType = 'Type 7' THEN 7 END";
+    
+        return template.query(SQL_POO_TYPE, new Object[]{userId}, rs -> {
+            Map<String, Integer> typeCounts = new java.util.HashMap<>();
+    
+            while (rs.next()) {
+                typeCounts.put(rs.getString("pooType"), rs.getInt("total"));
+            }
+    
+            return typeCounts;
+        });
+    }
+
+    @SuppressWarnings("deprecation")
+    public Map<String, Integer> getPooColorCounts(String userId) {
+        final String SQL_POO_COLOR = "SELECT s.pooColor, COALESCE(r.total, 0) as total " + 
+                                     "FROM (SELECT 'Brown' AS pooColor " + 
+                                     "UNION ALL SELECT 'Bright Brown' " + 
+                                     "UNION ALL SELECT 'Yellowish' " + 
+                                     "UNION ALL SELECT 'White Clay Colored' " + 
+                                     "UNION ALL SELECT 'Green' " + 
+                                     "UNION ALL SELECT 'Bright Red' " + 
+                                     "UNION ALL SELECT 'Reddish' " + 
+                                     "UNION ALL SELECT 'Black or Dark Brown') AS s " + 
+                                     "LEFT JOIN (SELECT pooColor, COUNT(*) as total " + 
+                                     "FROM records " + 
+                                     "WHERE userId = ? " + 
+                                     "GROUP BY pooColor) AS r " + 
+                                     "ON s.pooColor = r.pooColor " + 
+                                     "ORDER BY CASE " + 
+                                     "WHEN s.pooColor = 'Brown' THEN 1 " + 
+                                     "WHEN s.pooColor = 'Bright Brown' THEN 2 " + 
+                                     "WHEN s.pooColor = 'Yellowish' THEN 3 " + 
+                                     "WHEN s.pooColor = 'White Clay Colored' THEN 4 " + 
+                                     "WHEN s.pooColor = 'Green' THEN 5 " + 
+                                     "WHEN s.pooColor = 'Bright Red' THEN 6 " + 
+                                     "WHEN s.pooColor = 'Reddish' THEN 7 " + 
+                                     "WHEN s.pooColor = 'Black or Dark Brown' THEN 8 END";
+    
+        return template.query(SQL_POO_COLOR, new Object[]{userId}, rs -> {
+            Map<String, Integer> colorCounts = new java.util.LinkedHashMap<>();
+    
+            while (rs.next()) {
+                colorCounts.put(rs.getString("pooColor"), rs.getInt("total"));
+            }
+    
+            return colorCounts;
+        });
+
+    }
+
+    @SuppressWarnings("deprecation")
+    public Map<String, Integer> getPainLevelBeforeCounts(String userId) {
+        final String SQL_PAIN_LEVEL =   "SELECT s.painBefore, COALESCE(r.total, 0) as total " + 
+                                        "FROM (SELECT 'Unbearable' AS painBefore " + 
+                                        "UNION ALL SELECT 'Severe' " + 
+                                        "UNION ALL SELECT 'Moderate' " + 
+                                        "UNION ALL SELECT 'Mild' " + 
+                                        "UNION ALL SELECT 'None') AS s " + 
+                                        "LEFT JOIN (SELECT painBefore, COUNT(*) as total " + 
+                                        "FROM records " + 
+                                        "WHERE userId = ? " + 
+                                        "GROUP BY painBefore) AS r " + 
+                                        "ON s.painBefore = r.painBefore " + 
+                                        "ORDER BY CASE " + 
+                                        "WHEN s.painBefore = 'Unbearable' THEN 1 " + 
+                                        "WHEN s.painBefore = 'Severe' THEN 2 " + 
+                                        "WHEN s.painBefore = 'Moderate' THEN 3 " + 
+                                        "WHEN s.painBefore = 'Mild' THEN 4 " + 
+                                        "WHEN s.painBefore = 'None' THEN 5 END";
+
+        return template.query(SQL_PAIN_LEVEL, new Object[]{userId}, rs -> {
+            Map<String, Integer> painCounts = new java.util.LinkedHashMap<>();
+
+            while (rs.next()) {
+                painCounts.put(rs.getString("painBefore"), rs.getInt("total"));
+            }
+
+            return painCounts;
+            });
+    }
+
+    @SuppressWarnings("deprecation")
+    public Map<String, Integer> getPainLevelDuringCounts(String userId) {
+        final String SQL_PAIN_LEVEL =   "SELECT s.painDuring, COALESCE(r.total, 0) as total " + 
+                                        "FROM (SELECT 'Unbearable' AS painDuring " + 
+                                        "UNION ALL SELECT 'Severe' " + 
+                                        "UNION ALL SELECT 'Moderate' " + 
+                                        "UNION ALL SELECT 'Mild' " + 
+                                        "UNION ALL SELECT 'None') AS s " + 
+                                        "LEFT JOIN (SELECT painDuring, COUNT(*) as total " + 
+                                        "FROM records " + 
+                                        "WHERE userId = ? " + 
+                                        "GROUP BY painDuring) AS r " + 
+                                        "ON s.painDuring = r.painDuring " + 
+                                        "ORDER BY CASE " + 
+                                        "WHEN s.painDuring = 'Unbearable' THEN 1 " + 
+                                        "WHEN s.painDuring = 'Severe' THEN 2 " + 
+                                        "WHEN s.painDuring = 'Moderate' THEN 3 " + 
+                                        "WHEN s.painDuring = 'Mild' THEN 4 " + 
+                                        "WHEN s.painDuring = 'None' THEN 5 END";
+
+        return template.query(SQL_PAIN_LEVEL, new Object[]{userId}, rs -> {
+            Map<String, Integer> painCounts = new java.util.LinkedHashMap<>();
+
+            while (rs.next()) {
+                painCounts.put(rs.getString("painDuring"), rs.getInt("total"));
+            }
+
+            return painCounts;
+            });
+    }
+
+    @SuppressWarnings("deprecation")
+    public Map<String, Integer> getPainLevelAfterCounts(String userId) {
+        final String SQL_PAIN_LEVEL =   "SELECT s.painAfter, COALESCE(r.total, 0) as total " + 
+                                        "FROM (SELECT 'Unbearable' AS painAfter " + 
+                                        "UNION ALL SELECT 'Severe' " + 
+                                        "UNION ALL SELECT 'Moderate' " + 
+                                        "UNION ALL SELECT 'Mild' " + 
+                                        "UNION ALL SELECT 'None') AS s " + 
+                                        "LEFT JOIN (SELECT painAfter, COUNT(*) as total " + 
+                                        "FROM records " + 
+                                        "WHERE userId = ? " + 
+                                        "GROUP BY painAfter) AS r " + 
+                                        "ON s.painAfter = r.painAfter " + 
+                                        "ORDER BY CASE " + 
+                                        "WHEN s.painAfter = 'Unbearable' THEN 1 " + 
+                                        "WHEN s.painAfter = 'Severe' THEN 2 " + 
+                                        "WHEN s.painAfter = 'Moderate' THEN 3 " + 
+                                        "WHEN s.painAfter = 'Mild' THEN 4 " + 
+                                        "WHEN s.painAfter = 'None' THEN 5 END";
+
+        return template.query(SQL_PAIN_LEVEL, new Object[]{userId}, rs -> {
+            Map<String, Integer> painCounts = new java.util.LinkedHashMap<>();
+
+            while (rs.next()) {
+                painCounts.put(rs.getString("painAfter"), rs.getInt("total"));
+            }
+
+            return painCounts;
+            });
+    }
+
+    @SuppressWarnings("deprecation")
+    public Map<String, Integer> getUrgentPooCounts(String userId) {
+        final String SQL_URGENT = "SELECT s.urgent, COALESCE(r.total, 0) as total " + 
+                                  "FROM (SELECT 'no' AS urgent " + 
+                                  "UNION ALL SELECT 'yes') AS s " + 
+                                  "LEFT JOIN (SELECT urgent, COUNT(*) as total " + 
+                                  "FROM records " + 
+                                  "WHERE userId = ? " + 
+                                  "GROUP BY urgent) AS r " + 
+                                  "ON s.urgent = r.urgent " + 
+                                  "ORDER BY CASE " + 
+                                  "WHEN s.urgent = 'yes' THEN 1 " + 
+                                  "WHEN s.urgent = 'no' THEN 2 END";
+
+        return template.query(SQL_URGENT, new Object[]{userId}, rs -> {
+            Map<String, Integer> urgentCounts = new java.util.LinkedHashMap<>();
+
+            while (rs.next()) {
+                urgentCounts.put(rs.getString("urgent"), rs.getInt("total"));
+            }
+
+            return urgentCounts;
+            });
+    }
+
+    @SuppressWarnings("deprecation")
+    public Map<String, Integer> getLaxativePooCounts(String userId) {
+            final String SQL_LAXATIVE = "SELECT s.laxative, COALESCE(r.total, 0) as total " + 
+                                        "FROM (SELECT 'no' AS laxative " + 
+                                        "UNION ALL SELECT 'yes') AS s " + 
+                                        "LEFT JOIN (SELECT laxative, COUNT(*) as total " + 
+                                        "FROM records " + 
+                                        "WHERE userId = ? " + 
+                                        "GROUP BY laxative) AS r " + 
+                                        "ON s.laxative = r.laxative " + 
+                                        "ORDER BY CASE " + 
+                                        "WHEN s.laxative = 'yes' THEN 1 " + 
+                                        "WHEN s.laxative = 'no' THEN 2 END";
+
+        return template.query(SQL_LAXATIVE, new Object[]{userId}, rs -> {
+            Map<String, Integer> laxativeCounts = new java.util.LinkedHashMap<>();
+
+            while (rs.next()) {
+                laxativeCounts.put(rs.getString("laxative"), rs.getInt("total"));
+            }
+
+            return laxativeCounts;
+            });
+    }
+
+    @SuppressWarnings("deprecation")
+    public Map<String, Integer> getBleedingPooCounts(String userId) {
+        final String SQL_BLEEDING = "SELECT s.bleeding, COALESCE(r.total, 0) as total " + 
+                                    "FROM (SELECT 'no' AS bleeding " + 
+                                    "UNION ALL SELECT 'yes') AS s " + 
+                                    "LEFT JOIN (SELECT bleeding, COUNT(*) as total " + 
+                                    "FROM records " + 
+                                    "WHERE userId = ? " + 
+                                    "GROUP BY bleeding) AS r " + 
+                                    "ON s.bleeding = r.bleeding " + 
+                                    "ORDER BY CASE " + 
+                                    "WHEN s.bleeding = 'yes' THEN 1 " + 
+                                    "WHEN s.bleeding = 'no' THEN 2 END";   
+
+        return template.query(SQL_BLEEDING, new Object[]{userId}, rs -> {
+            Map<String, Integer> bleedingCounts = new java.util.LinkedHashMap<>();
+
+            while (rs.next()) {
+                bleedingCounts.put(rs.getString("bleeding"), rs.getInt("total"));
+            }
+
+            return bleedingCounts;
+            });
+                        
+    }
+
+    @SuppressWarnings("deprecation")
+    public Map<String, Integer> getSatisfactionLevelCounts(String userId) {
+        final String SQL_SATISFACTION = "SELECT s.satisfactionLevel, COALESCE(r.total, 0) as total " + 
+                                        "FROM (SELECT 'good' AS satisfactionLevel " + 
+                                        "UNION ALL SELECT 'mid' " + 
+                                        "UNION ALL SELECT 'bad') AS s " + 
+                                        "LEFT JOIN (SELECT satisfactionLevel, COUNT(*) as total " + 
+                                        "FROM records " + 
+                                        "WHERE userId = ? " + 
+                                        "GROUP BY satisfactionLevel) AS r " + 
+                                        "ON s.satisfactionLevel = r.satisfactionLevel " + 
+                                        "ORDER BY CASE " + 
+                                        "WHEN s.satisfactionLevel = 'good' THEN 1 " + 
+                                        "WHEN s.satisfactionLevel = 'mid' THEN 2 " + 
+                                        "WHEN s.satisfactionLevel = 'bad' THEN 3 END";
+
+        return template.query(SQL_SATISFACTION, new Object[]{userId}, rs -> {
+            Map<String, Integer> satisfactionCounts = new java.util.LinkedHashMap<>();
+
+            while (rs.next()) {
+                satisfactionCounts.put(rs.getString("satisfactionLevel"), rs.getInt("total"));
+            }
+
+            return satisfactionCounts;
+            });
+    }
+
+
+
+    
+
+    
 
 
     
