@@ -140,8 +140,8 @@ public class PooController {
     public ResponseEntity<String> getTopPooColor (@RequestHeader("userId") String userId) {
 
         String topPooColor = ps.getTopPooColor(userId);
-        JsonObject jo = Json.createObjectBuilder().add("topPooType", topPooColor).build();
-        System.out.println("Top Poo Type : " + jo.toString());
+        JsonObject jo = Json.createObjectBuilder().add("topPooColor", topPooColor).build();
+        System.out.println("Top Poo Color : " + jo.toString());
         return ResponseEntity.ok(jo.toString());
     }
 
@@ -171,18 +171,18 @@ public class PooController {
         return ResponseEntity.ok(jo.toString());
     }
     
-    @GetMapping("/summary/lastestPoo")
+    @GetMapping("/summary/latestPoo")
     public ResponseEntity<String> getLastestPoo (@RequestHeader("userId") String userId) {
 
         PooRecord lastestPoo = ps.getLastestPoo(userId);
 
-        if (lastestPoo == null) {
-            JsonObject jo = Json.createObjectBuilder().add("message", "No poo entries found, start logging your poo journey with us today!").build();
-            return ResponseEntity.ok(jo.toString());
-        }
+        JsonArrayBuilder jab = Json.createArrayBuilder();
+        jab.add(lastestPoo.toJson());
 
-        JsonStructure js = lastestPoo.toJson();
-        System.out.println(js.toString());
+        JsonStructure js = jab.build();
+
+        System.out.println(js);
+
         return ResponseEntity.ok(js.toString());
     }
     

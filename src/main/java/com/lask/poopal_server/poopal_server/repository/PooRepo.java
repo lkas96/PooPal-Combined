@@ -191,29 +191,26 @@ public class PooRepo {
 
         SqlRowSet rs = template.queryForRowSet(SQL_SATISFYING, userId);
 
-        int rowIndex = 0;
-
+        int[] totals = new int[3];
+        
         while (rs.next()) {
-
-            if (rowIndex == 0) {
-                int totalGood = rs.getInt("total");
-                rowIndex++;
-
-                if (rowIndex == 1) {
-                    int totalMid = rs.getInt("total");
-                    return new int[]{totalGood, totalMid};
-                }
-                rowIndex++;
-
-                if (rowIndex == 2) {
-                    int totalBad = rs.getInt("total");
-                    return new int[]{totalBad, totalBad};
-                }
-
+            String level = rs.getString("satisfactionLevel");
+            int total = rs.getInt("total");
+    
+            switch (level) {
+                case "good":
+                    totals[0] = total;
+                    break;
+                case "mid":
+                    totals[1] = total;
+                    break;
+                case "bad":
+                    totals[2] = total;
+                    break;
             }
         }
-
-        return new int[]{0, 0, 0};
+    
+        return totals;
     }
 
     @SuppressWarnings("deprecation")

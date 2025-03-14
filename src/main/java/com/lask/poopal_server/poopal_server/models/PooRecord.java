@@ -182,4 +182,14 @@ public class PooRecord {
                 .build();
     }
 
+    @Override
+    public String toString() {
+        return "PooRecord [id=" + id + ", pooWhere=" + pooWhere + ", pooType=" + pooType + ", pooColor=" + pooColor
+                + ", painBefore=" + painBefore + ", painDuring=" + painDuring + ", painAfter=" + painAfter + ", urgent="
+                + urgent + ", laxative=" + laxative + ", bleeding=" + bleeding + ", notes=" + notes + ", timestamp="
+                + timestamp + ", satisfactionLevel=" + satisfactionLevel + "]";
+    }
+
+    
+
 }
