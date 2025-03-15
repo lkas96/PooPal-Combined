@@ -14,6 +14,7 @@ import { RecordsComponent } from '../components/TRACKER/records/records.componen
 import { EditPooformComponent } from '../components/TRACKER/editpooform/editpooform.component';
 import { BrowseAllToiletsComponent } from '../components/TOILET/browse-all-toilets/browse-all-toilets.component';
 import { NearestToiletComponent } from '../components/TOILET/nearest-toilet/nearest-toilet.component';
+import { DashboardComponent } from '../components/TRENDS/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,10 +31,11 @@ const routes: Routes = [
               ],
   },
   {
-    path: 'trends',
-    component: TrendComponent,
-    canActivate: [AuthGuard],
-    children: [],
+    path: 'trends', component: TrendComponent, canActivate: [AuthGuard],
+    children: [
+                { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+                { path: 'dashboard', component: DashboardComponent },
+              ],
   },
   {
     path: 'toilets', component: ToiletComponent, canActivate: [AuthGuard],

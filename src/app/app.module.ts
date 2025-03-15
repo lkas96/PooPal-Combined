@@ -28,6 +28,8 @@ import { EditPooformComponent } from './components/TRACKER/editpooform/editpoofo
 import { DatePipe } from '@angular/common';
 import { BrowseAllToiletsComponent } from './components/TOILET/browse-all-toilets/browse-all-toilets.component';
 import { NearestToiletComponent } from './components/TOILET/nearest-toilet/nearest-toilet.component';
+import { DashboardComponent } from './components/TRENDS/dashboard/dashboard.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -47,8 +49,8 @@ import { NearestToiletComponent } from './components/TOILET/nearest-toilet/neare
     TrendComponent,
     EditPooformComponent,
     BrowseAllToiletsComponent,
-    NearestToiletComponent
-   
+    NearestToiletComponent,
+    DashboardComponent,    
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,8 @@ import { NearestToiletComponent } from './components/TOILET/nearest-toilet/neare
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    NgxChartsModule
   ],
   providers: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),

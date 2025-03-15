@@ -95,5 +95,105 @@ export class PooService {
       );
     }
 
+
+
+
+
+
+
+    //FOR THE TRENDS CHARTS PAGE
+        //FOR NOW DO ONE BY ONE
+    //MAYBE NEXT TIME IF GOT TIME AND BRAIN CELLS
+    //COMBINE ALL THESE DETAILS INTO ONE BIG JSON CALL
+    //HAHA BEETCH SMART.
+    //ALSO MOVE OUT TO THE DIFFERENT CONTROLLERS/SERVICES INSTEAD
+
+    //FOR TRRENDS PAGES
+    // 1. POOWHERE COUNTS
+    // 2. POOTYPE COUNTS
+    // 3. POOCOLOR COUNTS
+    // 4. PAIN LEVEL COUNTS -> BEFORE, DURING, AFTER
+    // 5. URGENT POO COUNTS
+    // 6. LAXATIVE POO COUNTS
+    // 7. BLEEDING POO COUNTS
+    // 8. SATISFACTION LEVEL COUNTS
+
+        //FOR NOW DO ONE BY ONE
+    //MAYBE NEXT TIME IF GOT TIME AND BRAIN CELLS
+    //COMBINE ALL THESE DETAILS INTO ONE BIG JSON CALL
+    //HAHA BEETCH SMART.
+    //ALSO MOVE OUT TO THE DIFFERENT CONTROLLERS/SERVICES INSTEAD
+
+    //FOR TRRENDS PAGES
+    // 1. POOWHERE COUNTS
+    // 2. POOTYPE COUNTS
+    // 3. POOCOLOR COUNTS
+    // 4. PAIN LEVEL COUNTS -> BEFORE, DURING, AFTER
+    // 5. URGENT POO COUNTS
+    // 6. LAXATIVE POO COUNTS
+    // 7. BLEEDING POO COUNTS
+    // 8. SATISFACTION LEVEL COUNTS
+
+    pooWhereTrends(userId: string) : Observable<any>{
+      const headers = new HttpHeaders({ 'userId': userId});
+      return this.httpClient.get<any>(`${this.baseURL}/trends/pooWhere`, { headers }
+      );
+    }
+
+    pooTypeTrends(userId: string) : Observable<any>{
+      const headers = new HttpHeaders({ 'userId': userId});
+      return this.httpClient.get<any>(`${this.baseURL}/trends/pooType`, { headers }
+      );
+    }
+
+    pooColorTrends(userId: string) : Observable<any>{
+      const headers = new HttpHeaders({ 'userId': userId});
+      return this.httpClient.get<any>(`${this.baseURL}/trends/pooColor`, { headers }
+      );
+    }
+
+    painLevelBeforeTrends(userId: string) : Observable<any>{
+      const headers = new HttpHeaders({ 'userId': userId});
+      return this.httpClient.get<any>(`${this.baseURL}/trends/painLevelBefore`, { headers }
+      );
+    }
+
+    painLevelDuringTrends(userId: string) : Observable<any>{
+      const headers = new HttpHeaders({ 'userId': userId});
+      return this.httpClient.get<any>(`${this.baseURL}/trends/painLevelDuring`, { headers }
+      );
+    }
+
+    painLevelAfterTrends(userId: string) : Observable<any>{
+      const headers = new HttpHeaders({ 'userId': userId});
+      return this.httpClient.get<any>(`${this.baseURL}/trends/painLevelAfter`, { headers }
+      );
+    }
+
+    urgentPooTrends(userId: string) : Observable<any>{
+      const headers = new HttpHeaders({ 'userId': userId});
+      return this.httpClient.get<any>(`${this.baseURL}/trends/urgentPoo`, { headers }
+      );
+    }
+
+    laxativePooTrends(userId: string) : Observable<any>{
+      const headers = new HttpHeaders({ 'userId': userId});
+      return this.httpClient.get<any>(`${this.baseURL}/trends/laxativePoo`, { headers }
+      );
+    }
+
+    bleedingPooTrends(userId: string) : Observable<any>{
+      const headers = new HttpHeaders({ 'userId': userId});
+      return this.httpClient.get<any>(`${this.baseURL}/trends/bleedingPoo`, { headers }
+      );
+    }
+
+    satisfactionLevelTrends(userId: string) : Observable<any>{
+      const headers = new HttpHeaders({ 'userId': userId});
+      return this.httpClient.get<any>(`${this.baseURL}/trends/satisfactionLevel`, { headers }
+      );
+    }
+
+
     
 }
