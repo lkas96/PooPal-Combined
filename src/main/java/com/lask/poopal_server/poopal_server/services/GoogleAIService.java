@@ -22,6 +22,9 @@ public class GoogleAIService {
     @Value("${google.ai.model}")
     private String model;
 
+    @Value("${google.ai.instructions}")
+    private String instructionSet;
+
     private final Client client;
 
     public GoogleAIService(Client client) {
@@ -47,10 +50,9 @@ public class GoogleAIService {
         String userJsonRecords = js.toString();
 
         // make the call to the google api to get response lah
-        GenerateContentResponse resp = client.models.generateContent(model, userPrompt + "\n\n"
-                + "Here is my personal poop records and history. Please refer to it if my prompt requires it or asks anything about my poop or poo history or trends or diet recommendations."
-                + "\n\n" + userJsonRecords, null);
+        GenerateContentResponse resp = client.models.generateContent(model, userPrompt + instructionSet + userJsonRecords, null);
 
+        System.out.println("UserID: " + userId);
         System.out.println("Reply from google ai:");
         System.out.println(resp.text());
 

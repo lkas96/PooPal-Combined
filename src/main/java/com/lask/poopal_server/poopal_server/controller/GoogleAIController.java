@@ -1,6 +1,8 @@
 package com.lask.poopal_server.poopal_server.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.http.HttpException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +27,14 @@ public class GoogleAIController {
     
     //from the chat frontend, take user query call to google ai service
     @PostMapping("/chat")
-    public ResponseEntity<String> sendQuery(@RequestBody String userPrompt, @RequestHeader("userId") String userId) throws IOException, HttpException {
+    public ResponseEntity<Map<String, String>> sendQuery(@RequestBody String userPrompt, @RequestHeader("userId") String userId) throws IOException, HttpException {
         String resp =  gas.getResponse(userPrompt, userId);
 
-        return ResponseEntity.ok(resp);
+        //convert to json
+        Map<String, String> json = new HashMap<>();
+        json.put("response", resp);
+
+        return ResponseEntity.ok().body(json);
     }
     
 }
