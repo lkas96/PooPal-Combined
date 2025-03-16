@@ -89,6 +89,13 @@
 			<version>2.0.1</version>
 		</dependency>
 
+		<!-- for the google chat gemini ai shit -->
+		<dependency>
+			<groupId>com.google.genai</groupId>
+			<artifactId>google-genai</artifactId>
+			<version>0.2.0</version>
+		</dependency>
+
 
 	</dependencies>
 
