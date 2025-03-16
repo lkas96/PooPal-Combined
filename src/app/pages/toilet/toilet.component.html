@@ -3,14 +3,15 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 d-block d-lg-none">
-      <div class="button-group d-flex justify-content-between">
-        <button mat-button color="primary" (click)="navigate('directory')">Toilet Directory</button>
-        <button mat-button color="accent" (click)="navigate('nearest')">Nearest Toilet</button>
-        <button mat-button color="warn" (click)="navigate('reviews')">Public Reviews</button>
-      </div>
+      <mat-tab-group [(selectedIndex)]="selectedTab" (selectedIndexChange)="onTabChange($event)">
+        <mat-tab label="Toilet Directory"></mat-tab>
+        <mat-tab label="Nearest Toilet"></mat-tab>
+        <mat-tab label="Public Reviews"></mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </div>
+
 <div class="nested-container">
   <router-outlet></router-outlet>
 </div>
