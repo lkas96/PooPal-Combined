@@ -15,6 +15,8 @@ import { EditPooformComponent } from '../components/TRACKER/editpooform/editpoof
 import { BrowseAllToiletsComponent } from '../components/TOILET/browse-all-toilets/browse-all-toilets.component';
 import { NearestToiletComponent } from '../components/TOILET/nearest-toilet/nearest-toilet.component';
 import { DashboardComponent } from '../components/TRENDS/dashboard/dashboard.component';
+import { AiComponent } from '../pages/ai/ai.component';
+import { PoopalAiComponent } from '../components/AI/poopal-ai/poopal-ai.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,6 +37,12 @@ const routes: Routes = [
     children: [
                 { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
                 { path: 'dashboard', component: DashboardComponent },
+              ],
+  },
+  {    path: 'ai', component: AiComponent, canActivate: [AuthGuard],
+    children: [
+                { path: '', redirectTo: 'chat', pathMatch: 'full' },
+                { path: 'chat', component: PoopalAiComponent },
               ],
   },
   {

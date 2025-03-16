@@ -22,7 +22,7 @@ import { ToiletComponent } from './pages/toilet/toilet.component';
 import { PooformComponent } from './components/TRACKER/pooform/pooform.component';
 import { TrackerSummaryComponent } from './components/TRACKER/summary/summary.component';
 import { RecordsComponent } from './components/TRACKER/records/records.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EditPooformComponent } from './components/TRACKER/editpooform/editpooform.component';
 import { DatePipe } from '@angular/common';
@@ -30,6 +30,9 @@ import { BrowseAllToiletsComponent } from './components/TOILET/browse-all-toilet
 import { NearestToiletComponent } from './components/TOILET/nearest-toilet/nearest-toilet.component';
 import { DashboardComponent } from './components/TRENDS/dashboard/dashboard.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { AiComponent } from './pages/ai/ai.component';
+import { PoopalAiComponent } from './components/AI/poopal-ai/poopal-ai.component';
+import { MarkDownModule } from './modules/markdown.module';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     EditPooformComponent,
     BrowseAllToiletsComponent,
     NearestToiletComponent,
-    DashboardComponent,    
+    DashboardComponent,
+    AiComponent,
+    PoopalAiComponent,    
   ],
   imports: [
     BrowserModule,
@@ -66,7 +71,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    NgxChartsModule
+    NgxChartsModule, 
+    FormsModule,
+    MarkDownModule
   ],
   providers: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
