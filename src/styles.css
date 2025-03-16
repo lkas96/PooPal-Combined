@@ -10,7 +10,6 @@ body {
 }
 
 .nested-container {
-  padding-top: 30px;
   padding-bottom: 100px; /* Adjust the value based on the height of your bottom navbar */
 }
 
