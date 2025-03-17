@@ -33,6 +33,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AiComponent } from './pages/ai/ai.component';
 import { PoopalAiComponent } from './components/AI/poopal-ai/poopal-ai.component';
 import { MarkDownModule } from './modules/markdown.module';
+import { ToiletReviewsComponent } from './components/TOILET/toilet-reviews/toilet-reviews.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { MarkDownModule } from './modules/markdown.module';
     NearestToiletComponent,
     DashboardComponent,
     AiComponent,
-    PoopalAiComponent,    
+    PoopalAiComponent,
+    ToiletReviewsComponent,    
   ],
   imports: [
     BrowserModule,
