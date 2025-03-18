@@ -11,7 +11,7 @@ export class PooPalAiService {
     constructor(private httpclient: HttpClient) { }
 
     // private baseURL = "http://localhost:9090/ai";
-    private baseURL = "http://poopal.me:9090/ai";
+    private baseURL = "https://poopal-server-production.up.railway.app/ai";
 
     //posting userPrompt to /ai/chat in the body
     getResponse(userPrompt: string, userId: string): Observable<any> {
