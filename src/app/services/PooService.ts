@@ -14,7 +14,8 @@ export class PooService {
 
   constructor(private httpClient: HttpClient, private gauth: AuthService) { }
 
-  private baseURL = "http://localhost:9090/poo";
+  // private baseURL = "http://localhost:9090/poo";
+  private baseURL = "http://poopal.me:9090/poo";
 
   //springboot endpoint to save POST METHOD to /poo/records/new
   savePooRecord(userId: string, pooRecord: PooRecord) : Observable<PooRecord>{
