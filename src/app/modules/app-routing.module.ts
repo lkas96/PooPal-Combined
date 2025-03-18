@@ -18,6 +18,7 @@ import { DashboardComponent } from '../components/TRENDS/dashboard/dashboard.com
 import { AiComponent } from '../pages/ai/ai.component';
 import { PoopalAiComponent } from '../components/AI/poopal-ai/poopal-ai.component';
 import { ToiletReviewsComponent } from '../components/TOILET/toilet-reviews/toilet-reviews.component';
+import { ReviewDetailsComponent } from '../components/TOILET/review-details/review-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
                 { path: 'directory', component: BrowseAllToiletsComponent },
                 { path: 'nearest', component: NearestToiletComponent },
                 { path: 'reviews', component: ToiletReviewsComponent },
+                { path: 'details/:id', component: ReviewDetailsComponent },
               ],
   },
   {
