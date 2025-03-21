@@ -59,4 +59,4 @@ jobs:
     - name: Authenticate Railway and Deploy
       run: |
         export RAILWAY_TOKEN=${{secrets.RAILWAY_TOKEN}}
-        railway up --service PooPal
+        railway up --service "PooPal Server"
