@@ -43,7 +43,7 @@ jobs:
         ENV PORT=8080
 
         # Expose the application port
-        EXPOSE ${PORT}
+        EXPOSE 8080
 
         # Set shell and entrypoint to run the app
         SHELL ["/bin/sh", "-c"]
