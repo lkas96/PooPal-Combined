@@ -52,7 +52,7 @@ public class PoopalServerApplication implements CommandLineRunner {
             // line 204 800 Super Waste Management site at Blk 414 Yishun Ring Rd => 800 Super Waste Management Pte Ltd
             // line 243 Recreation (MCST 4367) => Club Skyline Residence
             System.out.println("Now attempting to manual clean 3 lines of data");
-            
+
             List<String[]> listArray = new ArrayList<>();
             listArray.add(new String[] {"156", "Kah Engineering (1986) Pte Ltd"});
             listArray.add(new String[] {"204", "800 Super Waste Management Pte Ltd"});
@@ -82,6 +82,19 @@ public class PoopalServerApplication implements CommandLineRunner {
         }
 
         if (pr.countPlaceIds() == 0) {
+
+            //MANUAL CLEANING OVERRIDE 3 LINES OF PLACES
+            // line 156 Kah Engineering (1988) Pte Ltd => Kah Engineering (1986) Pte Ltd
+            // line 204 800 Super Waste Management site at Blk 414 Yishun Ring Rd => 800 Super Waste Management Pte Ltd
+            // line 243 Recreation (MCST 4367) => Club Skyline Residence
+            System.out.println("Now attempting to manual clean 3 lines of data");
+            
+            List<String[]> listArray = new ArrayList<>();
+            listArray.add(new String[] {"156", "Kah Engineering (1986) Pte Ltd"});
+            listArray.add(new String[] {"204", "800 Super Waste Management Pte Ltd"});
+            listArray.add(new String[] {"243", "Club Skyline Residence"});
+
+            tr.cleanData(listArray);
             // placesids is empty, need to populate
             System.out.println("Adding place ids to db");
             List<Toilet> toiletsFromDb = tr.getAllToilets();
