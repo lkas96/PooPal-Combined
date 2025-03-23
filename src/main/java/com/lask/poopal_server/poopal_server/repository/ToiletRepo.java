@@ -124,7 +124,7 @@ public class ToiletRepo {
             String id = entry[0];
             String newName = entry[1];
 
-            template.update(SQL_CLEAN_DATA, id, newName);
+            template.update(SQL_CLEAN_DATA, newName, id);
         }
 
         System.out.println("Data cleaned and updated successfully.");
