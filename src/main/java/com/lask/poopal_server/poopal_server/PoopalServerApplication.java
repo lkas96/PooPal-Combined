@@ -62,16 +62,18 @@ public class PoopalServerApplication implements CommandLineRunner {
                 System.out.println("Place ids already in db. Skipping scraping.");
                 System.out.println("Total place ids: " + pr.countPlaceIds());
             }
-        // } else if (pr.countPlaceIds() == 0) {
-        //     // placesids is empty, need to populate
-        //     System.out.println("Adding place ids to db");
-        //     List<Toilet> toiletsFromDb = tr.getAllToilets();
-        //     List<Place> places = getPlaceIds(toiletsFromDb); // assigns the placeid to the lsit of otilets
-        //     pr.addBatchPlaceIds(places, batchSize); // add to the darn db lmao
-        //     System.out.println("Scraping placeids saved to db liao");
         } else {
             System.out.println("Db already have. Skipping scraping.");
             System.out.println("Total toilets: " + tr.countToilets());
+        }
+
+        if (pr.countPlaceIds() == 0) {
+            // placesids is empty, need to populate
+            System.out.println("Adding place ids to db");
+            List<Toilet> toiletsFromDb = tr.getAllToilets();
+            List<Place> places = getPlaceIds(toiletsFromDb); // assigns the placeid to the lsit of otilets
+            pr.addBatchPlaceIds(places, batchSize); // add to the darn db lmao
+            System.out.println("Scraping placeids saved to db liao");
         }
     }
 
