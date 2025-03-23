@@ -117,6 +117,7 @@ public class ToiletRepo {
     }
 
     public void cleanData(List<String[]> listArray) {
+        System.out.println("INSIDE UPDATE CLEAN DATA 3 METHODS");
         final String SQL_CLEAN_DATA = "UPDATE toilets SET name = ? WHERE id = ?";
 
         for (String[] entry : listArray) {
