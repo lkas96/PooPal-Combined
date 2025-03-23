@@ -1,6 +1,8 @@
 package com.lask.poopal_server.poopal_server.services;
 
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -26,10 +28,12 @@ public class PlaceService {
     private static final String PLACES_URL = "https://places.googleapis.com/v1/places:searchText?key=";
 
     private static final String PLACES_URL2 = "https://places.googleapis.com/v1/places:autocomplete";
+
+    private static final String PLACES_URL3 = "https://places.googleapis.com/v1/places/";
     
     //get the string and name of the place
     //called from commandlinerunner first time
-    public String getPlaceId(String placeName) {
+    public List<String> getPlaceId(String placeName) {
         //put the placeanem to search in textquery json raw body
         JsonObject job = Json.createObjectBuilder()
                 .add("textQuery", placeName)
@@ -37,7 +41,7 @@ public class PlaceService {
 
         // set the custom header to add the gxgoogl whatever
         HttpHeaders headers = new HttpHeaders();
-        headers.add("X-Goog-FieldMask", "places.id,places.displayName");
+        headers.add("X-Goog-FieldMask", "places.id,places.displayName,places.location");
 
         //create the http object
         HttpEntity<String> entity = new HttpEntity<>(job.toString(), headers);
@@ -80,7 +84,6 @@ public class PlaceService {
                 String.class
             );
 
-
             JsonReader jr2 = Json.createReader(new StringReader(resp2.getBody()));
             JsonObject jo2 = jr2.readObject();
             JsonArray suggestions = jo2.getJsonArray("suggestions");
@@ -90,16 +93,56 @@ public class PlaceService {
             
             System.out.println("Backup Method Extracted ID: " + extracted2);
             
-            return extracted2;
+            //now take the ID, get plaace detilas
+            HttpHeaders headers3 = new HttpHeaders();
+            headers3.add("X-Goog-FieldMask", "location");
+
+            HttpEntity<String> entity3 = new HttpEntity<>(headers3);
+
+            ResponseEntity<String> resp3 = rt.exchange(
+                PLACES_URL3 + extracted2 + "?&key=" + apiKey,
+                HttpMethod.GET,
+                entity3,
+                String.class
+            );
+
+            JsonReader jr3 = Json.createReader(new StringReader(resp3.getBody()));
+            JsonObject jo3 = jr3.readObject();
+            JsonObject location = jo3.getJsonObject("location");
+            String extractedLatitude = location.getJsonNumber("latitude").toString();
+            String extractedLongtidude = location.getJsonNumber("longitude").toString();
+
+            //add to array and send it back to map it
+            List<String> details = new ArrayList<>();
+            details.add(extracted2);
+            details.add(extractedLatitude);
+            details.add(extractedLongtidude);
+
+            System.out.println("Extracted details: " + details.toString());
+
+            return details;
+            
+
         }
 
         //always get the first one if got multiple searches. first one should be the best matched example by google places api whatever
         JsonObject firstPlace = places.getJsonObject(0);
         String extractedId = firstPlace.getString("id");
 
-        System.out.println("Extracted ID: " + extractedId);
+        JsonObject location = firstPlace.getJsonObject("location");
 
-        return extractedId;
+        String extractedLatitude = location.getJsonNumber("latitude").toString();
+        String extractedLongtidude = location.getJsonNumber("longitude").toString();
+
+        //add to array and send it back to map it
+        List<String> details = new ArrayList<>();
+        details.add(extractedId);
+        details.add(extractedLatitude);
+        details.add(extractedLongtidude);
+
+        System.out.println("Extracted details: " + details.toString());
+
+        return details;
     }
 
 }

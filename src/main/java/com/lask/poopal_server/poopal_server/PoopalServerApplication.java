@@ -114,15 +114,19 @@ public class PoopalServerApplication implements CommandLineRunner {
 
         for (Toilet toilet : toilets) {
             String placeName = toilet.getName();
-            String placeId = ps.getPlaceId(placeName); //retrieved id from ze goog places
+
+            //this returns [id, lat, lon]
+            List<String> idLatLon = ps.getPlaceId(placeName); //retrieved id from ze goog places
             
             Place p = new Place();
 
             p.setToiletId(toilet.getId());
-            p.setPlaceId(placeId);
+            p.setPlaceId(idLatLon.get(0));
+            p.setLatitude(Double.parseDouble(idLatLon.get(1)));
+            p.setLongitude(Double.parseDouble(idLatLon.get(2)));
 
             places.add(p);
-            System.out.println("Toilet: " + toilet.getName() + " PlaceId: " + placeId);
+            System.out.println("Toilet: " + toilet.getName() + " PlaceId: " + idLatLon.get(0));
 
         }
 

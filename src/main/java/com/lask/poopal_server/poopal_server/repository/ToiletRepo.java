@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import com.lask.poopal_server.poopal_server.models.NearestToilet;
 import com.lask.poopal_server.poopal_server.models.Toilet;
 
 @Repository
@@ -81,6 +82,32 @@ public class ToiletRepo {
                 t.setName(results.getString("name"));
                 t.setDistrict(results.getString("district"));
                 t.setRating(results.getInt("rating"));
+                toilets.add(t);
+            } while (results.next());
+            return toilets;
+        } else {
+            return null;
+        }
+    }
+
+    public List<NearestToilet> getNearestToilets(Double lat, Double lon) {
+        //CALL SQL DB, 
+        //SQL CALCULATE LATLON NEAREST TO GIVEN INPUT RETURN TOP 5
+        final String SQL_SELECT_NEAREST = "SELECT *, (6371 * ACOS(COS(RADIANS(?)) * COS(RADIANS(latitude)) * COS(RADIANS(longitude) - RADIANS(?)) + SIN(RADIANS(?)) * SIN(RADIANS(latitude)))) AS distance_km "
+                                    + "FROM toilets t LEFT JOIN placeIds p ON t.id = p.toiletId ORDER BY distance_km LIMIT 5;";
+
+        SqlRowSet results = template.queryForRowSet(SQL_SELECT_NEAREST, lat, lon, lat);
+
+        if (results.next()) {
+            List<NearestToilet> toilets = new ArrayList<>();
+            do {
+                NearestToilet t = new NearestToilet();
+                t.setId(results.getString("id"));
+                t.setType(results.getString("type"));
+                t.setName(results.getString("name"));
+                t.setDistrict(results.getString("district"));
+                t.setRating(results.getInt("rating"));
+                t.setDistance(Double.parseDouble(results.getString("distance_km")));
                 toilets.add(t);
             } while (results.next());
             return toilets;

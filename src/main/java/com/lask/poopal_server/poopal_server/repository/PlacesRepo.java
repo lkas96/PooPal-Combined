@@ -14,17 +14,17 @@ public class PlacesRepo {
     @Autowired private JdbcTemplate template;
 
     //Add PlaceId Entry to PlaceIds table for single entry
-    public void addPlaceId(String toiletId, String placeId){
-        final String sql = "INSERT INTO PlaceIds (toiletId, placeId) VALUES (?, ?)";
-        template.update(sql, toiletId, placeId);
-        System.out.println("ToiletId/PlaceId: " + toiletId + " / " + placeId + "added to PlaceIds table");
-    }
+    // public void addPlaceId(String toiletId, String placeId){
+    //     final String sql = "INSERT INTO PlaceIds (toiletId, placeId) VALUES (?, ?)";
+    //     template.update(sql, toiletId, placeId);
+    //     System.out.println("ToiletId/PlaceId: " + toiletId + " / " + placeId + "added to PlaceIds table");
+    // }
     
     //bulk add for initial processing
     public void addBatchPlaceIds(List<Place> places, int batchSize) {
 
         //prepare insert ddml statement
-        final String SQL_INSERT = "INSERT INTO placeIds (toiletId, placeId) VALUES (?, ?)";
+        final String SQL_INSERT = "INSERT INTO placeIds (toiletId, placeId, latitude, longitude) VALUES (?, ?, ?, ?)";
     
         //insert function into mysql
         for (int i = 0; i < places.size(); i += batchSize){
@@ -35,7 +35,7 @@ public class PlacesRepo {
             List<Object[]> batchArgs = new ArrayList<>();
             
             for (Place p : batchGroup){
-                Object[] args = {p.getToiletId(), p.getPlaceId()};
+                Object[] args = {p.getToiletId(), p.getPlaceId(), p.getLatitude(), p.getLongitude()};
                 batchArgs.add(args);
             }
 
