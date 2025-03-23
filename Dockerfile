@@ -1,6 +1,6 @@
 
 # ------------ Build Stage ------------
-FROM openjdk:23 AS builde
+FROM openjdk:23 AS builder
 WORKDIR /sr
 # Copy Maven wrapper and project files
 COPY mvnw .
