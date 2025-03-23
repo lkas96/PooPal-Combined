@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebMvc
 public class CORSConfig implements WebMvcConfigurer {
-    @Value("${allowedOrigin}")
+    @Value("${allowedOrigin}") //add in variaables on hosting platform
 
     private String frontend;
     @Override
