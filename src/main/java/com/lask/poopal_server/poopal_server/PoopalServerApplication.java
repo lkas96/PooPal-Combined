@@ -22,52 +22,62 @@ import com.lask.poopal_server.poopal_server.services.PlaceService;
 @SpringBootApplication
 public class PoopalServerApplication implements CommandLineRunner {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PoopalServerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PoopalServerApplication.class, args);
+    }
 
-	@Value("${looMapURL}")
-	private String looMapURL;
+    @Value("${looMapURL}")
+    private String looMapURL;
 
-	private final int batchSize = 50;
+    private final int batchSize = 50;
 
-	@Autowired private ToiletRepo tr;
-    @Autowired private PlacesRepo pr;
-    @Autowired private PlaceService ps;
+    @Autowired
+    private ToiletRepo tr;
+    @Autowired
+    private PlacesRepo pr;
+    @Autowired
+    private PlaceService ps;
 
-	@Override
-	public void run(String... args) {
-		if (tr.countToilets() == 0) { // Only scrape if DB is empty
-			System.out.println("Database dont have, now scraping the web then adding to db");
+    @Override
+    public void run(String... args) {
+        if (tr.countToilets() == 0) { // Only scrape if DB is empty
+            System.out.println("Database dont have, now scraping the web then adding to db");
 
-			List<Toilet> toilets = scrape();
-			tr.saveToilets(toilets, batchSize);
+            List<Toilet> toilets = scrape();
+            tr.saveToilets(toilets, batchSize);
             System.out.println("Scraping and saved to db liao");
 
-
-            //this current toilets list is is java memory one, there is no ID yet, the id IS DONE IN DATABASE MYSQL
-            //RETRIEVE FIRST BEFORE PLACEID, BEUCASE USING REFERENCES
-            //TOILET ID IS THE PRIMARY KEY
+            // this current toilets list is is java memory one, there is no ID yet, the id
+            // IS DONE IN DATABASE MYSQL
+            // RETRIEVE FIRST BEFORE PLACEID, BEUCASE USING REFERENCES
+            // TOILET ID IS THE PRIMARY KEY
             List<Toilet> toiletsFromDb = tr.getToilets();
 
             if (pr.countPlaceIds() == 0) {
                 System.out.println("Adding place ids to db");
-                List<Place> places = getPlaceIds(toiletsFromDb); //assigns the placeid to the lsit of otilets
-                pr.addBatchPlaceIds(places, batchSize); //add to the darn db lmao
+                List<Place> places = getPlaceIds(toiletsFromDb); // assigns the placeid to the lsit of otilets
+                pr.addBatchPlaceIds(places, batchSize); // add to the darn db lmao
                 System.out.println("Scraping placeids saved to db liao");
             } else {
                 System.out.println("Place ids already in db. Skipping scraping.");
                 System.out.println("Total place ids: " + pr.countPlaceIds());
             }
-		} else {
-			System.out.println("Db already have. Skipping scraping.");
+        } else if (pr.countPlaceIds() == 0) {
+            // placesids is empty, need to populate
+            System.out.println("Adding place ids to db");
+            List<Toilet> toiletsFromDb = tr.getAllToilets();
+            List<Place> places = getPlaceIds(toiletsFromDb); // assigns the placeid to the lsit of otilets
+            pr.addBatchPlaceIds(places, batchSize); // add to the darn db lmao
+            System.out.println("Scraping placeids saved to db liao");
+        } else {
+            System.out.println("Db already have. Skipping scraping.");
             System.out.println("Total toilets: " + tr.countToilets());
-		}
-	}
+        }
+    }
 
-	//actual scraping method, checks html then get matchy matchy data
-	//and extract wahatever table data wanted
-	public List<Toilet> scrape() {
+    // actual scraping method, checks html then get matchy matchy data
+    // and extract wahatever table data wanted
+    public List<Toilet> scrape() {
         List<Toilet> toilets = new ArrayList<>();
         try {
             Document doc = Jsoup.connect(looMapURL).get();
@@ -86,14 +96,14 @@ public class PoopalServerApplication implements CommandLineRunner {
                             Toilet toilet = new Toilet();
                             toilet.setDistrict(districtName);
                             toilet.setType(columns.get(0).text().trim());
-                        
+
                             // extrqqact and trim remove the SBS TRANSOT/SMRT/TOWER with the | symbol
                             String nameText = columns.get(1).text().trim();
                             if (nameText.contains("|")) {
                                 nameText = nameText.split("\\|", 2)[1].trim(); // keep second one after |
                             }
                             toilet.setName(nameText);
-                        
+
                             toilet.setRating(columns.get(3).select("i.fa-star").size());
                             toilets.add(toilet);
                         }
@@ -106,18 +116,17 @@ public class PoopalServerApplication implements CommandLineRunner {
         return toilets;
     }
 
-
-    //GOOGLE MAPS PLACEID FUNCTION
-    public List<Place> getPlaceIds(List<Toilet> toilets){
+    // GOOGLE MAPS PLACEID FUNCTION
+    public List<Place> getPlaceIds(List<Toilet> toilets) {
 
         List<Place> places = new ArrayList<>();
 
         for (Toilet toilet : toilets) {
             String placeName = toilet.getName();
 
-            //this returns [id, lat, lon]
-            List<String> idLatLon = ps.getPlaceId(placeName); //retrieved id from ze goog places
-            
+            // this returns [id, lat, lon]
+            List<String> idLatLon = ps.getPlaceId(placeName); // retrieved id from ze goog places
+
             Place p = new Place();
 
             p.setToiletId(toilet.getId());
