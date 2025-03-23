@@ -14,6 +14,7 @@ import jakarta.json.JsonStructure;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,7 +58,7 @@ public class ToiletController {
 
         JsonStructure js = jab.build();
         System.out.println(js);
-        return ResponseEntity.ok(js.toString());
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(js.toString());
     }
     
 
