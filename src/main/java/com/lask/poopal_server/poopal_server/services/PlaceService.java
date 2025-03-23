@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -74,6 +75,7 @@ public class PlaceService {
 
             HttpHeaders headers2 = new HttpHeaders();
             headers2.add("X-Goog-Api-Key", apiKey);
+            headers2.setContentType(MediaType.APPLICATION_JSON); 
 
             HttpEntity<String> entity2 = new HttpEntity<>(job2.toString(), headers2);
 
