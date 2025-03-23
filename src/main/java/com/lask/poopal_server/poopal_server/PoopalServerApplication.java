@@ -71,6 +71,7 @@ public class PoopalServerApplication implements CommandLineRunner {
             // placesids is empty, need to populate
             System.out.println("Adding place ids to db");
             List<Toilet> toiletsFromDb = tr.getAllToilets();
+            System.out.println(toiletsFromDb.toString());
             List<Place> places = getPlaceIds(toiletsFromDb); // assigns the placeid to the lsit of otilets
             pr.addBatchPlaceIds(places, batchSize); // add to the darn db lmao
             System.out.println("Scraping placeids saved to db liao");
