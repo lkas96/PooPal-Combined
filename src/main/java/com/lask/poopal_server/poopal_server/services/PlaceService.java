@@ -84,6 +84,8 @@ public class PlaceService {
                 String.class
             );
 
+            System.out.println(resp2.getBody());
+
             JsonReader jr2 = Json.createReader(new StringReader(resp2.getBody()));
             JsonObject jo2 = jr2.readObject();
             JsonArray suggestions = jo2.getJsonArray("suggestions");
