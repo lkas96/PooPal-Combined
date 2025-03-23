@@ -10,8 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class CORSConfig implements WebMvcConfigurer {
     @Value("${allowedOrigin}") //add in variaables on hosting platform
-
     private String frontend;
+    
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
