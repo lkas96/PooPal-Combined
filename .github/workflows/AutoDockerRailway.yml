@@ -18,7 +18,7 @@ jobs:
       run: | 
         cat <<EOF> Dockerfile
         # ------------ Build Stage ------------
-        FROM eclipse-temurin:23-noble AS builder
+        FROM openjdk:23 AS builder
 
         WORKDIR /src
 
@@ -32,7 +32,7 @@ jobs:
         RUN chmod +x mvnw && ./mvnw package -Dmaven.test.skip=true
 
         # ------------ Runtime Stage ------------
-        FROM eclipse-temurin:23-jre-noble
+        FROM openjdk:23
 
         WORKDIR /app
 
