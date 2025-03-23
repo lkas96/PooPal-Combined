@@ -6,3 +6,12 @@ export interface Toilet {
     rating: number;
     
 }
+
+export interface NearestToilet {
+    id: string;
+    name: string;
+    district: string;
+    type: string;
+    rating: number;
+    distance: number;
+}

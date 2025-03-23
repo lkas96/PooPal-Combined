@@ -1,1 +1,54 @@
-<p>nearest-toilet works!</p>
+<mat-card class="records-container">
+  <mat-card-title>Nearest Toilet</mat-card-title>
+
+  <div class="records-list">
+    <mat-accordion multi="true">
+      <mat-expansion-panel *ngFor="let toilet of dataSource.data">
+        <!-- Panel Header (Always Visible) -->
+        <mat-expansion-panel-header>
+          <mat-panel-title class="panel-title">
+            <span class="name">{{ toilet.name }}</span>
+            <span class="distance">{{ toilet.distance | number:'1.2-2' }} km</span>
+            <span class="rating">{{ getEmojiRating(toilet.rating) }}</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- Panel content when expanded -->
+        <div>
+          <table class="record-table">
+            <tr>
+              <td><strong>Type:</strong> {{ toilet.type }}</td>
+              <td><strong>Location:</strong> {{ toilet.name }}</td>
+              <p>get address whatever</p>
+            </tr>
+          </table>
+        </div>
+
+        <mat-action-row>
+          <button
+            mat-button
+            color="primary"
+            (click)="openGoogleMaps(toilet.name)"
+          >
+            Get Directions
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+</mat-card>
+
+
+
+<div class="location-box">
+  <h3>Current Location</h3>
+  <p *ngIf="latitude && longitude">
+    Latitude: {{ latitude }} <br />
+    Longitude: {{ longitude }}
+  </p>
+  <p *ngIf="!latitude || !longitude">
+    Please allow access to location permissions to use this feature.
+  </p>
+  <button (click)="getUserLocation()">Get My Location</button>
+</div>
