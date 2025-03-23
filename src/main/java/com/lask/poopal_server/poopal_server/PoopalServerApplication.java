@@ -124,6 +124,8 @@ public class PoopalServerApplication implements CommandLineRunner {
         for (Toilet toilet : toilets) {
             String placeName = toilet.getName();
 
+            System.out.printf("trying to get place details for ", placeName);
+
             // this returns [id, lat, lon]
             List<String> idLatLon = ps.getPlaceId(placeName); // retrieved id from ze goog places
 
