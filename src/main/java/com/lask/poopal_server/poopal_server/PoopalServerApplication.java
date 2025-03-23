@@ -47,6 +47,18 @@ public class PoopalServerApplication implements CommandLineRunner {
             tr.saveToilets(toilets, batchSize);
             System.out.println("Scraping and saved to db liao");
 
+            //MANUAL CLEANING OVERRIDE 3 LINES OF PLACES
+            // line 156 Kah Engineering (1988) Pte Ltd => Kah Engineering (1986) Pte Ltd
+            // line 204 800 Super Waste Management site at Blk 414 Yishun Ring Rd => 800 Super Waste Management Pte Ltd
+            // line 243 Recreation (MCST 4367) => Club Skyline Residence
+            List<String[]> listArray = new ArrayList<>();
+            listArray.add(new String[] {"156", "Kah Engineering (1986) Pte Ltd"});
+            listArray.add(new String[] {"204", "800 Super Waste Management Pte Ltd"});
+            listArray.add(new String[] {"243", "Club Skyline Residence"});
+
+            tr.cleanData(listArray);
+
+
             // this current toilets list is is java memory one, there is no ID yet, the id
             // IS DONE IN DATABASE MYSQL
             // RETRIEVE FIRST BEFORE PLACEID, BEUCASE USING REFERENCES

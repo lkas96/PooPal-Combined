@@ -116,4 +116,18 @@ public class ToiletRepo {
         }
     }
 
+    public void cleanData(List<String[]> listArray) {
+        final String SQL_CLEAN_DATA = "UPDATE toilets SET name = ? WHERE id = ?";
+
+        for (String[] entry : listArray) {
+            
+            String id = entry[0];
+            String newName = entry[1];
+
+            template.update(SQL_CLEAN_DATA, id, newName);
+        }
+
+        System.out.println("Data cleaned and updated successfully.");
+    }
+
 }
