@@ -122,7 +122,7 @@ public class PlaceService {
             details.add(extractedLatitude);
             details.add(extractedLongtidude);
 
-            System.out.println("Extracted details: " + details.toString());
+            System.out.println("Extracted details:  USING URL 3" + details.toString());
 
             return details;
             
@@ -144,7 +144,7 @@ public class PlaceService {
         details.add(extractedLatitude);
         details.add(extractedLongtidude);
 
-        System.out.println("Extracted details: " + details.toString());
+        System.out.println("Extracted details USING URL 1: " + details.toString());
 
         return details;
     }
