@@ -29,4 +29,4 @@ EXPOSE 8080
 
 # Set shell and entrypoint to run the app
 SHELL ["/bin/sh", "-c"]
-ENTRYPOINT SERVER_PORT=${PORT} java -jar app.jarF
+ENTRYPOINT SERVER_PORT=${PORT} java -jar app.jar
