@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
-
 import com.lask.poopal_server.poopal_server.models.NearestToilet;
 import com.lask.poopal_server.poopal_server.models.Toilet;
 
@@ -129,6 +128,15 @@ public class ToiletRepo {
         }
 
         System.out.println("Data cleaned and updated successfully.");
+    }
+
+    public void saveReview(String cleanliness, String smell, String recommended, String comments, String imageUrl,
+            String userId, String toiletId) {
+        
+        final String SQL_INSERT_REVIEW = "INSERT INTO reviews (cleanliness, smell, recommended, comments, photoUrl, userId, toiletId) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+        template.update(SQL_INSERT_REVIEW, cleanliness, smell, recommended, comments, imageUrl, userId, toiletId);
+
     }
 
 }
