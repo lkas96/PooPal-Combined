@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lask.poopal_server.poopal_server.models.NearestToilet;
+import com.lask.poopal_server.poopal_server.models.Review;
 import com.lask.poopal_server.poopal_server.models.Toilet;
 import com.lask.poopal_server.poopal_server.services.S3Service;
 import com.lask.poopal_server.poopal_server.services.ToiletService;
@@ -21,6 +22,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -74,7 +76,7 @@ public class ToiletController {
     }
 
     @PostMapping("/review/upload")
-    public ResponseEntity<?> uploadReview(  @RequestParam("cleanliness") String cleanliness,
+    public ResponseEntity<String> uploadReview(  @RequestParam("cleanliness") String cleanliness,
                                             @RequestParam("smell") String smell,
                                             @RequestParam("recommended") String recommended,
                                             @RequestParam("comments") String comments,
@@ -90,5 +92,20 @@ public class ToiletController {
 
         return null;
     }
+
+    @GetMapping("/getreviews/{toiletId}")
+    public ResponseEntity<String> getReviews(@PathVariable String toiletId) {
+        List<Review> reviews = ts.getReviews(toiletId);
+
+        JsonArrayBuilder jab = Json.createArrayBuilder();
+        for (Review r : reviews) {
+            jab.add(r.toJson());
+        }
+        JsonStructure js = jab.build();
+
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(js.toString());
+
+    }
+    
 
 }

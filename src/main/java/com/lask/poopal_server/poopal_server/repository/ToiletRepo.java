@@ -1,5 +1,6 @@
 package com.lask.poopal_server.poopal_server.repository;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,27 +9,29 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 import com.lask.poopal_server.poopal_server.models.NearestToilet;
+import com.lask.poopal_server.poopal_server.models.Review;
 import com.lask.poopal_server.poopal_server.models.Toilet;
 
 @Repository
 public class ToiletRepo {
-    @Autowired private JdbcTemplate template;
+    @Autowired
+    private JdbcTemplate template;
 
     public void saveToilets(List<Toilet> toilets, int batchSize) {
 
-        //prepare insert ddml statement
+        // prepare insert ddml statement
         final String SQL_INSERT = "INSERT INTO toilets (type, name, district, rating) VALUES (?, ?, ?, ?)";
-    
-        //insert function into mysql
-        for (int i = 0; i < toilets.size(); i += batchSize){
+
+        // insert function into mysql
+        for (int i = 0; i < toilets.size(); i += batchSize) {
             int stopAt = Math.min(i + batchSize, toilets.size());
-            
+
             List<Toilet> batchGroup = toilets.subList(i, stopAt);
 
             List<Object[]> batchArgs = new ArrayList<>();
-            
-            for (Toilet t : batchGroup){
-                Object[] args = {t.getType(), t.getName(), t.getDistrict(), t.getRating()};
+
+            for (Toilet t : batchGroup) {
+                Object[] args = { t.getType(), t.getName(), t.getDistrict(), t.getRating() };
                 batchArgs.add(args);
             }
 
@@ -37,14 +40,15 @@ public class ToiletRepo {
         }
     }
 
-    //count number of records first for checking if got any new entries when srapped. 
-    //if scrap list > db records, add the new records. 
+    // count number of records first for checking if got any new entries when
+    // srapped.
+    // if scrap list > db records, add the new records.
     public int countToilets() {
         String SQL_COUNT = "SELECT COUNT(*) FROM toilets";
         return template.queryForObject(SQL_COUNT, Integer.class);
     }
 
-    //get teh list of all the toilets
+    // get teh list of all the toilets
     public List<Toilet> getAllToilets() {
         final String SQL_SELECT = "SELECT * FROM toilets";
 
@@ -90,10 +94,10 @@ public class ToiletRepo {
     }
 
     public List<NearestToilet> getNearestToilets(Double lat, Double lon) {
-        //CALL SQL DB, 
-        //SQL CALCULATE LATLON NEAREST TO GIVEN INPUT RETURN TOP 5
+        // CALL SQL DB,
+        // SQL CALCULATE LATLON NEAREST TO GIVEN INPUT RETURN TOP 5
         final String SQL_SELECT_NEAREST = "SELECT *, (6371 * ACOS(COS(RADIANS(?)) * COS(RADIANS(latitude)) * COS(RADIANS(longitude) - RADIANS(?)) + SIN(RADIANS(?)) * SIN(RADIANS(latitude)))) AS distance_km "
-                                    + "FROM toilets t LEFT JOIN placeIds p ON t.id = p.toiletId ORDER BY distance_km LIMIT 5;";
+                + "FROM toilets t LEFT JOIN placeIds p ON t.id = p.toiletId ORDER BY distance_km LIMIT 5;";
 
         SqlRowSet results = template.queryForRowSet(SQL_SELECT_NEAREST, lat, lon, lat);
 
@@ -120,7 +124,7 @@ public class ToiletRepo {
         final String SQL_CLEAN_DATA = "UPDATE toilets SET name = ? WHERE id = ?";
 
         for (String[] entry : listArray) {
-            
+
             String id = entry[0];
             String newName = entry[1];
 
@@ -132,11 +136,40 @@ public class ToiletRepo {
 
     public void saveReview(String cleanliness, String smell, String recommended, String comments, String imageUrl,
             String userId, String toiletId) {
-        
+
         final String SQL_INSERT_REVIEW = "INSERT INTO reviews (cleanliness, smell, recommended, comments, photoUrl, userId, toiletId) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
+
         template.update(SQL_INSERT_REVIEW, cleanliness, smell, recommended, comments, imageUrl, userId, toiletId);
 
+    }
+
+    public List<Review> getReviews(String toiletId) {
+
+        final String SQL_SELECT_REVIEWS = "SELECT * FROM reviews WHERE toiletId = ?";
+
+        SqlRowSet results = template.queryForRowSet(SQL_SELECT_REVIEWS, toiletId);
+
+        if (results.next()) {
+            
+            List<Review> reviews = new ArrayList<>();
+
+            Review r = new Review();
+            r.setReviewId(results.getInt("reviewId"));
+            r.setCleanliness(results.getInt("cleanliness"));
+            r.setSmell(results.getInt("smell"));
+            r.setRecommended(results.getString("recommended"));
+            r.setComments(results.getString("comments"));
+            r.setImageUrl(results.getString("photoUrl"));
+            r.setToiletId(results.getInt("toiletId"));
+            // convert to localdatetime
+            Timestamp timestamp = results.getTimestamp("timestamp");
+            r.setTimestamp(timestamp.toLocalDateTime());
+            reviews.add(r);
+
+            return reviews;
+        } else {
+            return null;
+        }
     }
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lask.poopal_server.poopal_server.models.NearestToilet;
+import com.lask.poopal_server.poopal_server.models.Review;
 import com.lask.poopal_server.poopal_server.models.Toilet;
 import com.lask.poopal_server.poopal_server.repository.ToiletRepo;
 
@@ -26,6 +27,10 @@ public class ToiletService {
     public void saveReview(String cleanliness, String smell, String recommended, String comments, String imageUrl,
             String userId, String toiletId) {
         tr.saveReview(cleanliness, smell, recommended, comments, imageUrl, userId, toiletId);
+    }
+
+    public List<Review> getReviews(String toiletId) {
+        return tr.getReviews(toiletId);
     }
 
 
