@@ -162,9 +162,9 @@ public class ToiletRepo {
             r.setComments(results.getString("comments"));
             r.setImageUrl(results.getString("photoUrl"));
             r.setToiletId(results.getInt("toiletId"));
-            // convert to localdatetime
-            LocalDateTime timestamp = results.getObject("timestamp", LocalDateTime.class);
-            r.setTimestamp(timestamp);
+            // Convert to LocalDateTime
+            Timestamp timestamp = results.getTimestamp("timestamp");
+            r.setTimestamp(timestamp != null ? timestamp.toLocalDateTime() : null);
 
             reviews.add(r);
 
