@@ -4,7 +4,7 @@ export interface Review {
     smell: number;
     recommended: string;
     comments: string;
-    image: string;
+    imageUrl: string;
     toiletId: string;
     timestamp: string;
 }

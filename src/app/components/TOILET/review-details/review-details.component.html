@@ -35,26 +35,30 @@
   <div class="reviews-section" *ngIf="reviews.length > 0; else noReviews">
     <h3>Reviews</h3>
   
-    <div *ngFor="let review of reviews.slice().reverse()">
-      <mat-card class="review-card">
-        <mat-card-header>
-          <mat-card-title>Recommended: {{ review.recommended }} / 5</mat-card-title>
-          <mat-card-subtitle>{{ review.timestamp | date:'medium' }}</mat-card-subtitle>
-        </mat-card-header>
-  
+    <div *ngFor="let review of reviews">
+      <mat-card class="review-card"> 
         <mat-card-content>
           <table class="review-table">
+            <tr><td colspan="2"><Strong>{{ review.timestamp | date:'medium' }} &nbsp;&nbsp;&nbsp; Experience:   
+              <span *ngIf="review.recommended === 'yes'">👍</span>
+              <span *ngIf="review.recommended === 'no'">👎</span>
+              </Strong>
+            </td></tr>
             <tr>
-                <td><strong>Cleanliness:</strong></td>
-                <td>{{ review.cleanliness }} / 5</td>
+                <td>Cleanliness: {{ review.cleanliness }} / 5</td>
               </tr>
             <tr>
-              <td><strong>Smell:</strong></td>
-              <td>{{ review.smell }} / 5</td>
+              <td>Smell: {{ review.smell }} / 5</td>
             </tr>
             <tr>
-              <td><strong>Comment:</strong></td>
-              <td>{{ review.comments }}</td>
+              <td>Comment: {{ review.comments }}</td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div *ngIf="review.imageUrl" class="review-image-container">
+                <img [src]="review.imageUrl" alt="Review photo" class="review-photo" />
+                </div>
+              </td>
             </tr>
           </table>
         </mat-card-content>

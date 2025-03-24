@@ -1,0 +1,68 @@
+/* Container styling */
+.records-container {
+    margin: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  /* Title and Expansion Panel */
+  .panel-title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: bold;
+  }
+  
+  .district, .name, .rating {
+    margin-right: 8px;
+  }
+  
+  /* Records List Spacing */
+  .records-list {
+    margin-top: 12px;
+  }
+  
+  /* Table formatting */
+  .record-table, .review-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .record-table td,
+  .review-table td {
+    padding: 8px;
+    vertical-align: top;
+  }
+  
+  /* Reviews Section */
+  .reviews-section {
+    margin: 24px 16px;
+  }
+  
+  /* Individual Review Card */
+  .review-card {
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  
+  /* Review Image Styling */
+  .review-image-container {
+    margin-top: 10px;
+  }
+  
+  .review-photo {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Action row spacing */
+  mat-action-row {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
