@@ -1,6 +1,7 @@
 package com.lask.poopal_server.poopal_server.repository;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -162,9 +163,9 @@ public class ToiletRepo {
             r.setImageUrl(results.getString("photoUrl"));
             r.setToiletId(results.getInt("toiletId"));
             // convert to localdatetime
-            Timestamp timestamp = results.getTimestamp("timestamp");
-            r.setTimestamp(timestamp != null ? timestamp.toLocalDateTime() : null);
-            
+            LocalDateTime timestamp = results.getObject("timestamp", LocalDateTime.class);
+            r.setTimestamp(timestamp);
+
             reviews.add(r);
 
             return reviews;
