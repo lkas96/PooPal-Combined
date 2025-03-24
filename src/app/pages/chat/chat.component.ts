@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JedisChatService } from '../../services/jedis.chat.service';
+import { WebSocketService } from '../../services/web.socket.service';
 
 @Component({
   selector: 'app-chat',
@@ -13,40 +13,24 @@ export class ChatComponent implements OnInit {
   messageText!: string;
   sender!: string;
 
-  constructor(private jcs: JedisChatService) {
-    //load username first
-    //usla is pull from gauth but no
-    //wait random chat better anon
+  constructor(private wss: WebSocketService) {
     this.generateRandomName();
   }
-  
+
   generateRandomName() {
-    //generate random poopy themed names
-    const part1 = [
-      'Squishy', 'Tooty', 'Stinky', 'Sloppy', 'Bubbly',
-      'Gassy', 'Soggy', 'Crusty', 'Lumpy', 'Sneaky'
-    ];
-  
-    const part2 = [
-      'Poop', 'Dumper', 'Toot', 'Log', 'Nugget',
-      'Poozilla', 'BootyBlast', 'FlushMaster', 'Stinker', 'Turd'
-    ];
-  
-    const randomFront = part1[Math.floor(Math.random() * part1.length)];
-    const randomBack = part2[Math.floor(Math.random() * part2.length)];
-    const randomNumber = Math.floor(Math.random() * 1000);
-    
-    //set random gen mame
-    this.sender = `${randomFront}${randomBack}${randomNumber}`;
+    const part1 = ['Squishy', 'Tooty', 'Stinky', 'Sloppy', 'Bubbly'];
+    const part2 = ['Poop', 'Toot', 'Log', 'Poozilla', 'Turd'];
+    this.sender = `${this.pick(part1)}${this.pick(part2)}${Math.floor(Math.random() * 1000)}`;
+  }
+
+  pick(arr: string[]) {
+    return arr[Math.floor(Math.random() * arr.length)];
   }
 
   ngOnInit() {
-    this.loadMessages();
-    setInterval(() => this.loadMessages(), 1000); // polling, pulling new messages ever 3 second
-  }
-
-  loadMessages() {
-    this.jcs.getMessages().subscribe(data => this.messages = data);
+    this.wss.subscribeToMessages((msg) => {
+      this.messages.push(msg);
+    });
   }
 
   send() {
@@ -55,9 +39,7 @@ export class ChatComponent implements OnInit {
       content: this.messageText,
       timestamp: Date.now()
     };
-    this.jcs.sendMessage(msg).subscribe(() => {
-      this.messageText = '';
-      this.loadMessages();
-    });
+    this.wss.sendMessage(msg);
+    this.messageText = '';
   }
 }
