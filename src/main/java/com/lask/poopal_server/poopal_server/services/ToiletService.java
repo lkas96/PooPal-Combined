@@ -33,6 +33,10 @@ public class ToiletService {
         return tr.getReviews(toiletId);
     }
 
+    public Toilet getToilet(String toiletId) {
+        return tr.getToilet(toiletId);
+    }
+
 
 
 }

@@ -106,6 +106,13 @@ public class ToiletController {
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(js.toString());
 
     }
+
+    @GetMapping("/gettoilet/{toiletId}")
+    public ResponseEntity<String> getToilet(@PathVariable String toiletId) {
+        Toilet toilet = ts.getToilet(toiletId);
+
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(toilet.toJson().toString());
+    }
     
 
 }

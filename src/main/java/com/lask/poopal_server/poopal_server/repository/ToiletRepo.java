@@ -143,6 +143,7 @@ public class ToiletRepo {
 
     }
 
+    @SuppressWarnings({ "deprecation", "unused" })
     public List<Review> getReviews(String toiletId) {
         final String SQL_SELECT_REVIEWS = "SELECT * FROM reviews WHERE toiletId = ?";
     
@@ -158,6 +159,20 @@ public class ToiletRepo {
             Timestamp timestamp = rs.getTimestamp("timestamp");
             r.setTimestamp(timestamp != null ? timestamp.toLocalDateTime() : null);
             return r;
+        });
+    }
+
+    @SuppressWarnings({ "deprecation", "unused" })
+    public Toilet getToilet(String toiletId) {
+        final String SQL_SELECT_TOILET = "SELECT * FROM toilets WHERE id = ?";
+        return template.queryForObject(SQL_SELECT_TOILET, new Object[]{toiletId}, (rs, rowNum) -> {
+            Toilet t = new Toilet();
+            t.setId(rs.getString("id"));
+            t.setType(rs.getString("type"));
+            t.setName(rs.getString("name"));
+            t.setDistrict(rs.getString("district"));
+            t.setRating(rs.getInt("rating"));
+            return t;
         });
     }
 
