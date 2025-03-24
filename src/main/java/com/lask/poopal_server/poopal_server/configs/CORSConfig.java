@@ -16,7 +16,8 @@ public class CORSConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
         .allowedOrigins(frontend)  // Allow frontend domain
-        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");  // Include OPTIONS
+        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // Include OPTIONS
+        .allowCredentials(true); 
     }
     
 }
