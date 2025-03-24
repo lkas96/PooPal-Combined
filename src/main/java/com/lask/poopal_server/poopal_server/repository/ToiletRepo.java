@@ -145,7 +145,7 @@ public class ToiletRepo {
 
     @SuppressWarnings({ "deprecation", "unused" })
     public List<Review> getReviews(String toiletId) {
-        final String SQL_SELECT_REVIEWS = "SELECT * FROM reviews WHERE toiletId = ?";
+        final String SQL_SELECT_REVIEWS = "SELECT * FROM reviews WHERE toiletId = ? ORDER BY timestamp DESC";
     
         return template.query(SQL_SELECT_REVIEWS, new Object[]{toiletId}, (rs, rowNum) -> {
             Review r = new Review();
