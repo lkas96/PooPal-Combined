@@ -41,7 +41,7 @@ export class ToiletService {
 
   getToiletDetails(toiletId: string) : Observable<Toilet> {
     return this.httpclient.get<Toilet>(
-      `${this.baseURL}/getdetails/${toiletId}`
+      `${this.baseURL}/gettoilet/${toiletId}`
     );
   }
 
