@@ -163,7 +163,8 @@ public class ToiletRepo {
             r.setToiletId(results.getInt("toiletId"));
             // convert to localdatetime
             Timestamp timestamp = results.getTimestamp("timestamp");
-            r.setTimestamp(timestamp.toLocalDateTime());
+            r.setTimestamp(timestamp != null ? timestamp.toLocalDateTime() : null);
+            
             reviews.add(r);
 
             return reviews;
