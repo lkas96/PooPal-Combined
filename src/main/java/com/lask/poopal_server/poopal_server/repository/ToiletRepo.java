@@ -1,7 +1,6 @@
 package com.lask.poopal_server.poopal_server.repository;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -145,33 +144,21 @@ public class ToiletRepo {
     }
 
     public List<Review> getReviews(String toiletId) {
-
         final String SQL_SELECT_REVIEWS = "SELECT * FROM reviews WHERE toiletId = ?";
-
-        SqlRowSet results = template.queryForRowSet(SQL_SELECT_REVIEWS, toiletId);
-
-        if (results.next()) {
-            
-            List<Review> reviews = new ArrayList<>();
-
+    
+        return template.query(SQL_SELECT_REVIEWS, new Object[]{toiletId}, (rs, rowNum) -> {
             Review r = new Review();
-            r.setReviewId(results.getInt("reviewId"));
-            r.setCleanliness(results.getInt("cleanliness"));
-            r.setSmell(results.getInt("smell"));
-            r.setRecommended(results.getString("recommended"));
-            r.setComments(results.getString("comments"));
-            r.setImageUrl(results.getString("photoUrl"));
-            r.setToiletId(results.getInt("toiletId"));
-            // Convert to LocalDateTime
-            Timestamp timestamp = results.getTimestamp("timestamp");
+            r.setReviewId(rs.getInt("reviewId"));
+            r.setCleanliness(rs.getInt("cleanliness"));
+            r.setSmell(rs.getInt("smell"));
+            r.setRecommended(rs.getString("recommended"));
+            r.setComments(rs.getString("comments"));
+            r.setImageUrl(rs.getString("photoUrl"));
+            r.setToiletId(rs.getInt("toiletId"));
+            Timestamp timestamp = rs.getTimestamp("timestamp");
             r.setTimestamp(timestamp != null ? timestamp.toLocalDateTime() : null);
-
-            reviews.add(r);
-
-            return reviews;
-        } else {
-            return null;
-        }
+            return r;
+        });
     }
 
 }
