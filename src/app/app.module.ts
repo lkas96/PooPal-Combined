@@ -35,6 +35,8 @@ import { PoopalAiComponent } from './components/AI/poopal-ai/poopal-ai.component
 import { MarkDownModule } from './modules/markdown.module';
 import { ToiletReviewsComponent } from './components/TOILET/toilet-reviews/toilet-reviews.component';
 import { ReviewDetailsComponent } from './components/TOILET/review-details/review-details.component';
+import { ToiletReviewFormComponent } from './components/REVIEW/toilet-review-form/toilet-review-form.component';
+import { ReviewComponent } from './pages/review/review.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { ReviewDetailsComponent } from './components/TOILET/review-details/revie
     AiComponent,
     PoopalAiComponent,
     ToiletReviewsComponent,
-    ReviewDetailsComponent,    
+    ReviewDetailsComponent,
+    ToiletReviewFormComponent,
+    ReviewComponent,
   ],
   imports: [
     BrowserModule,

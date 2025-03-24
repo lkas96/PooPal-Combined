@@ -43,7 +43,7 @@ export class BrowseAllToiletsComponent implements OnInit {
   }
 
   getEmojiRating(rating: number): string {
-    const stars = ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'];
+    const stars = ['1⭐', '2⭐', '3⭐', '4⭐', '5⭐'];
     return stars[rating - 1] || '⭐'; // Default to 1 star if undefined
   }
 
@@ -53,4 +53,10 @@ export class BrowseAllToiletsComponent implements OnInit {
     )}`;
     window.open(url, '_blank');
   }
+
+  reviewToilet(toiletId: string) {
+    // Navigate to the review form, passing the toiletId as a route parameter
+    this.router.navigate(['/review', toiletId]);
+  }
+
 }

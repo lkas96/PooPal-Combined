@@ -1,1 +1,68 @@
-<p>review-details works!</p>
+<div class="toilet-details" *ngIf="toilet">
+  <mat-card class="records-container">
+    <mat-card-title>Toilet Details</mat-card-title>
+  
+    <div class="records-list">
+      <mat-accordion multi="false">
+        <mat-expansion-panel [expanded]="true" *ngIf="toilet">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="panel-title">
+              <span class="district">{{ toilet.district }}</span>
+              <span class="name">{{ toilet.name }}</span>
+              <span class="rating">{{ getEmojiRating(toilet.rating) }}</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+  
+          <div>
+            <table class="record-table">
+              <tr>
+                <td><strong>Type:</strong> {{ toilet.type }}</td>
+                <td><strong>Location:</strong> {{ toilet.name }}</td>
+              </tr>
+            </table>
+          </div>
+  
+          <mat-action-row>
+            <button mat-button color="primary" (click)="reviewToilet(toilet.id)">Review Toilet</button>
+            <button mat-button color="primary" (click)="openGoogleMaps(toilet.name)">Get Directions</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </mat-card>
+  
+  
+  <div class="reviews-section" *ngIf="reviews.length > 0; else noReviews">
+    <h3>Reviews</h3>
+  
+    <div *ngFor="let review of reviews.slice().reverse()">
+      <mat-card class="review-card">
+        <mat-card-header>
+          <mat-card-title>Recommended: {{ review.recommended }} / 5</mat-card-title>
+          <mat-card-subtitle>{{ review.timestamp | date:'medium' }}</mat-card-subtitle>
+        </mat-card-header>
+  
+        <mat-card-content>
+          <table class="review-table">
+            <tr>
+                <td><strong>Cleanliness:</strong></td>
+                <td>{{ review.cleanliness }} / 5</td>
+              </tr>
+            <tr>
+              <td><strong>Smell:</strong></td>
+              <td>{{ review.smell }} / 5</td>
+            </tr>
+            <tr>
+              <td><strong>Comment:</strong></td>
+              <td>{{ review.comments }}</td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  
+  <ng-template #noReviews>
+    <p>No reviews yet. Be the first to leave one!</p>
+  </ng-template>
+  
