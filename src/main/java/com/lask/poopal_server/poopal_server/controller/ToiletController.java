@@ -6,7 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lask.poopal_server.poopal_server.models.NearestToilet;
 import com.lask.poopal_server.poopal_server.models.Toilet;
-import com.lask.poopal_server.poopal_server.services.FileUploadService;
 import com.lask.poopal_server.poopal_server.services.S3Service;
 import com.lask.poopal_server.poopal_server.services.ToiletService;
 
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -33,13 +31,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @RequestMapping("/toilet")
 public class ToiletController {
 
-    private static final String BASE64_PREFIX = "data:image/png;base64,";
-
     @Autowired
     ToiletService ts;
-
-    @Autowired
-    FileUploadService fileUploadService;
 
     @Autowired
     S3Service s3Service;
