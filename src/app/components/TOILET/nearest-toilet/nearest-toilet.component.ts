@@ -68,4 +68,14 @@ export class NearestToiletComponent implements OnInit {
     )}`;
     window.open(url, '_blank');
   }
+
+  reviewToilet(toiletId: string) {
+    // Navigate to the review form, passing the toiletId as a route parameter
+    this.router.navigate(['/review', toiletId]);
+  }
+
+  viewToilet(toiletId: string) {
+    this.router.navigate(['/review/details/' + toiletId]);
+  }
+  
 }

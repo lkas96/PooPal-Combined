@@ -43,7 +43,7 @@ export class BrowseAllToiletsComponent implements OnInit {
   }
 
   getEmojiRating(rating: number): string {
-    const stars = ['1⭐', '2⭐', '3⭐', '4⭐', '5⭐'];
+    const stars = ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'];
     return stars[rating - 1] || '⭐'; // Default to 1 star if undefined
   }
 

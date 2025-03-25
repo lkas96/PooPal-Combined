@@ -1,5 +1,12 @@
-<mat-card class="records-container">
-  <mat-card-title>Nearest Toilet</mat-card-title>
+<div class="records-container">
+<br>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <h2>Nearest Toilet</h2>
+  <button mat-raised-button color="primary" (click)="getUserLocation()">
+    Refresh Location
+  </button>
+</div>
+<br>
 
   <div class="records-list">
     <mat-accordion multi="true">
@@ -18,37 +25,17 @@
           <table class="record-table">
             <tr>
               <td><strong>Type:</strong> {{ toilet.type }}</td>
-              <td><strong>Location:</strong> {{ toilet.name }}</td>
-              <p>get address whatever</p>
+              <td><strong>Area:</strong> {{ toilet.district }}</td>
             </tr>
           </table>
         </div>
 
         <mat-action-row>
-          <button
-            mat-flat-button
-            color="primary"
-            (click)="openGoogleMaps(toilet.name)"
-          >
-            Get Directions
-          </button>
+          <button mat-flat-button color="primary" (click)="viewToilet(toilet.id)">View Reviews</button>
+          <button mat-flat-button color="primary" (click)="reviewToilet(toilet.id)">Review Toilet</button>
+          <button mat-flat-button color="primary" (click)="openGoogleMaps(toilet.name)">Get Directions</button>
         </mat-action-row>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-
-</mat-card>
-
-
-
-<div class="location-box">
-  <h3>Current Location</h3>
-  <p *ngIf="latitude && longitude">
-    Latitude: {{ latitude }} <br />
-    Longitude: {{ longitude }}
-  </p>
-  <p *ngIf="!latitude || !longitude">
-    Please allow access to location permissions to use this feature.
-  </p>
-  <button (click)="getUserLocation()">Get My Location</button>
 </div>
