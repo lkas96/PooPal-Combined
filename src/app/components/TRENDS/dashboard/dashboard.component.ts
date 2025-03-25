@@ -11,10 +11,6 @@ import { PooService } from '../../../services/poo.service';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
-  bowelTrends = [
-    { name: 'Type 3', value: 2 },
-    { name: 'Type 4', value: 1 } //value is the count, take from database then assign back. 
-  ];
 
   colorScheme = {
     name: 'cool',
@@ -23,11 +19,25 @@ export class DashboardComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
+  painColorScheme = {
+    name: 'cool',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#bf422c', '#e36d2c', '#eca02c', '#f2b930', '#f4d7a0']
+  };
+
   pooColorScheme = {
     name: 'cool',
     selectable: true,
     group: ScaleType.Ordinal,
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#66370b', '#cc6f12', '#b2aa01', '#e6e6e6', '#01451e', '#e41b21', '#5e0614', '#1c1210']
+  };
+
+  satisfactionColorScheme = {
+    name: 'cool',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#5AA454', '#C7B42C', '#A10A28']
   };
 
   constructor(private ps: PooService, private router: Router, private gauth: AuthService) {}

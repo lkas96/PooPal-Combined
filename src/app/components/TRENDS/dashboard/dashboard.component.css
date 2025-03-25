@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 16px;
+  min-height: 300px;
 }
 
 .trends-container {
@@ -9,4 +10,10 @@
   width: 90%;
   margin: auto;
   padding: 20px;
+  text-align: center;
+}
+
+mat-card {
+  margin-bottom: 20px;
+  border-radius: 12px;
 }

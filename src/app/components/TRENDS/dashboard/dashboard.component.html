@@ -1,133 +1,185 @@
 <div class="nested-container">
   <div class="trends-container">
+    <h1>Your Poo Trends</h1>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Where you have your poops</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="grid-container">
+          <ngx-charts-pie-chart
+            [results]="pooWhere"
+            [scheme]="colorScheme"
+            [labels]="true"
+            [legend]="true"
+            [animations]="true">
+          </ngx-charts-pie-chart>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
-    <div class="grid-container">
-      <ngx-charts-bar-vertical
-        [results]="pooWhere"
-        [scheme]="colorScheme"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [showDataLabel]="true"
-        [animations]="true">
-      </ngx-charts-bar-vertical>
-    </div>
-    <br>
-    
-    <div class="grid-container">
-      <ngx-charts-bar-vertical
-        [results]="pooType"
-        [scheme]="colorScheme"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [showDataLabel]="true"
-        [animations]="true">
-      </ngx-charts-bar-vertical>
-    </div>
-    <br>
-    
-    <div class="grid-container">
-      <ngx-charts-bar-vertical
-        [results]="pooColor"
-        [scheme]="colorScheme"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [showDataLabel]="true"
-        [animations]="true">
-      </ngx-charts-bar-vertical>
-    </div>
-    <br>
-    
-    <div class="grid-container">
-      <ngx-charts-bar-vertical
-        [results]="pooPainBefore"
-        [scheme]="colorScheme"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [showDataLabel]="true"
-        [animations]="true">
-      </ngx-charts-bar-vertical>
-    </div>
-    <br>
-    
-    <div class="grid-container">
-      <ngx-charts-bar-vertical
-        [results]="pooPainDuring"
-        [scheme]="colorScheme"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [showDataLabel]="true"
-        [animations]="true">
-      </ngx-charts-bar-vertical>
-    </div>
-    <br>
-    
-    <div class="grid-container">
-      <ngx-charts-bar-vertical
-        [results]="pooPainAfter"
-        [scheme]="colorScheme"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [showDataLabel]="true"
-        [animations]="true">
-      </ngx-charts-bar-vertical>
-    </div>
-    <br>
-    
-    <div class="grid-container">
-      <ngx-charts-bar-vertical
-        [results]="pooUrgency"
-        [scheme]="colorScheme"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [showDataLabel]="true"
-        [animations]="true">
-      </ngx-charts-bar-vertical>
-    </div>
-    <br>
-    
-    <div class="grid-container">
-      <ngx-charts-bar-vertical
-        [results]="pooLaxative"
-        [scheme]="colorScheme"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [showDataLabel]="true"
-        [animations]="true">
-      </ngx-charts-bar-vertical>
-    </div>
-    <br>
-    
-    <div class="grid-container">
-      <ngx-charts-bar-vertical
-        [results]="pooBleeding"
-        [scheme]="colorScheme"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [showDataLabel]="true"
-        [animations]="true">
-      </ngx-charts-bar-vertical>
-    </div>
-    <br>
-    
-    <div class="grid-container">
-      <ngx-charts-bar-vertical
-        [results]="pooSatisfaction"
-        [scheme]="colorScheme"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [showDataLabel]="true"
-        [animations]="true">
-      </ngx-charts-bar-vertical>
-    </div>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Poo Types</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="grid-container">
+          <ngx-charts-bar-vertical
+            [results]="pooType"
+            [scheme]="colorScheme"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [showDataLabel]="true"
+            [animations]="true">
+          </ngx-charts-bar-vertical>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Poo Colors</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="grid-container">
+          <ngx-charts-bar-vertical
+            [results]="pooColor"
+            [scheme]="pooColorScheme"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="true"
+            [showDataLabel]="true"
+            [animations]="true">
+          </ngx-charts-bar-vertical>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Number of Painful Experiences Before Pooping</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="grid-container">
+          <ngx-charts-bar-vertical
+            [results]="pooPainBefore"
+            [scheme]="painColorScheme"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [showDataLabel]="true"
+            [animations]="true">
+          </ngx-charts-bar-vertical>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Number of Painful Experiences During Pooping</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="grid-container">
+          <ngx-charts-bar-vertical
+            [results]="pooPainDuring"
+            [scheme]="painColorScheme"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [showDataLabel]="true"
+            [animations]="true">
+          </ngx-charts-bar-vertical>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Number of Painful Experiences After Pooping</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="grid-container">
+          <ngx-charts-bar-vertical
+            [results]="pooPainAfter"
+            [scheme]="painColorScheme"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [showDataLabel]="true"
+            [animations]="true">
+          </ngx-charts-bar-vertical>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Were Your Poos Urgent</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="grid-container">
+          <ngx-charts-pie-chart
+            [results]="pooUrgency"
+            [scheme]="colorScheme"
+            [legend]="true"
+            [labels]="true"
+            [animations]="true">
+          </ngx-charts-pie-chart>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Stimulants Usage</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="grid-container">
+          <ngx-charts-pie-chart
+            [results]="pooLaxative"
+            [scheme]="colorScheme"
+            [legend]="true"
+            [labels]="true"
+            [animations]="true">
+          </ngx-charts-pie-chart>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Poo Bleeding</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="grid-container">
+          <ngx-charts-pie-chart
+            [results]="pooBleeding"
+            [scheme]="colorScheme"
+            [labels]="true"
+            [legend]="true"
+            [animations]="true">
+          </ngx-charts-pie-chart>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Poo Experiences</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="grid-container">
+          <ngx-charts-pie-chart
+            [results]="pooSatisfaction"
+            [scheme]="satisfactionColorScheme"
+            [labels]="true"
+            [legend]="true"
+            [animations]="true">
+          </ngx-charts-pie-chart>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
   </div>  
 </div>
