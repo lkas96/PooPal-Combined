@@ -75,9 +75,17 @@ export class TrackerSummaryComponent implements OnInit {
     });
   }
 
-  formatDate(timestamp: string): string {
+  private formatDate(timestamp: string): string {
     const date = new Date(timestamp);
-    return isNaN(date.getTime()) ? 'Invalid Date' : date.toLocaleString();
+  
+    if (isNaN(date.getTime())) return 'Invalid Date';
+  
+    // Add 8 hours (8 * 60 * 60 * 1000 milliseconds)
+    const adjustedDate = new Date(date.getTime() + 8 * 60 * 60 * 1000);
+  
+    return adjustedDate.toLocaleString('en-SG', {
+      hour12: true,
+    });
   }
 
   editRecord(recordId: number) {
