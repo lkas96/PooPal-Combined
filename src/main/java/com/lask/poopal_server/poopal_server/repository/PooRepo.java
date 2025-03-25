@@ -289,7 +289,7 @@ public class PooRepo {
                                     "WHEN s.pooType = 'Type 7' THEN 7 END";
     
         return template.query(SQL_POO_TYPE, new Object[]{userId}, rs -> {
-            Map<String, Integer> typeCounts = new java.util.HashMap<>();
+            Map<String, Integer> typeCounts = new java.util.LinkedHashMap<>();
     
             while (rs.next()) {
                 typeCounts.put(rs.getString("pooType"), rs.getInt("total"));
