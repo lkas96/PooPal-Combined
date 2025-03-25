@@ -5,6 +5,8 @@ import { Toilet } from '../../../models/toilet';
 import { ToiletService } from '../../../services/toilet.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-browse-all-toilets',
@@ -18,7 +20,9 @@ export class BrowseAllToiletsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private toiletSvc: ToiletService, private router: Router) {}
+  expandedToiletId: string | null = null;
+
+  constructor(private toiletSvc: ToiletService, private router: Router, private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.getAllToilets();
@@ -61,6 +65,12 @@ export class BrowseAllToiletsComponent implements OnInit {
 
   viewToilet(toiletId: string) {
     this.router.navigate(['/review/details/' + toiletId]);
+  }
+
+  getGoogleMapUrl(toilet: Toilet): SafeResourceUrl {
+    const query = encodeURIComponent(`${toilet.placeId}`);
+    const url = `https://www.google.com/maps/embed/v1/place?key=${environment.MAPS_API}&q=${query}`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
 }
