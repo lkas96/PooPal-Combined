@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PooRecordViewing } from '../../../models/pooRecordViewing';
-import { PooService } from '../../../services/PooService';
+import { PooService } from '../../../services/poo.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 

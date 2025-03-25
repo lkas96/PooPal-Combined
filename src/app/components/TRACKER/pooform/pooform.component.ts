@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PooRecord } from '../../../models/pooRecord';
-import { PooService } from '../../../services/PooService';
+import { PooService } from '../../../services/poo.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PooService } from '../../../services/PooService';
+import { PooService } from '../../../services/poo.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { PooRecordViewing } from '../../../models/pooRecordViewing';

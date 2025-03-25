@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
-import { PooService } from '../../../services/PooService';
+import { PooService } from '../../../services/poo.service';
 
 @Component({
   selector: 'app-dashboard',

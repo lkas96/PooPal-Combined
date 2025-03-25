@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PooService } from '../../../services/PooService';
+import { PooService } from '../../../services/poo.service';
 import { AuthService } from '../../../services/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
