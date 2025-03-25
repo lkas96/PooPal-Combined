@@ -91,7 +91,8 @@ public class PooRepo {
     public void updatePooEntry(String userId, PooRecord newPoo) {
         final String SQL_UPDATE = "UPDATE records SET pooWhere = ?, pooType = ?, pooColor = ?, painBefore = ?, painDuring = ?, painAfter = ?, urgent = ?, laxative = ?, bleeding = ?, notes = ?, timestamp = ?, satisfactionLevel = ? WHERE userId = ? and id = ?";
 
-        Timestamp timestamp = newPoo.getTimestamp() != null ? Timestamp.valueOf(newPoo.getTimestamp()) : null;
+        //lazy way of fixing hours. 
+        Timestamp timestamp = newPoo.getTimestamp() != null ? Timestamp.valueOf(newPoo.getTimestamp().minusHours(8)) : null;
 
         int isUpdated = template.update(SQL_UPDATE, newPoo.getPooWhere(), newPoo.getPooType(), newPoo.getPooColor(), newPoo.getPainBefore(), newPoo.getPainDuring(), newPoo.getPainAfter(), newPoo.getUrgent(), newPoo.getLaxative(), newPoo.getBleeding(), newPoo.getNotes(), timestamp, newPoo.getSatisfactionLevel(), userId, newPoo.getId());
 
