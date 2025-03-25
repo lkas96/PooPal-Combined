@@ -96,14 +96,7 @@ public class PooController {
         recordChange.setLaxative(poo.getLaxative());
         recordChange.setBleeding(poo.getBleeding());
         recordChange.setNotes(poo.getNotes());
-
-        System.out.println("Timestamp : " + poo.getTimestamp());
-        //convert string to timestamp
-        String date = poo.getTimestamp().toString();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
-
-        recordChange.setTimestamp(dateTime);
+        recordChange.setTimestamp(poo.getTimestamp());
         recordChange.setSatisfactionLevel(poo.getSatisfactionLevel());
         ps.updatePooEntry(userId, poo);
 
