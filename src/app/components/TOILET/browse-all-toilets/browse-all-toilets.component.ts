@@ -59,4 +59,8 @@ export class BrowseAllToiletsComponent implements OnInit {
     this.router.navigate(['/review', toiletId]);
   }
 
+  viewToilet(toiletId: string) {
+    this.router.navigate(['/review/details/' + toiletId]);
+  }
+
 }

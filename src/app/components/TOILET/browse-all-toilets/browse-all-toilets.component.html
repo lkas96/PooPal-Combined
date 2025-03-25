@@ -1,5 +1,7 @@
-<mat-card class="records-container">
-    <mat-card-title>Toilet Directory</mat-card-title>
+<div class="records-container">
+  <br>
+  <h1>Toilet Directory</h1>
+  <br>
   
     <mat-form-field appearance="outline" style="width: 100%;">
       <mat-label>Search</mat-label>
@@ -12,7 +14,6 @@
           <!-- Panel Header (Always Visible) -->
           <mat-expansion-panel-header>
             <mat-panel-title class="panel-title">
-              <span class="district">{{ toilet.district }}</span>
               <span class="name">{{ toilet.name }}</span>
               <span class="rating">{{ getEmojiRating(toilet.rating) }}</span>
             </mat-panel-title>
@@ -23,19 +24,19 @@
             <table class="record-table">
               <tr>
                 <td><strong>Type:</strong> {{ toilet.type }}</td>
-                <td><strong>Location:</strong> {{ toilet.name }}</td>
-                <p>get address whatever</p>
+                <td><strong>Area:</strong> {{ toilet.district }}</td>
               </tr>
             </table>  
           </div>
   
           <mat-action-row>
-            <button mat-button color="primary" (click)="reviewToilet(toilet.id)">Review Toilet</button>
-            <button mat-button color="primary" (click)="openGoogleMaps(toilet.name)">Get Directions</button>
+            <button mat-flat-button color="primary" (click)="viewToilet(toilet.id)">View Reviews</button>
+            <button mat-flat-button color="primary" (click)="reviewToilet(toilet.id)">Review Toilet</button>
+            <button mat-flat-button color="primary" (click)="openGoogleMaps(toilet.name)">Get Directions</button>
           </mat-action-row>
         </mat-expansion-panel>
       </mat-accordion>
     </div>
   
-    <mat-paginator [pageSizeOptions]="[15, 30,  dataSource.filteredData.length || 0 ]" showFirstLastButtons></mat-paginator>
-  </mat-card>
+    <mat-paginator style="background: none;" [pageSizeOptions]="[15, 30,  dataSource.filteredData.length || 0 ]" showFirstLastButtons></mat-paginator>
+  </div>
