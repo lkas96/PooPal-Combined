@@ -18,7 +18,9 @@ export class PoopalAiComponent implements OnInit {
   userName!: string;
   botName: string = 'PooPal AI';
 
-  constructor(private httpclient: HttpClient, private pas: PooPalAiService, private gauth: AuthService) {}
+  constructor(private httpclient: HttpClient, private pas: PooPalAiService, private gauth: AuthService) {
+    this.setViewportHeight();
+  }
 
   ngOnInit(): void {
     this.gauth.getUserId().then(userId => {
@@ -51,6 +53,11 @@ export class PoopalAiComponent implements OnInit {
     );
   
     this.userInput = '';
+  }
+
+  setViewportHeight = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
   }
   
 }

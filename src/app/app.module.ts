@@ -37,6 +37,7 @@ import { ToiletReviewsComponent } from './components/TOILET/toilet-reviews/toile
 import { ReviewDetailsComponent } from './components/TOILET/review-details/review-details.component';
 import { ToiletReviewFormComponent } from './components/REVIEW/toilet-review-form/toilet-review-form.component';
 import { ReviewComponent } from './pages/review/review.component';
+import { PoopalChatComponent } from './components/CHAT/poopal-chat/poopal-chat.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ReviewComponent } from './pages/review/review.component';
     ReviewDetailsComponent,
     ToiletReviewFormComponent,
     ReviewComponent,
+    PoopalChatComponent,
   ],
   imports: [
     BrowserModule,
