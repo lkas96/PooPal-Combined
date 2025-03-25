@@ -4,6 +4,7 @@ export interface Toilet {
     district: string;
     type: string;
     rating: number;
+    placeId: string;
     
 }
 
@@ -14,4 +15,5 @@ export interface NearestToilet {
     type: string;
     rating: number;
     distance: number;
+    placeId: string;
 }
