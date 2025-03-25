@@ -1,5 +1,7 @@
 package com.lask.poopal_server.poopal_server.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,8 +98,12 @@ public class PooController {
         recordChange.setNotes(poo.getNotes());
 
         System.out.println("Timestamp : " + poo.getTimestamp());
-        
-        recordChange.setTimestamp(poo.getTimestamp());
+        //convert string to timestamp
+        String date = poo.getTimestamp().toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+
+        recordChange.setTimestamp(dateTime);
         recordChange.setSatisfactionLevel(poo.getSatisfactionLevel());
         ps.updatePooEntry(userId, poo);
 
