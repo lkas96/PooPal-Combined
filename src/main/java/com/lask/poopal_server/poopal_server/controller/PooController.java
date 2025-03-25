@@ -94,6 +94,9 @@ public class PooController {
         recordChange.setLaxative(poo.getLaxative());
         recordChange.setBleeding(poo.getBleeding());
         recordChange.setNotes(poo.getNotes());
+
+        System.out.println("Timestamp : " + poo.getTimestamp());
+        
         recordChange.setTimestamp(poo.getTimestamp());
         recordChange.setSatisfactionLevel(poo.getSatisfactionLevel());
         ps.updatePooEntry(userId, poo);
