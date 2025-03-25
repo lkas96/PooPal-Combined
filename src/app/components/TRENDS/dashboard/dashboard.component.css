@@ -1,19 +1,18 @@
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 16px;
+  gap: 30px;
   min-height: 300px;
 }
 
 .trends-container {
-  max-width: 700px;
-  width: 90%;
+  max-width: 800px;
+  width: 95%;
   margin: auto;
-  padding: 20px;
   text-align: center;
 }
 
 mat-card {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   border-radius: 12px;
 }
