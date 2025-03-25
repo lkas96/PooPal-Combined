@@ -88,8 +88,6 @@ export class NearestToiletComponent implements OnInit {
     const placeId = encodeURIComponent(`${toilet.placeId}`);
     const url = `https://www.google.com/maps/embed/v1/directions?key=${environment.MAPS_API}&destination=place_id:${placeId}&origin=${this.latitude},${this.longitude}&mode=transit`;
 
-    console.log(url);
-
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }  
 }

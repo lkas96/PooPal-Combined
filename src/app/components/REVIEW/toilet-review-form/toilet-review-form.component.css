@@ -1,6 +1,9 @@
-.poo-card {
-    max-width: 700px;
-    width: 90%;
-    margin: auto;
-  }
-  
+.review-container {
+  max-width: 800px;
+  width: 95%;
+  margin: auto;
+}
+
+.review-container h1 {
+  text-align: center;
+}

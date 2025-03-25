@@ -74,8 +74,6 @@ export class BrowseAllToiletsComponent implements OnInit {
     const placeId = encodeURIComponent(`${toilet.placeId}`);
     const url = `https://www.google.com/maps/embed/v1/place?key=${environment.MAPS_API}&q=place_id:${placeId}`;
 
-    console.log(url);
-
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
