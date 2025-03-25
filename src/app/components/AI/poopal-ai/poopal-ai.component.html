@@ -1,18 +1,27 @@
-<!-- <div class="nested-container"> -->
+<br>
 <h1>Chatting with PooPal AI</h1>
+<br>
 <div class="chat-container">
   <mat-card class="chat-box">
     <div *ngFor="let message of messages">
       <div [class]="message.sender === 'user' ? 'user-msg' : 'bot-msg'">
-        <strong>{{ message.senderName }}</strong><br>
+        <strong>{{ message.senderName }}</strong
+        ><br />
         <markdown [data]="message.text"></markdown>
       </div>
     </div>
   </mat-card>
   <div class="chat-input">
-    <input matInput [(ngModel)]="userInput" placeholder="Type your message..." (keyup.enter)="sendMessage()"class="chat-input-field"/>
-    <button mat-flat-button (click)="sendMessage()" class="send-btn">Send</button>
+    <input
+      matInput
+      [(ngModel)]="userInput"
+      placeholder="Type your message..."
+      (keyup.enter)="sendMessage()"
+      class="chat-input-field"
+    />
+    <button mat-flat-button (click)="sendMessage()" class="send-btn">
+      Send
+    </button>
   </div>
   <div *ngIf="loading" class="loading">PooPal AI is thinking...</div>
 </div>
-<!-- </div>  -->
