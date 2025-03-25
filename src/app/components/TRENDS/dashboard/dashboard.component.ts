@@ -23,6 +23,13 @@ export class DashboardComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
+  pooColorScheme = {
+    name: 'cool',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
+
   constructor(private ps: PooService, private router: Router, private gauth: AuthService) {}
 
   userId!: string;
@@ -60,6 +67,14 @@ export class DashboardComponent implements OnInit {
       }));
     });
 
+    const orderedTypes = ['Type 1', 'Type 2', 'Type 3', 'Type 4', 'Type 5', 'Type 6', 'Type 7'];
+    this.ps.pooTypeTrends(this.userId).subscribe((data: any) => {
+      this.pooType = orderedTypes.map(type => ({
+        name: type,
+        value: data[type] || 0 // default to 0 if missing
+      }));
+    });
+       
     this.ps.pooTypeTrends(this.userId).subscribe((data: any) => {
       this.pooType = Object.keys(data).map(key => ({
         name: key,  // Assign key as name 
