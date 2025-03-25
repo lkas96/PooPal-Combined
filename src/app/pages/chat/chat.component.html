@@ -1,14 +1,23 @@
 <app-top-nav></app-top-nav>
-  
-  <div class="container">
-    <h1>Chat with PooPals 💩</h1>
-    <div *ngFor="let msg of messages">
-      <b>{{msg.sender}}:</b> {{msg.message}}
+
+<h1>Chat with PooPals 💩</h1>
+<div class="chat-container">
+  <mat-card class="chat-box">
+    <div *ngFor="let msg of messages"
+         [ngClass]="{'message-wrapper': true, 'user': msg.sender === sender, 'other': msg.sender !== sender}">
+      
+      <div class="message-bubble" [ngClass]="{'other': msg.sender !== sender}">
+        <div class="sender">{{ msg.sender }}</div>
+        <div>{{ msg.message }}</div>
+      </div>
+
     </div>
-    
-    <input [(ngModel)]="messageText" placeholder="Type a message..." />
-    <button (click)="send()">Send</button>
+  </mat-card>
+
+  <div class="chat-input">
+    <input matInput [(ngModel)]="messageText" placeholder="Type a message..." (keyup.enter)="send()" class="chat-input-field" />
+    <button mat-flat-button color="primary" (click)="send()" class="send-btn">Send</button>
   </div>
+</div>
 
 <app-bottom-nav></app-bottom-nav>
-  

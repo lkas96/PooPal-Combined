@@ -1,7 +1,7 @@
 .chat-container {
   width: 95%;
   max-width: 800px;
-  height: 70vh;
+  height: 75vh;
   margin: auto;
 }
 
@@ -9,6 +9,7 @@
   height: 95%;
   overflow-y: auto;
   margin-bottom: 15px;
+  padding: 10px;
 }
 
 .user-msg {
