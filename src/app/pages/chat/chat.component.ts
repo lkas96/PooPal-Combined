@@ -36,7 +36,7 @@ export class ChatComponent implements OnInit {
   send() {
     const msg = {
       sender: this.sender,
-      content: this.messageText,
+      message: this.messageText,
       timestamp: Date.now()
     };
     this.wss.sendMessage(msg);

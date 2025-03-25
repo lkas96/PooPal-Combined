@@ -3,7 +3,7 @@
   <div class="container">
     <h1>Chat with PooPals 💩</h1>
     <div *ngFor="let msg of messages">
-      <b>{{msg.sender}}:</b> {{msg.content}}
+      <b>{{msg.sender}}:</b> {{msg.message}}
     </div>
     
     <input [(ngModel)]="messageText" placeholder="Type a message..." />
