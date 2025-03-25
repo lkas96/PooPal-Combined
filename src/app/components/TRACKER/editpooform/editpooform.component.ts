@@ -18,13 +18,13 @@ export class EditPooformComponent implements OnInit {
   recordId!: string;
 
   pooTypes = [
-    {label: 'Type 1', value: 'Type 1'},
-    {label: 'Type 2', value: 'Type 2'},
-    {label: 'Type 3', value: 'Type 3'},
-    {label: 'Type 4', value: 'Type 4'},
-    {label: 'Type 5', value: 'Type 5'},
-    {label: 'Type 6', value: 'Type 6'},
-    {label: 'Type 7', value: 'Type 7'}
+    { label: 'Type 1', value: 'Type 1' },
+    { label: 'Type 2', value: 'Type 2' },
+    { label: 'Type 3', value: 'Type 3' },
+    { label: 'Type 4', value: 'Type 4' },
+    { label: 'Type 5', value: 'Type 5' },
+    { label: 'Type 6', value: 'Type 6' },
+    { label: 'Type 7', value: 'Type 7' },
   ];
 
   poopColors = [
@@ -47,9 +47,9 @@ export class EditPooformComponent implements OnInit {
   ];
 
   satisfactionLevels = [
-    {label: 'Good', value: 'Good'},
-    {label: 'Mid', value: 'Mid'},
-    {label: 'Bad', value: 'Bad'},
+    { label: 'Good', value: 'Good' },
+    { label: 'Mid', value: 'Mid' },
+    { label: 'Bad', value: 'Bad' },
   ];
 
   constructor(
@@ -108,25 +108,30 @@ export class EditPooformComponent implements OnInit {
   // Populate the form with retrieved record values
   populateForm() {
     if (!this.retrievedRecord || !this.retrievedRecord.timestamp) {
-      console.warn("No record found or missing timestamp, skipping form population.");
+      console.warn(
+        'No record found or missing timestamp, skipping form population.'
+      );
       return;
     }
-  
-    console.log("Populating form with record:", this.retrievedRecord);
-  
+
+    console.log('Populating form with record:', this.retrievedRecord);
+
     const timestampStr = this.retrievedRecord.timestamp;
     let timestampDate = new Date(timestampStr);
-    
-    // Add 8 hours (UTC+8)
-    timestampDate.setHours(timestampDate.getHours() + 8);
-    
+
+    // Add 8 hours manually (convert to UTC+8)
+    timestampDate = new Date(timestampDate.getTime() + 8 * 60 * 60 * 1000);
+
+    // Format it as 'YYYY-MM-DDTHH:MM' for input
+    const formattedTimestamp = this.formatToInputDate(timestampDate);
+
     this.cdr.detectChanges();
-    
+
     // Convert timestamp to input format: 'YYYY-MM-DDTHH:MM'
-    const formattedTimestamp = timestampDate.toISOString().slice(0, 16);
-    
-    console.log("Formatted Timestamp with UTC+8:", formattedTimestamp);
-  
+    const formattedTimestamp2 = timestampDate.toISOString().slice(0, 16);
+
+    console.log('Formatted Timestamp with UTC+8:', formattedTimestamp2);
+
     // Update form with retrieved values
     this.form.patchValue({
       timestamp: formattedTimestamp,
@@ -142,10 +147,9 @@ export class EditPooformComponent implements OnInit {
       notes: this.retrievedRecord.notes || '',
       satisfactionLevel: this.retrievedRecord.satisfactionLevel || '',
     });
-  
-    console.log("Form populated with:", this.form.value);
+
+    console.log('Form populated with:', this.form.value);
   }
-  
 
   get timestampControl(): FormControl | null {
     return this.form.get('timestamp') as FormControl;
@@ -159,9 +163,14 @@ export class EditPooformComponent implements OnInit {
       return;
     }
 
+    const localTimestampStr = this.form.value.timestamp;
+    const localDate = new Date(localTimestampStr);
+    const formattedTimestamp = this.formatToCustomString(localDate);
+
     const updatedRecord: PooRecordViewing = {
       ...this.retrievedRecord!,
       ...this.form.value,
+      timestamp: formattedTimestamp
     };
 
     console.log('Updating Poo Record:', updatedRecord);
@@ -184,4 +193,30 @@ export class EditPooformComponent implements OnInit {
       }
     );
   }
+  
+  //convert to display on form
+  formatToInputDate(date: Date): string {
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const month = pad(date.getMonth() + 1);
+    const day = pad(date.getDate());
+    const hours = pad(date.getHours());
+    const minutes = pad(date.getMinutes());
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  }
+
+  //conver back for submission
+  formatToCustomString(date: Date): string {
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const month = pad(date.getMonth() + 1);
+    const day = pad(date.getDate());
+    const hours = pad(date.getHours());
+    const minutes = pad(date.getMinutes());
+    const seconds = pad(date.getSeconds());
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+  }
+  
+  
+  
 }

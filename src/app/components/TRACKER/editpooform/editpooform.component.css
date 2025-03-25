@@ -1,6 +1,9 @@
-.poo-card {
-    max-width: 700px;
-    width: 90%;
-    margin: auto;
-  }
-  
+.form-container {
+  max-width: 1080px;
+  width: 95%;
+  margin: auto;
+}
+
+.form-container h1 {
+  text-align: center;
+}
