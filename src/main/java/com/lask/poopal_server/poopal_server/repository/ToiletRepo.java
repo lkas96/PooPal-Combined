@@ -64,6 +64,8 @@ public class ToiletRepo {
                 t.setDistrict(results.getString("district"));
                 t.setRating(results.getInt("rating"));
                 t.setPlaceId(results.getString("placeId"));
+                t.setLat(results.getString("latitude"));
+                t.setLon(results.getString("longitude"));
                 toilets.add(t);
             } while (results.next());
             return toilets;
@@ -87,6 +89,8 @@ public class ToiletRepo {
                 t.setDistrict(results.getString("district"));
                 t.setRating(results.getInt("rating"));
                 t.setPlaceId(results.getString("placeId"));
+                t.setLat(results.getString("latitude"));
+                t.setLon(results.getString("longitude"));
                 toilets.add(t);
             } while (results.next());
             return toilets;
@@ -113,6 +117,9 @@ public class ToiletRepo {
                 t.setDistrict(results.getString("district"));
                 t.setRating(results.getInt("rating"));
                 t.setDistance(Double.parseDouble(results.getString("distance_km")));
+                t.setPlaceId(results.getString("placeId"));
+                t.setLat(results.getString("latitude"));
+                t.setLon(results.getString("longitude"));
                 toilets.add(t);
             } while (results.next());
             return toilets;
@@ -175,6 +182,8 @@ public class ToiletRepo {
             t.setDistrict(rs.getString("district"));
             t.setRating(rs.getInt("rating"));
             t.setPlaceId(rs.getString("placeId"));
+            t.setLat(rs.getString("latitude"));
+            t.setLon(rs.getString("longitude"));
             return t;
         });
     }

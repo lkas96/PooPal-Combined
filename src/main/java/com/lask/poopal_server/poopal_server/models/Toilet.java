@@ -10,6 +10,8 @@ public class Toilet {
     private String type;
     private int rating;
     private String placeId;
+    private String lat;
+    private String lon;
 
     // to json format helper method easier
     public JsonObject toJson() {
@@ -20,16 +22,20 @@ public class Toilet {
                 .add("type", type)
                 .add("rating", rating)
                 .add("placeId", placeId)
+                .add("lat", lat)
+                .add("lon", lon)
                 .build();
     }
 
-    public Toilet(String id, String name, String district, String type, int rating, String placeId) {
+    public Toilet(String id, String name, String district, String type, int rating, String placeId, String lat, String lon) {
         this.id = id;
         this.name = name;
         this.district = district;
         this.type = type;
         this.rating = rating;
         this.placeId = placeId;
+        this.lat = lat;
+        this.lon = lon;
     }
 
     public Toilet(String id, String name, String district, String type, int rating) {
@@ -40,12 +46,14 @@ public class Toilet {
         this.rating = rating;
     }
 
-    public Toilet(String name, String district, String type, int rating, String placeId) {
+    public Toilet(String name, String district, String type, int rating, String placeId, String lat, String lon) {
         this.name = name;
         this.district = district;
         this.type = type;
         this.rating = rating;
         this.placeId = placeId;
+        this.lat = lat;
+        this.lon = lon;
     }
 
     public Toilet(String name, String district, String type, int rating) {
@@ -104,6 +112,22 @@ public class Toilet {
 
     public void setPlaceId(String placeId) {
         this.placeId = placeId;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLon() {
+        return lon;
+    }
+
+    public void setLon(String lon) {
+        this.lon = lon;
     }
 
 }

@@ -11,6 +11,8 @@ public class NearestToilet {
     private int rating;
     private Double distance;
     private String placeId;
+    private String lat;
+    private String lon;
 
     // to json format helper method easier
     public JsonObject toJson() {
@@ -22,11 +24,13 @@ public class NearestToilet {
                 .add("rating", rating)
                 .add("distance", distance)
                 .add("placeId", placeId)
+                .add("lat", lat)
+                .add("lon", lon)
                 .build();
     }
 
     public NearestToilet(String id, String name, String district, String type, int rating, Double distance,
-            String placeId) {
+            String placeId, String lat, String lon) {
         this.id = id;
         this.name = name;
         this.district = district;
@@ -34,15 +38,19 @@ public class NearestToilet {
         this.rating = rating;
         this.distance = distance;
         this.placeId = placeId;
+        this.lat = lat;
+        this.lon = lon;
     }
 
-    public NearestToilet(String name, String district, String type, int rating, Double distance, String placeId) {
+    public NearestToilet(String name, String district, String type, int rating, Double distance, String placeId, String lat, String lon) {
         this.name = name;
         this.district = district;
         this.type = type;
         this.rating = rating;
         this.distance = distance;
         this.placeId = placeId;
+        this.lat = lat;
+        this.lon = lon;
     }
 
     public NearestToilet() {
@@ -102,6 +110,22 @@ public class NearestToilet {
 
     public void setPlaceId(String placeId) {
         this.placeId = placeId;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLon() {
+        return lon;
+    }
+
+    public void setLon(String lon) {
+        this.lon = lon;
     }
 
 }
