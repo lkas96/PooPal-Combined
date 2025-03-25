@@ -32,15 +32,17 @@ export class TrackerComponent implements OnInit{
   }
 
   updateTabSelection(url: string) {
-    if (url.endsWith('/tracker') || url.endsWith('/tracker/summary')) {
+    if (url === '/tracker' || url === '/tracker/summary') {
       this.selectedTab = 0;
-    } else if (url.endsWith('/tracker/new')) {
+    } else if (url === '/tracker/new') {
       this.selectedTab = 1;
-    } else if (url.includes('/tracker/records')) {
+    } else if (url === '/tracker/records') {
       this.selectedTab = 2;
+    } else {
+      // Not a tab-mapped route (e.g. edit mode), don't select a tab
+      this.selectedTab = -1;
     }
   }
-
   onTabChange(index: number) {
     this.router.navigate([`/tracker/${this.tabRoutes[index].route}`]);
   }
