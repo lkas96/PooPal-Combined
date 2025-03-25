@@ -5,6 +5,8 @@ import { NearestToilet, Toilet } from '../../../models/toilet';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-nearest-toilet',
@@ -17,10 +19,11 @@ export class NearestToiletComponent implements OnInit {
   longitude!: number;
 
   currentLocation!: string;
+  expandedToiletId: string | null = null;
 
   dataSource = new MatTableDataSource<NearestToilet>([]);
 
-  constructor(private ts: ToiletService, private router: Router) {}
+  constructor(private ts: ToiletService, private router: Router, private sanitizer: DomSanitizer) {}
 
   //always get location on component load
   ngOnInit(): void {
@@ -78,4 +81,15 @@ export class NearestToiletComponent implements OnInit {
     this.router.navigate(['/review/details/' + toiletId]);
   }
   
+  getGoogleMapUrl(toilet: Toilet): SafeResourceUrl {
+
+    console.log(toilet.placeId);
+
+    const placeId = encodeURIComponent(`${toilet.placeId}`);
+    const url = `https://www.google.com/maps/embed/v1/directions?key=${environment.MAPS_API}&destination=place_id:${placeId}&origin=${this.latitude},${this.longitude}&mode=transit`;
+
+    console.log(url);
+
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }  
 }

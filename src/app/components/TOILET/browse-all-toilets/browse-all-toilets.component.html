@@ -33,7 +33,7 @@
             </tr>
           </table>
         </div>
-
+        <br>
         <ng-container *ngIf="expandedToiletId === toilet.id">
           <iframe
             width="100%"
@@ -60,13 +60,6 @@
             (click)="reviewToilet(toilet.id)"
           >
             Review Toilet
-          </button>
-          <button
-            mat-flat-button
-            color="primary"
-            (click)="openGoogleMaps(toilet.name)"
-          >
-            Get Directions
           </button>
         </mat-action-row>
       </mat-expansion-panel>

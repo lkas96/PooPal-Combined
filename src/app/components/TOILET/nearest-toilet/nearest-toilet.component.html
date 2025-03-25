@@ -10,7 +10,8 @@
 
   <div class="records-list">
     <mat-accordion multi="true">
-      <mat-expansion-panel *ngFor="let toilet of dataSource.data">
+      <mat-expansion-panel *ngFor="let toilet of dataSource.connect() | async"(opened)="expandedToiletId = toilet.id"
+      (closed)="expandedToiletId = null">
         <!-- Panel Header (Always Visible) -->
         <mat-expansion-panel-header>
           <mat-panel-title class="panel-title">
@@ -30,10 +31,22 @@
           </table>
         </div>
 
+        <br>
+        <ng-container *ngIf="expandedToiletId === toilet.id">
+          <iframe
+            width="100%"
+            height="450px"
+            style="border: 0"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            [attr.src]="getGoogleMapUrl(toilet)"
+          ></iframe>
+        </ng-container>
+
         <mat-action-row>
           <button mat-flat-button color="primary" (click)="viewToilet(toilet.id)">View Reviews</button>
           <button mat-flat-button color="primary" (click)="reviewToilet(toilet.id)">Review Toilet</button>
-          <button mat-flat-button color="primary" (click)="openGoogleMaps(toilet.name)">Get Directions</button>
         </mat-action-row>
       </mat-expansion-panel>
     </mat-accordion>
