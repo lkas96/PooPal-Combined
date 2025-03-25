@@ -1,9 +1,14 @@
-<mat-card class="records-container">
-  <mat-card-title>Poo Records</mat-card-title>
+<div class="records-container">
+  <br>
+  <h1>Your Poo Records</h1>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Search records" />
+  <mat-form-field appearance="outline" style="width: 100%">
+    <mat-label>Search</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Search records"
+    />
   </mat-form-field>
 
   <div class="records-list">
@@ -13,13 +18,17 @@
         <mat-expansion-panel-header>
           <mat-panel-title class="panel-title">
             <span class="timestamp">{{ record.timestamp }}</span>
-            <span class="public">{{ record.pooWhere === 'home' ? 'Home' : 'Outside' }}</span>
-            <span class="satisfactionLevel">{{ record.satisfactionLevel }}</span>
+            <span class="public">{{
+              record.pooWhere === "home" ? "Home" : "Outside"
+            }}</span>
+            <span class="satisfactionLevel">{{
+              record.satisfactionLevel
+            }}</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
 
         <!-- Panel content when expanded - reorg later -->
-         <div>
+        <div>
           <table class="record-table">
             <tr>
               <td><strong>Poo Type:</strong> {{ record.pooType }}</td>
@@ -30,27 +39,43 @@
               <td><strong>Pain During:</strong> {{ record.painDuring }}</td>
             </tr>
             <tr>
-              <td><strong>Laxative Used:</strong> {{ record.laxative ? 'Yes' : 'No' }}</td>
+              <td>
+                <strong>Laxative Used:</strong>
+                {{ record.laxative ? "Yes" : "No" }}
+              </td>
               <td><strong>Pain After:</strong> {{ record.painAfter }}</td>
             </tr>
             <tr>
-              <td><strong>Urgent:</strong> {{ record.urgent === 'yes' ? 'Urgent' : 'Not Urgent' }}</td>
-              <td><strong>Bleeding:</strong> {{ record.bleeding ? 'Yes' : 'No' }}</td>
-              
+              <td>
+                <strong>Urgent:</strong>
+                {{ record.urgent === "yes" ? "Urgent" : "Not Urgent" }}
+              </td>
+              <td>
+                <strong>Bleeding:</strong> {{ record.bleeding ? "Yes" : "No" }}
+              </td>
             </tr>
             <tr>
-              <td colspan="2"><strong>Notes:</strong> {{ record.notes || 'No comments' }}</td>
+              <td colspan="2">
+                <strong>Notes:</strong> {{ record.notes || "No comments" }}
+              </td>
             </tr>
-          </table>  
-         </div>
+          </table>
+        </div>
 
         <mat-action-row>
-          <button mat-button color="primary" (click)="editRecord(record.id)">Edit</button>
-          <button mat-button color="primary" (click)="deleteRecord(record.id)">Delete</button>
+          <button mat-button color="primary" (click)="editRecord(record.id)">
+            Edit
+          </button>
+          <button mat-button color="primary" (click)="deleteRecord(record.id)">
+            Delete
+          </button>
         </mat-action-row>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
 
-  <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
-</mat-card>
+  <mat-paginator
+    [pageSizeOptions]="[10, 20, 30]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
