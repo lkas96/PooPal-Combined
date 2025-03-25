@@ -20,7 +20,7 @@ export class PooService {
   //springboot endpoint to save POST METHOD to /poo/records/new
   savePooRecord(userId: string, pooRecord: PooRecord) : Observable<PooRecord>{
     const headers = new HttpHeaders({ 'userId': userId});
-    return this.httpClient.post<PooRecord>(`${this.baseURL}/records/new`, pooRecord, { headers } // ✅ Pass headers in the third parameter
+    return this.httpClient.post<PooRecord>(`${this.baseURL}/records/new`, pooRecord, { headers }
     );
   }
 
