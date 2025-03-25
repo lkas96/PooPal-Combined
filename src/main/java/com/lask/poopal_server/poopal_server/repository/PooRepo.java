@@ -93,7 +93,7 @@ public class PooRepo {
 
         Timestamp timestamp = newPoo.getTimestamp() != null ? Timestamp.valueOf(newPoo.getTimestamp()) : null;
 
-        int isUpdated = template.update(SQL_UPDATE, newPoo.getPooWhere(), newPoo.getPooType(), newPoo.getPooColor(), newPoo.getPainBefore(), newPoo.getPainDuring(), newPoo.getPainAfter(), newPoo.getUrgent(), newPoo.getLaxative(), newPoo.getBleeding(), newPoo.getNotes(), timestamp, userId, newPoo.getId(), newPoo.getSatisfactionLevel());
+        int isUpdated = template.update(SQL_UPDATE, newPoo.getPooWhere(), newPoo.getPooType(), newPoo.getPooColor(), newPoo.getPainBefore(), newPoo.getPainDuring(), newPoo.getPainAfter(), newPoo.getUrgent(), newPoo.getLaxative(), newPoo.getBleeding(), newPoo.getNotes(), timestamp, newPoo.getSatisfactionLevel(), userId, newPoo.getId());
 
         if (isUpdated == 1) {
             System.out.println("Poo entry updated successfully");
