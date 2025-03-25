@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit{
   ngOnInit() {
     this.authService.getUser().subscribe(user => {
       if (user) {
-        this.router.navigate(['/home']); //redirect if already logged in, cannot see login page. 
+        this.router.navigate(['/tracker/summary']); //redirect if already logged in, cannot see login page. 
       }
     });
   }
