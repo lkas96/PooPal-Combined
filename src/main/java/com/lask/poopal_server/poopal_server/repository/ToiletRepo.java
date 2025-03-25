@@ -50,7 +50,7 @@ public class ToiletRepo {
 
     // get teh list of all the toilets
     public List<Toilet> getAllToilets() {
-        final String SQL_SELECT = "SELECT * FROM toilets";
+        final String SQL_SELECT = "select * from toilets t left join placeIds p on t.id = p.toiletId;";
 
         SqlRowSet results = template.queryForRowSet(SQL_SELECT);
 
@@ -63,6 +63,7 @@ public class ToiletRepo {
                 t.setName(results.getString("name"));
                 t.setDistrict(results.getString("district"));
                 t.setRating(results.getInt("rating"));
+                t.setPlaceId(results.getString("placeId"));
                 toilets.add(t);
             } while (results.next());
             return toilets;
@@ -72,7 +73,7 @@ public class ToiletRepo {
     }
 
     public List<Toilet> getToilets() {
-        final String SQL_SELECT = "SELECT * FROM toilets";
+        final String SQL_SELECT = "select * from toilets t left join placeIds p on t.id = p.toiletId;";
 
         SqlRowSet results = template.queryForRowSet(SQL_SELECT);
 
@@ -85,6 +86,7 @@ public class ToiletRepo {
                 t.setName(results.getString("name"));
                 t.setDistrict(results.getString("district"));
                 t.setRating(results.getInt("rating"));
+                t.setPlaceId(results.getString("placeId"));
                 toilets.add(t);
             } while (results.next());
             return toilets;
@@ -164,7 +166,7 @@ public class ToiletRepo {
 
     @SuppressWarnings({ "deprecation", "unused" })
     public Toilet getToilet(String toiletId) {
-        final String SQL_SELECT_TOILET = "SELECT * FROM toilets WHERE id = ?";
+        final String SQL_SELECT_TOILET = "select * from toilets t left join placeIds p on t.id = p.toiletId where t.id = ?";
         return template.queryForObject(SQL_SELECT_TOILET, new Object[]{toiletId}, (rs, rowNum) -> {
             Toilet t = new Toilet();
             t.setId(rs.getString("id"));
@@ -172,6 +174,7 @@ public class ToiletRepo {
             t.setName(rs.getString("name"));
             t.setDistrict(rs.getString("district"));
             t.setRating(rs.getInt("rating"));
+            t.setPlaceId(rs.getString("placeId"));
             return t;
         });
     }
