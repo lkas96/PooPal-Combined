@@ -1,7 +1,98 @@
-<div class="container">
-  <h1>Welcome to PooPal 🚽</h1>
-  <p>Track your bowel movements, find clean toilets, and chat with others!</p>
-  <button mat-raised-button color="accent" routerLink="/login">
-    Get Started
-  </button>
+<div>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <img
+        src="assets/images/logo-rounded.png"
+        alt="PooPal Logo"
+        width="32"
+        height="32"
+        style="margin-right: 10px"
+      />
+      <a class="navbar-brand" [routerLink]="'/tracker/summary'">PooPal</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- All menu shortcuts removed -->
+        </ul>
+
+        <!-- Right-aligned Logout Button -->
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item" style="align-content: center">
+            <button mat-raised-button color="accent" (click)="login()">
+              Login
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </div>
+
+<div class="hero-section d-flex align-items-center text-center text-white">
+  <div class="container py-5">
+    <h1 class="display-4 fw-bold mb-3">Welcome to PooPal</h1>
+    <p class="lead mb-4">
+      Track your bowel movements, discover the best toilets nearby, and chat with fellow poopal buddies all in one place!
+    </p>
+    <button mat-raised-button color="primary" class="px-5 py-2" (click)="login()">
+      Get Started
+    </button>
+  </div>
+</div>
+
+<div class="container py-5">
+  <h2 class="text-center mb-4">PooPal Features</h2>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let feature of features">
+      <mat-card class="h-100">
+        <mat-card-header>
+          <mat-icon>{{ feature.icon }}</mat-icon>
+          <mat-card-title>{{ feature.title }} &nbsp;</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ feature.description }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div class="container py-5">
+  <h2 class="text-center mb-4">App Preview</h2>
+  <div class="auto-scroll-wrapper">
+    <div class="auto-scroll-track" #scrollTrack>
+      <ng-container *ngFor="let image of mockups.concat(mockups)">
+        <div class="screenshot-card">
+          <img [src]="image" alt="App Mockup" class="img-fluid rounded shadow-sm" />
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<footer class="bg-body-tertiary text-white py-4 mt-5" data-bs-theme="dark">
+  <div class="container text-center">
+    <img
+      src="assets/images/logo-rounded.png"
+      alt="PooPal Logo"
+      width="32"
+      height="32"
+      class="mb-2"
+    />
+    <h5 class="mb-2">PooPal</h5>
+    <p class="mb-1">Find the best loos and take majestic poos.</p>
+    <p class="mb-1">Developed by Lawson.</p>
+    <p class="mb-0 small">&copy; {{ currentYear }} PooPal. All rights reserved.</p>
+  </div>
+</footer>
