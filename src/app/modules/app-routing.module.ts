@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../pages/home/home.component';
 import { AuthGuard } from '../services/auth.guard';
 import { TrackerComponent } from '../pages/tracker/tracker.component';
-import { HomeSummaryComponent } from '../pages/home-summary/home-summary.component';
 import { ChatComponent } from '../pages/chat/chat.component';
 import { TrendComponent } from '../pages/trend/trend.component';
 import { ToiletComponent } from '../pages/toilet/toilet.component';
@@ -22,8 +21,6 @@ import { ReviewComponent } from '../pages/review/review.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  // { path: 'login', component: LoginComponent },
-  // { path: 'home', component: HomeSummaryComponent, canActivate: [AuthGuard] }, //authenticated home page on login
   {
     path: 'tracker', component: TrackerComponent, canActivate: [AuthGuard],
     children: [ 

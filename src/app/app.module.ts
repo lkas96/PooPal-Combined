@@ -12,7 +12,6 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { HomeSummaryComponent } from './pages/home-summary/home-summary.component';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ChatComponent } from './pages/chat/chat.component';
@@ -43,7 +42,6 @@ import { PoopalChatComponent } from './components/CHAT/poopal-chat/poopal-chat.c
     HomeComponent,
     BottomNavComponent,
     TrackerComponent,
-    HomeSummaryComponent,
     TopNavComponent,
     ChatComponent,
     TrendComponent,
