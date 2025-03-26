@@ -1,6 +1,6 @@
 <div align="center">
   <img src="client/src/assets/images/logo-rounded.png" height="150" alt="PooPal Logo">
-  <h1>PooPal</h1>
+  <h2>PooPal</h2>
   <h3>Find the best loo and take majestic poos!</h3>
 </div>
 
