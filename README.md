@@ -1,8 +1,10 @@
 <div align="center">
   <img src="client/src/assets/images/logo-rounded.png" height="150" alt="PooPal Logo">
-  <p>PooPal</p>
-  <p>Find the best loo and take majestic poos!</p>
+  <h1 style="font-size: 3em; margin: 0;">PooPal</h1>
+  <h2 style="font-weight: normal; margin-top: 0;">Find the best loo and take majestic poos!</h2>
 </div>
+
+<hr>
 
 **PooPal** is a fun, helpful, and slightly cheeky web app designed to help users track their bowel movements, explore nearby toilets, chat live, and get AI-powered gut health insights. Whether you're aiming to improve digestion or just want a good laugh on the loo — PooPal has your back(side)!
 
