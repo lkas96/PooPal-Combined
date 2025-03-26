@@ -24,6 +24,7 @@ export class TrackerSummaryComponent implements OnInit {
   satisfyingCountGood: number = 0;
   satisfyingCountMid: number = 0;
   satisfyingCountBad: number = 0;
+  daysSinceLastPoo: number = 0;
 
   latestPooArray: PooRecordViewing[] = [];
   dataSource: MatTableDataSource<PooRecordViewing> = new MatTableDataSource<PooRecordViewing>([]);
@@ -52,9 +53,10 @@ export class TrackerSummaryComponent implements OnInit {
       this.topPooColor = data.topPooColor;
     });
 
-    this.ps.urgentPooCount(this.userId).subscribe((data: any) => {
-      this.urgentCountYes = data.totalUrgentYes;
-      this.urgentCountNo = data.totalUrgentNo;
+    this.ps.urgentPooTrends(this.userId).subscribe((data: any) => {
+      console.log('Urgent poo count:', data);
+      this.urgentCountYes = data.yes;
+      this.urgentCountNo = data.no;
     });
 
     this.ps.satisfyingPooCount(this.userId).subscribe((data: any) => {
@@ -70,9 +72,14 @@ export class TrackerSummaryComponent implements OnInit {
         timestamp: this.formatDate(record.timestamp)
       }));
       this.dataSource = new MatTableDataSource<PooRecordViewing>(this.latestPooArray);
+
+      this.daysSinceLastPoo = this.calculateDaysSince(data[0].timestamp);
+  
+      
     }, error => {
       console.error('Error getting latest poo:', error);
     });
+    
   }
 
   private formatDate(timestamp: string): string {
@@ -104,4 +111,14 @@ export class TrackerSummaryComponent implements OnInit {
       }
     );
   }
+
+private calculateDaysSince(timestamp: string): number {
+  const date = new Date(timestamp);
+  if (isNaN(date.getTime())) return 0;
+
+  const now = new Date();
+  const diffTime = now.getTime() - date.getTime();
+  return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+}
+  
 }

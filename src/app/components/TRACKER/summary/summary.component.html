@@ -20,11 +20,11 @@
           <div>
             <table class="record-table">
               <tr>
-                <td><strong>Poo Type:</strong> {{ record.pooType }}</td>
+                <td><strong>Poo Type:</strong> {{ record.pooType }} <img [src]="'assets/bristol/' + record.pooType + '.png'" alt="Poo Type" style="height: 20px;"></td>
                 <td><strong>Pain Before:</strong> {{ record.painBefore }}</td>
               </tr>
               <tr>
-                <td><strong>Poo Color:</strong> {{ record.pooColor }}</td>
+                <td><strong>Poo Color:</strong> {{ record.pooColor }} <img [src]="'assets/pooColors/' + record.pooColor + '.png'" alt="Poo Color" style="height: 20px;"></td>
                 <td><strong>Pain During:</strong> {{ record.painDuring }}</td>
               </tr>
               <tr>
@@ -67,7 +67,7 @@
           <mat-card-title>Top Poo Type</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>{{ topPooType }}</p>
+          <p><img [src]="'assets/bristol/' + topPooType + '.png'" alt="Poo Type" style="height: 50px;"> <br> {{ topPooType }}</p>
         </mat-card-content>
       </mat-card>
   
@@ -76,16 +76,16 @@
           <mat-card-title>Top Poo Color</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>{{ topPooColor }}</p>
+          <p><img [src]="'assets/pooColors/' + topPooColor + '.png'" alt="Poo Color" style="height: 50px;"> <br> {{ topPooColor }}</p>
         </mat-card-content>
       </mat-card>
   
       <mat-card class="stat-card">
         <mat-card-header>
-          <mat-card-title>Urgent Poos</mat-card-title>
+          <mat-card-title>Poo Urgency</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>{{ urgentCountYes }} Urgent <br> {{ urgentCountNo }} Non-Urgent</p>
+          <p>{{ urgentCountYes }} Urgent <br> {{urgentCountNo}} Non Urgent </p>
         </mat-card-content>
       </mat-card>
   
@@ -97,6 +97,16 @@
           <p>😊 {{ satisfyingCountGood }}<br>😐 {{ satisfyingCountMid }}<br>😞 {{ satisfyingCountBad }}</p>
         </mat-card-content>
       </mat-card>
+
+      <mat-card class="stat-card">
+        <mat-card-header>
+          <mat-card-title>Days Since Last Poo</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ daysSinceLastPoo }} day<span *ngIf="daysSinceLastPoo !== 1">s</span></p>
+        </mat-card-content>
+      </mat-card>
+      
     </div>
   </div>
   
