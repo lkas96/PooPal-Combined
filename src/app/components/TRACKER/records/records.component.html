@@ -18,12 +18,17 @@
         <mat-expansion-panel-header>
           <mat-panel-title class="panel-title">
             <span class="timestamp">{{ record.timestamp }}</span>
-            <span class="public">{{
-              record.pooWhere === "home" ? "Home" : "Outside"
-            }}</span>
-            <span class="satisfactionLevel">{{
-              record.satisfactionLevel
-            }}</span>
+            <span class="public">
+              {{ record.pooWhere === 'home' ? '🏠 Home' : '🌎 Outside' }}
+            </span>
+              <span class="satisfactionLevel">
+                {{
+                  record.satisfactionLevel === 'Good' ? '😊 Good' :
+                  record.satisfactionLevel === 'Mid' ? '😐 Mid' :
+                  record.satisfactionLevel === 'Bad' ? '😞 Bad' :
+                  record.satisfactionLevel
+                }}
+                </span>
           </mat-panel-title>
         </mat-expansion-panel-header>
 
@@ -31,11 +36,11 @@
         <div>
           <table class="record-table">
             <tr>
-              <td><strong>Poo Type:</strong> {{ record.pooType }}</td>
+              <td><strong>Poo Type:</strong> {{ record.pooType }} <img [src]="'assets/bristol/' + record.pooType + '.png'" alt="Poo Type" style="height: 20px;"></td>
               <td><strong>Pain Before:</strong> {{ record.painBefore }}</td>
             </tr>
             <tr>
-              <td><strong>Poo Color:</strong> {{ record.pooColor }}</td>
+              <td><strong>Poo Color:</strong> {{ record.pooColor }} <img [src]="'assets/pooColors/' + record.pooColor + '.png'" alt="Poo Color" style="height: 20px;"></td>
               <td><strong>Pain During:</strong> {{ record.painDuring }}</td>
             </tr>
             <tr>

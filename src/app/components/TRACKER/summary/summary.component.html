@@ -11,8 +11,17 @@
           <mat-expansion-panel-header>
             <mat-panel-title class="panel-title">
               <span class="timestamp">{{ record.timestamp }}</span>
-              <span class="public">{{ record.pooWhere === 'home' ? 'Home' : 'Outside' }}</span>
-              <span class="satisfactionLevel">{{ record.satisfactionLevel }}</span>
+              <span class="public">
+                {{ record.pooWhere === 'home' ? '🏠 Home' : '🌎 Outside' }}
+              </span>
+              <span class="satisfactionLevel">
+                {{
+                  record.satisfactionLevel === 'Good' ? '😊 Good' :
+                  record.satisfactionLevel === 'Mid' ? '😐 Mid' :
+                  record.satisfactionLevel === 'Bad' ? '😞 Bad' :
+                  record.satisfactionLevel
+                }}
+                </span>
             </mat-panel-title>
           </mat-expansion-panel-header>
   
