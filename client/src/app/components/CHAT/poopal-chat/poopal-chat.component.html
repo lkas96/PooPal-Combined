@@ -1,0 +1,21 @@
+<br>
+<h1>Chat with PooPals 💩</h1>
+<br>
+<div class="chat-container">
+  <mat-card class="chat-box">
+    <div *ngFor="let msg of messages"
+         [ngClass]="{'message-wrapper': true, 'user': msg.sender === sender, 'other': msg.sender !== sender}">
+      
+      <div class="message-bubble" [ngClass]="{'other': msg.sender !== sender}">
+        <div class="sender">{{ msg.sender }}</div>
+        <div>{{ msg.message }}</div>
+      </div>
+
+    </div>
+  </mat-card>
+
+  <div class="chat-input">
+    <input matInput [(ngModel)]="messageText" placeholder="Type a message..." (keyup.enter)="send()" class="chat-input-field" />
+    <button mat-flat-button color="primary" (click)="send()" class="send-btn">Send</button>
+  </div>
+</div>

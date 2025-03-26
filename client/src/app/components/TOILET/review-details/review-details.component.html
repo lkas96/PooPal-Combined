@@ -1,0 +1,98 @@
+<div class="records-container" *ngIf="toilet">
+  <br />
+  <h1>
+    Reviewing Toilet
+  </h1>
+  <br />
+  <div class="records-list">
+    <mat-expansion-panel *ngIf="toilet">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="panel-title">
+          <span class="name">{{ toilet.name }}</span>
+          <span class="rating">{{ getEmojiRating(toilet.rating) }}</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div>
+        <table class="record-table">
+          <tr>
+            <td><strong>Type:</strong> {{ toilet.type }}</td>
+            <td><strong>Area:</strong> {{ toilet.district }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <br>
+      <ng-container *ngIf="expandedToiletId === toilet.id">
+        <iframe
+          width="100%"
+          height="450px"
+          style="border: 0"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          [attr.src]="getGoogleMapUrl(toilet)"
+        ></iframe>
+      </ng-container>
+
+      <mat-action-row>
+        <button mat-flat-button color="primary" (click)="reviewToilet(toilet.id)">
+          Write Review
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </div>
+<br>
+
+  <div class="reviews-section" *ngIf="reviews.length > 0; else noReviews">
+    <br>
+    <h1>Reviews by PooPals</h1>
+    <br>
+    <div *ngFor="let review of reviews">
+      <mat-card class="review-card">
+        <mat-card-content>
+          <table class="review-table">
+            <tr>
+              <td colspan="2">
+                <Strong
+                  >{{ review.timestamp }}&nbsp;&nbsp;&nbsp;
+                  Experience:
+                  <span *ngIf="review.recommended === 'yes'">👍</span>
+                  <span *ngIf="review.recommended === 'no'">👎</span>
+                </Strong>
+              </td>
+            </tr>
+            <tr>
+              <td>Cleanliness: {{ review.cleanliness }} / 5</td>
+            </tr>
+            <tr>
+              <td>Smell: {{ review.smell }} / 5</td>
+            </tr>
+            <tr>
+              <td>Comment: {{ review.comments }}</td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div *ngIf="review.imageUrl" class="review-image-container">
+                  <img
+                    [src]="review.imageUrl"
+                    alt="Review photo"
+                    class="review-photo"
+                  />
+                </div>
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <ng-template #noReviews>
+    <p>No reviews yet. Be the first to leave one!</p>
+  </ng-template>
+  <br>
+  <br>
+  <br>
+  
+</div>

@@ -1,0 +1,9 @@
+.form-container {
+  max-width: 800px;
+  width: 95%;
+  margin: auto;
+}
+
+.form-container h1 {
+  text-align: center;
+}

@@ -1,0 +1,19 @@
+<app-top-nav></app-top-nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 d-block d-lg-none">
+      <mat-tab-group [(selectedIndex)]="selectedTab" (selectedIndexChange)="onTabChange($event)">
+        <mat-tab label="Toilet Directory"></mat-tab>
+        <mat-tab label="Nearest Toilet"></mat-tab>
+        <!-- <mat-tab label="Public Reviews"></mat-tab> -->
+      </mat-tab-group>
+    </div>
+  </div>
+</div>
+
+<div class="nested-container">
+  <router-outlet></router-outlet>
+</div>
+
+<app-bottom-nav></app-bottom-nav>

@@ -1,0 +1,53 @@
+.container {
+  max-width: 960px;
+  margin: auto;
+}
+
+mat-card {
+  border-radius: 12px;
+}
+
+mat-icon {
+  margin-right: 8px;
+}
+
+.hero-section {
+    min-height: 80vh;
+    padding: 4rem 0;
+    background-image: url('/assets/images/image.png');
+  }
+
+  .auto-scroll-wrapper {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+  
+  .auto-scroll-track {
+    display: flex;
+    gap: 1rem;
+    animation: scroll-left 30s linear infinite;
+    width: max-content;
+  }
+  
+  .screenshot-card {
+    flex: 0 0 auto;
+    width: 300px;
+  }
+  
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+  

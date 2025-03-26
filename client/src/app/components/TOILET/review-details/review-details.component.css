@@ -1,0 +1,84 @@
+.records-container {
+  max-width: 800px;
+  width: 95%;
+  margin: auto;
+}
+
+.panel-title {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  width: 100%;
+  font-weight: 500;
+  padding: 8px;
+}
+
+.panel-title span {
+  flex-basis: 50%;
+  text-align: center;
+}
+
+.district,
+.name,
+.rating {
+  margin-right: 8px;
+}
+
+.records-list {
+  margin-top: 12px;
+}
+
+.record-table,
+.review-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.record-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background: #f4f3f6;
+  border-bottom: none !important;
+}
+
+/* .reviews-section {
+  margin: 24px 16px;
+} */
+
+.review-card {
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.review-photo {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+mat-action-row {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+mat-action-row {
+  border-top: none !important;
+}
+
+mat-expansion-panel {
+  background: #f4f3f6;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.record-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background: #f4f3f6;
+  border-bottom: none !important;
+}

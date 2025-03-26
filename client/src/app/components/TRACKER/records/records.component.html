@@ -1,0 +1,89 @@
+<div class="records-container">
+  <br>
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1>Your Poo Records</h1>
+    <button mat-flat-button color="accent" (click)="downloadPDF()">Download All Records</button>
+  </div>
+
+  <mat-form-field appearance="outline" style="width: 100%">
+    <mat-label>Search</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Search records"
+    />
+  </mat-form-field>
+
+  <div class="records-list">
+    <mat-accordion multi="true">
+      <mat-expansion-panel *ngFor="let record of dataSource.connect() | async">
+        <!-- Panel Header (Always Visible) -->
+        <mat-expansion-panel-header>
+          <mat-panel-title class="panel-title">
+            <span class="timestamp">{{ record.timestamp }}</span>
+            <span class="public">
+              {{ record.pooWhere === 'home' ? '🏠 Home' : '🌎 Outside' }}
+            </span>
+              <span class="satisfactionLevel">
+                {{
+                  record.satisfactionLevel === 'Good' ? '😊 Good' :
+                  record.satisfactionLevel === 'Mid' ? '😐 Mid' :
+                  record.satisfactionLevel === 'Bad' ? '😞 Bad' :
+                  record.satisfactionLevel
+                }}
+                </span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- Panel content when expanded - reorg later -->
+        <div>
+          <table class="record-table">
+            <tr>
+              <td><strong>Poo Type:</strong> {{ record.pooType }} <img [src]="'assets/bristol/' + record.pooType + '.png'" alt="Poo Type" style="height: 20px;"></td>
+              <td><strong>Pain Before:</strong> {{ record.painBefore }}</td>
+            </tr>
+            <tr>
+              <td><strong>Poo Color:</strong> {{ record.pooColor }} <img [src]="'assets/pooColors/' + record.pooColor + '.png'" alt="Poo Color" style="height: 20px;"></td>
+              <td><strong>Pain During:</strong> {{ record.painDuring }}</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Laxative Used:</strong>
+                {{ record.laxative ? "Yes" : "No" }}
+              </td>
+              <td><strong>Pain After:</strong> {{ record.painAfter }}</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Urgent:</strong>
+                {{ record.urgent === "yes" ? "Urgent" : "Not Urgent" }}
+              </td>
+              <td>
+                <strong>Bleeding:</strong> {{ record.bleeding ? "Yes" : "No" }}
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <strong>Notes:</strong> {{ record.notes || "No comments" }}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <mat-action-row>
+          <button mat-flat-button color="primary" (click)="editRecord(record.id)">
+            Edit
+          </button>
+          <button mat-flat-button color="primary" (click)="deleteRecord(record.id)">
+            Delete
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <mat-paginator style="background: none;"
+    [pageSizeOptions]="[10, 20, 30]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

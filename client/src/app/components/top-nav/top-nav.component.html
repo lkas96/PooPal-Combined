@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <img src="assets/images/logo-rounded.png" alt="PooPal Logo" width="32" height="32" style="margin-right: 10px;">
+        <a class="navbar-brand" [routerLink]="'/tracker/summary'">PooPal</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Tracker
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" [routerLink]="'/tracker/summary'">Summary</a></li>
+                        <li><a class="dropdown-item" [routerLink]="'/tracker/new'">Log A Poo</a></li>
+                        <li><a class="dropdown-item" [routerLink]="'/tracker/records'">My Poo History</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="'/trends'">Trends</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="'/ai'">PooPal AI</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Toilets
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" [routerLink]="'/toilets/directory'">Toilet Directory</a></li>
+                        <li><a class="dropdown-item" [routerLink]="'/toilets/nearest'">Nearest Toilet</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="https://www.toilet.org.sg/" target="blank">
+                            Data Provided By<br>Restroom Association (Singapore)</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="'/chat'">Chat</a>
+                </li>
+            </ul>
+
+            <!-- Right-aligned Logout Button -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <button type="button" class="btn btn-danger" (click)="logout()">Logout</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
