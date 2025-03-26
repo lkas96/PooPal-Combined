@@ -32,8 +32,12 @@ export class ReviewDetailsComponent implements OnInit {
     this.toiletId = this.route.snapshot.params['id'];
 
     //get all reviews for this toilet
-    this.ts.getToiletReviews(this.toiletId).subscribe((data) => {
-      this.reviews = data;
+    this.ts.getToiletReviews(this.toiletId).subscribe((reviews) => {
+      this.reviews = reviews.map((review) => ({
+        ...review,
+        timestampRaw: review.timestamp,
+        timestamp: this.formatDate(review.timestamp),
+      }));
     });
 
     //get the details of the toilet
@@ -69,5 +73,18 @@ export class ReviewDetailsComponent implements OnInit {
     const url = `https://www.google.com/maps/embed/v1/place?key=${environment.MAPS_API}&q=place_id:${placeId}`;
 
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  private formatDate(timestamp: string): string {
+    const date = new Date(timestamp);
+
+    if (isNaN(date.getTime())) return 'Invalid Date';
+
+    // Add 8 hours (8 * 60 * 60 * 1000 milliseconds)
+    const adjustedDate = new Date(date.getTime() + 8 * 60 * 60 * 1000);
+
+    return adjustedDate.toLocaleString('en-SG', {
+      hour12: true,
+    });
   }
 }

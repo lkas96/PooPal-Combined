@@ -55,7 +55,7 @@
             <tr>
               <td colspan="2">
                 <Strong
-                  >{{ review.timestamp | date : "medium" }} &nbsp;&nbsp;&nbsp;
+                  >{{ review.timestamp }}&nbsp;&nbsp;&nbsp;
                   Experience:
                   <span *ngIf="review.recommended === 'yes'">👍</span>
                   <span *ngIf="review.recommended === 'no'">👎</span>
