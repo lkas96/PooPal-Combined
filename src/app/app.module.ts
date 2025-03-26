@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { AngularMaterialModule } from './modules/material.module';
 import { HomeComponent } from './pages/home/home.component';
 import { BottomNavComponent } from './components/bottom-nav/bottom-nav.component';
-import { LoginComponent } from './pages/login/login.component';
 import { TrackerComponent } from './pages/tracker/tracker.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
@@ -43,7 +42,6 @@ import { PoopalChatComponent } from './components/CHAT/poopal-chat/poopal-chat.c
     AppComponent,
     HomeComponent,
     BottomNavComponent,
-    LoginComponent,
     TrackerComponent,
     HomeSummaryComponent,
     TopNavComponent,
