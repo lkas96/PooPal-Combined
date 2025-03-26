@@ -1,6 +1,9 @@
 <div class="records-container">
   <br>
-  <h1>Your Poo Records</h1>
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1>Your Poo Records</h1>
+    <button mat-flat-button color="accent" (click)="downloadPDF()">Download All Records</button>
+  </div>
 
   <mat-form-field appearance="outline" style="width: 100%">
     <mat-label>Search</mat-label>
