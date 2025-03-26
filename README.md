@@ -1,4 +1,4 @@
-# ![PooPal Features](assets/images/image.png) PooPal
+# ![PooPal Features](assets/images/logo-rounded.png) PooPal
 
 **PooPal** is a fun, helpful, and slightly cheeky web app designed to help users track their bowel movements, explore nearby toilets, chat live, and get AI-powered gut health insights. Whether you're aiming to improve digestion or just want a good laugh on the loo — PooPal has your back(side)!
 
