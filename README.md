@@ -33,3 +33,8 @@
 - **Database:** MySQL, Redis (for chat)
 - **AI Integration:** Gemini AI
 - **Other:** WebSockets, PWA support
+
+## 📝 Notes
+
+- **PooPal-Combined: ** This repo is made for submission, required to have server/client in one repo. Merged using github actions.
+- *PooPal-Server: ** This repo has githubs actions set up for auto deployment to railway via CLI. 
