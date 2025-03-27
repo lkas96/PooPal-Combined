@@ -26,7 +26,7 @@ COPY server/.mvn .mvn
 COPY server/mvnw .
 COPY server/src src
 
-COPY --from=ngbuild /client/dist/client/browser src/main/resources/static
+COPY --from=ngbuild /client/dist/poopal-client/browser src/main/resources/static
 
 RUN chmod a+x mvnw
 RUN ./mvnw package -Dmaven.test.skip=true
